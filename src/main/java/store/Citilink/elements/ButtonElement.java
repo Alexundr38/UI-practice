@@ -3,10 +3,10 @@ package store.Citilink.elements;
 public class ButtonElement extends BaseElement {
     private static final String CLASS_XPATH = "//div[@class=\"%s\"]";
     private static final String ROLE_XPATH = "//div[@role=\"%s\"]";
-    private static final String TYPE_XPATH = "//button[@type=\"%s\"]";
+    private static final String TYPE_AND_TEXT_XPATH = "//button[@type=\"%s\" and contains(text(), \"%s\")]";
 //    private static final String DATA_META_NAME_XPATH = "//div[@role=\"%s\"]";
 
-    private ButtonElement(String xpath, String param) {
+    private ButtonElement(String xpath, String... param) {
         super(xpath, param);
     }
 
@@ -22,7 +22,7 @@ public class ButtonElement extends BaseElement {
         return new ButtonElement(ROLE_XPATH, roleName);
     }
 
-    public static ButtonElement byType(String typeName){
-        return new ButtonElement(TYPE_XPATH, typeName);
+    public static ButtonElement byTypeAndText(String typeName, String text){
+        return new ButtonElement(TYPE_AND_TEXT_XPATH, typeName, text);
     }
 }

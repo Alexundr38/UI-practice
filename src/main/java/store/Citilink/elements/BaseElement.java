@@ -9,8 +9,8 @@ public class BaseElement {
     protected static final int WAIT_SECONDS = 5;
     protected final SelenideElement baseElement;
 
-    protected BaseElement(String xpath, String attributeValue){
-        baseElement = $x(String.format(xpath, attributeValue));
+    protected BaseElement(String xpath, String... params){
+        baseElement = $x(String.format(xpath, (Object[]) params));
     }
     public boolean isDisplayed() {
         try {

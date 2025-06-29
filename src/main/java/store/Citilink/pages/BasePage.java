@@ -36,11 +36,9 @@ public class BasePage {
 
     public void login(){
         loginButton.click();
-        ButtonElement loginWithPassword = ButtonElement.byType("button");
-        if (loginWithPassword.isDisplayed()) {  // isDisplayed() уже содержит ожидание
+        ButtonElement loginWithPassword = ButtonElement.byTypeAndText("button", "Войти по паролю");
+        if (loginWithPassword.isDisplayed()) {
             loginWithPassword.click();
-        } else {
-            throw new RuntimeException("Кнопка loginWithPassword не найдена!");
         }
     }
 }
