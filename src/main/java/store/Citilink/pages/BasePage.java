@@ -8,7 +8,6 @@ import static java.lang.Thread.sleep;
 public class BasePage {
     protected final Class<? extends BasePage> pageClass;
     protected final String expectedUrlPart;
-    private final ButtonElement loginButton = ButtonElement.byRole("button");
 
     protected BasePage(Class<? extends BasePage> pageClass, String expectedUrlPart) {
         this.pageClass = pageClass;
@@ -31,14 +30,6 @@ public class BasePage {
             return pageClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             throw new AssertionError(e);
-        }
-    }
-
-    public void login(){
-        loginButton.click();
-        ButtonElement loginWithPassword = ButtonElement.byTypeAndText("button", "Войти по паролю");
-        if (loginWithPassword.isDisplayed()) {
-            loginWithPassword.click();
         }
     }
 }
