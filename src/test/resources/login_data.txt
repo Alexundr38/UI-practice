@@ -1,2 +1,0 @@
-dns.shop.test@mail.ru
-test123
