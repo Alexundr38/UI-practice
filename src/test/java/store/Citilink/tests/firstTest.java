@@ -56,6 +56,7 @@ public class firstTest {
         open("https://www.citilink.ru/");
         sleep(1000);
         HomePage homePage = new HomePage();
+        homePage.login();
         homePage.openButton(HomePage.HeaderButton.BASKET);
         sleep(10000);
     }
