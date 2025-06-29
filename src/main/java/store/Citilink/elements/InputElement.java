@@ -1,13 +1,17 @@
 package store.Citilink.elements;
 
 public class InputElement extends BaseElement {
-    private static final String CLASS_XPATH = "//input[@class=“%s“]";
+    private static final String TYPE_XPATH = "//input[@type=\"%s\"]";
 
-    private InputElement(String xpath, String attributeValue) {
-        super(xpath, attributeValue);
+    private InputElement(String xpath, String params) {
+        super(xpath, params);
     }
 
-    public static InputElement byClass(String className) {
-        return new InputElement(CLASS_XPATH, className);
+    public static InputElement byType(String typeName) {
+        return new InputElement(TYPE_XPATH, typeName);
+    }
+
+    public void setValue(String text){
+        baseElement.setValue(text);
     }
 }
