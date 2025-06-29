@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import store.Citilink.pages.HomePage;
 import org.openqa.selenium.edge.EdgeOptions;
 
+
 import java.io.File;
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ public class firstTest {
 //        Configuration.timeout = 15000;
 //        Configuration.holdBrowserOpen = true;
 //    }
-//
+
     @AfterEach
     public void tearDown() {
         closeWebDriver();
@@ -55,7 +56,7 @@ public class firstTest {
         open("https://www.citilink.ru/");
         sleep(1000);
         HomePage homePage = new HomePage();
-        homePage.login();
+        homePage.openButton(HomePage.HeaderButton.BASKET);
         sleep(10000);
     }
 }

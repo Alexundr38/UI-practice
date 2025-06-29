@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Condition.enabled;
 public class ButtonElement extends BaseElement {
     private static final String TYPE_XPATH = "//button[@type=\"%s\"]";
     private static final String ROLE_XPATH = "//div[@role=\"%s\"]";
+    private static final String DATA_META_NAME_XPATH = "//*[@data-meta-name=\"%s\"]";
     private static final String TYPE_AND_TEXT_XPATH = "//button[@type=\"%s\" and .//text()[contains(., \"%s\")]]";
 
     private ButtonElement(String xpath, String... param) {
@@ -28,6 +29,9 @@ public class ButtonElement extends BaseElement {
     public static ButtonElement byTypeAndText(String typeName, String text) {
         return new ButtonElement(TYPE_AND_TEXT_XPATH, typeName, text);
     }
+
+    public static ButtonElement byDataMetaName(String value) {
+        return new ButtonElement(DATA_META_NAME_XPATH, value);
 
     public boolean isEnabled(){
         try {
