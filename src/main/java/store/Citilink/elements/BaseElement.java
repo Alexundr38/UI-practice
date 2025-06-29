@@ -17,6 +17,7 @@ public class BaseElement {
             return baseElement
                     .shouldBe(visible, Duration.ofSeconds(WAIT_SECONDS))
                     .isDisplayed();
+
         } catch (Exception e) {
             return false;
         }
