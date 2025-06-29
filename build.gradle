@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'store.DNS'
+group = 'store.Citilink'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -11,6 +11,7 @@ repositories {
 
 dependencies {
     implementation("com.codeborne:selenide:7.9.3")
+    implementation 'io.github.bonigarcia:webdrivermanager:5.7.0'
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }

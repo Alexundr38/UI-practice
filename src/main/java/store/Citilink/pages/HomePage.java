@@ -1,13 +1,11 @@
-package store.DNS.pages;
-
-import store.DNS.elements.ButtonElement;
+package store.Citilink.pages;
 
 public class HomePage extends BasePage {
     //private CatalogButton catalogButton;
     //private InputSearch inputSearch;
 
     public HomePage() {
-        super(HomePage.class, "https://www.dns-shop.ru");
+        super(HomePage.class, "https://www.citilink.ru");
     }
 
 }

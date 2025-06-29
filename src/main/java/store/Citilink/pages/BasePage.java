@@ -1,12 +1,14 @@
-package store.DNS.pages;
+package store.Citilink.pages;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
-import store.DNS.elements.ButtonElement;
+import store.Citilink.elements.ButtonElement;
+
+import static java.lang.Thread.sleep;
 
 public class BasePage {
     protected final Class<? extends BasePage> pageClass;
     protected final String expectedUrlPart;
-    private final ButtonElement loginButton = ButtonElement.byClassLink("user-menu");
+    private final ButtonElement loginButton = ButtonElement.byRole("button");
 
     protected BasePage(Class<? extends BasePage> pageClass, String expectedUrlPart) {
         this.pageClass = pageClass;
@@ -34,5 +36,11 @@ public class BasePage {
 
     public void login(){
         loginButton.click();
+        ButtonElement loginWithPassword = ButtonElement.byType("button");
+        if (loginWithPassword.isDisplayed()) {  // isDisplayed() уже содержит ожидание
+            loginWithPassword.click();
+        } else {
+            throw new RuntimeException("Кнопка loginWithPassword не найдена!");
+        }
     }
 }

@@ -1,4 +1,4 @@
-package store.DNS.elements;
+package store.Citilink.elements;
 
 public class InputElement extends BaseElement {
     private static final String CLASS_XPATH = "//input[@class=“%s“]";
