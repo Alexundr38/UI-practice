@@ -25,6 +25,7 @@ public class BasePage {
     protected BasePage(Class<? extends BasePage> pageClass, String expectedUrlPart) {
         this.pageClass = pageClass;
         this.expectedUrlPart = expectedUrlPart;
+        verifyPageUrl();
     }
 
     /**
