@@ -1,7 +1,7 @@
 package store.Citilink.pages;
 
 import store.Citilink.elements.ButtonElement;
-import store.Citilink.elements.InputElement;
+import store.Citilink.elements.SearchElement;
 import store.Citilink.load_data.LoadLoginData;
 
 /**
@@ -10,7 +10,7 @@ import store.Citilink.load_data.LoadLoginData;
  */
 public class HomePage extends BasePage {
     /** Поле поиска по сайту. */
-    private InputElement inputSearch = InputElement.byType("search");
+    private SearchElement searchInput = SearchElement.byType("search");
 
     /** Кнопка входа в личный кабинет. */
     private final ButtonElement loginButton = ButtonElement.byDataMetaName("UserButtonContainer");
@@ -48,8 +48,16 @@ public class HomePage extends BasePage {
      * Конструктор главной страницы.
      * Передаёт ожидаемый URL в базовый класс.
      */
-    public HomePage() {
+    protected HomePage() {
         super(HomePage.class, "https://www.citilink.ru");
+    }
+
+    /**
+     * Создает объект HomePage
+     * @return Объект NomePage
+     */
+    public static HomePage openHomePage() {
+        return new HomePage();
     }
 
     /**
@@ -73,8 +81,8 @@ public class HomePage extends BasePage {
             loginWithPassword.click();
         }
         
-        InputElement inputEmail = InputElement.byType("email");
-        InputElement inputPassword = InputElement.byType("password");
+        SearchElement inputEmail = SearchElement.byType("email");
+        SearchElement inputPassword = SearchElement.byType("password");
 
         LoadLoginData loadData = new LoadLoginData();
         String email = loadData.getUsername();
