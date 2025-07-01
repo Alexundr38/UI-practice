@@ -33,8 +33,6 @@ public class ProductCardElement extends ProductSnippetElement {
      * Добавляет товар в корзину (клик по кнопке "Оформить заказ").
      */
     public void addToCart() {
-        ButtonElement test = ButtonElement.byInElement(this, "data-meta-name", "Snippet__cart-button");
-        System.out.println(test.isDisplayed());
         ButtonElement.byInElement(this, "data-meta-name", "Snippet__cart-button").click();
     }
 
