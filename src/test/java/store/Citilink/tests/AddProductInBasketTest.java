@@ -4,14 +4,14 @@ import org.junit.jupiter.api.Test;
 import store.Citilink.pages.BasketPage;
 import store.Citilink.pages.HomePage;
 import store.Citilink.pages.SearchPage;
-
-
 import static com.codeborne.selenide.Selenide.sleep;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import store.Citilink.load_data.LoadProductData;
+
 
 /**
- * Тест проверяет добавление товара в корзину и то,
- * что после добавления корзина не пуста.
+ * Тест проверяет добавление в корзину случайно выбранного товара.
+ * Название товара берётся из внешнего JSON-файла со списком продуктов.
  */
 public class AddProductInBasketTest extends BaseTest {
     protected BasketPage basketPage;
@@ -19,18 +19,20 @@ public class AddProductInBasketTest extends BaseTest {
 
     @Test
     protected void addProductToBasket() {
-        String productName = "Смартфон ITEL P65 6/256Gb, P671LN, титан";
+        LoadProductData loader = new LoadProductData();
+        String productName = loader.getRandomProduct();
+
         login();
         homePage.search(productName);
-        sleep(5000);
+        sleep(1000);
 
         searchPage = SearchPage.openSearchPage();
         searchPage.addProductToCartByName(productName);
 
         homePage.openButton(HomePage.HeaderButton.BASKET);
         basketPage = BasketPage.openBasketPage();
-        sleep(500);
-
-        assertFalse(basketPage.isEmptyOrder(), "Ожидали, что корзина не пустая после добавления товара");
+        sleep(1000);
+        assertTrue(basketPage.containsProductWithName(productName),
+                "Ожидали, что в корзине есть товар с названием: " + productName);
     }
 }

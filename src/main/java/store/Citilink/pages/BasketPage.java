@@ -30,7 +30,7 @@ public class BasketPage extends BasePage {
 
     /**
      * Приватный метод для инициализации элемента товара в корзине.
-     * Находит элемент по data-meta-name="BasketSnippet".
+     * Находит элемент по названию".
      */
     private void setUpElementByName(String productName){
         productSnippet = ProductBasketElement.byName(productName);
@@ -71,6 +71,16 @@ public class BasketPage extends BasePage {
         setUpElementByName(productName);
         productSnippet.clickRemoveCheckBox();
         removeSelectedButton.click();
+        return productSnippet.isDisplayed();
+    }
+
+    /**
+     * Проверяет, что в корзине присутствует товар с точным названием.
+     * @param productName точное название товара
+     * @return true, если элемент с таким названием виден на странице
+     */
+    public boolean containsProductWithName(String productName) {
+        productSnippet = ProductBasketElement.byName(productName);
         return productSnippet.isDisplayed();
     }
 
