@@ -6,7 +6,7 @@ import store.Citilink.pages.HomePage;
 import store.Citilink.pages.SearchPage;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import store.Citilink.load_data.LoadProductData;
+import store.Citilink.load_and_write_data.LoadWriteProductData;
 
 
 /**
@@ -19,7 +19,7 @@ public class AddProductInBasketTest extends BaseTest {
 
     @Test
     protected void addProductToBasket() {
-        LoadProductData loader = new LoadProductData();
+        LoadWriteProductData loader = new LoadWriteProductData(LoadWriteProductData.ActionType.PUT_BASKET);
         String productName = loader.getRandomProduct();
 
         login();

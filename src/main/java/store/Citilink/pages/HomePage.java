@@ -2,7 +2,7 @@ package store.Citilink.pages;
 
 import store.Citilink.elements.ButtonElement;
 import store.Citilink.elements.SearchElement;
-import store.Citilink.load_data.LoadLoginData;
+import store.Citilink.load_and_write_data.LoadLoginData;
 
 /**
  * Главная страница сайта Citilink.
