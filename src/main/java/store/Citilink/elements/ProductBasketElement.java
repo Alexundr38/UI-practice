@@ -5,6 +5,9 @@ package store.Citilink.elements;
  * Наследуется от ProductSnippetElement, добавляя функциональность для работы с товарами в корзине.
  */
 public class ProductBasketElement extends ProductSnippetElement{
+    private static final String BASKET_SNIPPET_BY_NAME_XPATH = SNIPPET_BY_NAME_XPATH.replaceFirst("%s", "BasketSnippet");
+
+
     /** Кнопка удаления товара из корзины */
     private final ButtonElement removeButton = ButtonElement.byButtonInElement(
             this, "data-meta-name", "DeleteAction");
@@ -20,8 +23,15 @@ public class ProductBasketElement extends ProductSnippetElement{
      */
     protected ProductBasketElement(String xpath, String param){
         super(xpath, param);
-        // Устанавливает базовый элемент по атрибуту data-meta-id
-        changeBaseElement("data-meta-id");
+    }
+
+    /**
+     * Статический метод для создания элемента по data-meta-name
+     * @param productName Значение атрибута data-meta-name
+     * @return Новый объект ProductBasketElement
+     */
+    public static ProductBasketElement byName(String productName){
+        return new ProductBasketElement(BASKET_SNIPPET_BY_NAME_XPATH, productName);
     }
 
     /**

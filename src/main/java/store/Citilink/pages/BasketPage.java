@@ -7,9 +7,9 @@ import store.Citilink.elements.ProductBasketElement;
  * Класс представляет страницу корзины товаров.
  * Наследуется от BasePage и предоставляет методы для взаимодействия с корзиной.
  */
-public class BasketPage extends BasePage{
-    /** Верхний элемент товара в корзине */
+public class BasketPage extends BasePage {
     ProductBasketElement productSnippet;
+
     private final ButtonElement removeSelectedButton = ButtonElement.byText("Удалить выбранные");
 
     /**
@@ -26,6 +26,14 @@ public class BasketPage extends BasePage{
      */
     public static BasketPage openBasketPage(){
         return new BasketPage();
+    }
+
+    /**
+     * Приватный метод для инициализации элемента товара в корзине.
+     * Находит элемент по data-meta-name="BasketSnippet".
+     */
+    private void setUpElementByName(String productName){
+        productSnippet = ProductBasketElement.byName(productName);
     }
 
     /**
@@ -49,8 +57,8 @@ public class BasketPage extends BasePage{
      * Удаляет товар из корзины с помощью кнопки корзины на элементе.
      * @return true, если товар больше не отображается (удален успешно), false - если товар остался
      */
-    public boolean removeUpProductWithBin() {
-        setUpElement();
+    public boolean removeUpProductWithBin(String productName) {
+        setUpElementByName(productName);
         productSnippet.removeElementWithBin();
         return productSnippet.isDisplayed();
     }
@@ -59,8 +67,8 @@ public class BasketPage extends BasePage{
      * Удаляет товар из корзины посредством выделения товара и удаления через кнопку "Удалить выбранные".
      * @return true, если товар больше не отображается (удален успешно), false - если товар остался
      */
-    public boolean removeUpProductWithCheckBox() {
-        setUpElement();
+    public boolean removeUpProductWithCheckBox(String productName) {
+        setUpElementByName(productName);
         productSnippet.clickRemoveCheckBox();
         removeSelectedButton.click();
         return productSnippet.isDisplayed();
