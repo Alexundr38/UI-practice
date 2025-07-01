@@ -5,9 +5,7 @@ package store.Citilink.elements;
  * Содержит методы для добавления товара в корзину, сравнение и избранное.
  */
 public class ProductCardElement extends ProductSnippetElement {
-    private static final String CARD_BY_NAME_XPATH =
-            "//div[@data-meta-name='SnippetProductVerticalLayout' " +
-                    "and .//a[@data-meta-name='Snippet__title' and normalize-space(text())='%s']]";
+    private static final String CARD_BY_NAME_XPATH = SNIPPET_BY_NAME_XPATH.replaceFirst("%s", "SnippetProductVerticalLayout");
 
     /**
      * Приватный конструктор.
@@ -33,8 +31,6 @@ public class ProductCardElement extends ProductSnippetElement {
      * Добавляет товар в корзину (клик по кнопке "Оформить заказ").
      */
     public void addToCart() {
-        ButtonElement test = ButtonElement.byInElement(this, "data-meta-name", "Snippet__cart-button");
-        System.out.println(test.isDisplayed());
         ButtonElement.byInElement(this, "data-meta-name", "Snippet__cart-button").click();
     }
 
