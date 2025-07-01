@@ -37,7 +37,7 @@ public class SearchPage extends BasePage {
      * @return объект ProductCardElement для дальнейших действий
      */
     public ProductCardElement getProductCardByName(String productName) {
-        return ProductCardElement.byName(productName);
+        return ProductCardElement.byName("SnippetProductVerticalLayout", productName);
     }
 
     /**

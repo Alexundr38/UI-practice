@@ -1,4 +1,4 @@
-package store.Citilink.load_data;
+package store.Citilink.load_and_write_data;
 
 import org.json.JSONObject;
 import java.nio.file.Files;
