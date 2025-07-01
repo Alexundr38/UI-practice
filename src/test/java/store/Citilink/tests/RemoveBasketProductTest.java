@@ -1,6 +1,7 @@
 package store.Citilink.tests;
 
 import org.junit.jupiter.api.Test;
+import store.Citilink.load_and_write_data.LoadWriteProductData;
 import store.Citilink.pages.BasketPage;
 import store.Citilink.pages.HomePage;
 
@@ -13,13 +14,17 @@ public class RemoveBasketProductTest extends BaseTest{
     @Test
     protected void removeBasketProductWithBin() {
         openBasketPage();
-        assertTrue(basketPage.removeUpProductWithBin("Смартфон TECNO Spark 30C 8/256Gb, черный"));
+        LoadWriteProductData loader = new LoadWriteProductData(LoadWriteProductData.ActionType.REMOVE_BASKET);
+        String productName = loader.getRandomProduct();
+        assertTrue(basketPage.removeUpProductWithBin(productName));
     }
 
     @Test
     protected void removeBasketProductWithCheckBox() {
         openBasketPage();
-        assertTrue(basketPage.removeUpProductWithCheckBox("Смартфон TECNO Spark 30C 8/256Gb, черный"));
+        LoadWriteProductData loader = new LoadWriteProductData(LoadWriteProductData.ActionType.REMOVE_BASKET);
+        String productName = loader.getRandomProduct();
+        assertTrue(basketPage.removeUpProductWithCheckBox(productName));
     }
 
     @Test
