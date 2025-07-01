@@ -28,6 +28,12 @@ public class ButtonElement extends BaseElement {
     private static final String TEXT_XPATH = "//button[.//text()=\"%s\"]";
 
     /**
+     * XPath шаблон для поиска вложенного элемента по заданному атрибуту и его значению
+     * относительно родительского элемента.
+     */
+    private static final String IN_ELEMENT_XPATH = ".//*[@%s=\"%s\"]";
+
+    /**
      * Приватный конструктор для создания объекта ButtonElement.
      * @param xpath XPath-шаблон для поиска элемента
      * @param param Параметры для подстановки в XPath-шаблон
@@ -102,6 +108,20 @@ public class ButtonElement extends BaseElement {
      */
     public static ButtonElement byText(String text) {
         return new ButtonElement(TEXT_XPATH, text);
+    }
+
+    /**
+     * Создает объект ButtonElement внутри указанного родительского элемента
+     * по произвольному атрибуту и его значению.
+     *
+     * @param parentElement Родительский элемент, относительно которого выполняется поиск
+     * @param xpathParam    Имя атрибута для поиска (например, "data-meta-name")
+     * @param paramValue    Значение атрибута, по которому ищется элемент
+     * @return новый экземпляр ButtonElement, соответствующий найденной кнопке
+     */
+    public static ButtonElement byInElement(BaseElement parentElement, String xpathParam, String paramValue) {
+        return new ButtonElement(parentElement,
+                IN_ELEMENT_XPATH.replaceFirst("%s", xpathParam), paramValue);
     }
 
     /**

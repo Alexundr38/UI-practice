@@ -97,4 +97,13 @@ public class HomePage extends BasePage {
             endLoginButton.click();
         }
     }
+
+    /**
+     * Выполняет поиск по сайту.
+     * @param query строка для поиска
+     */
+    public void search(String query) {
+        searchInput.setValue(query);
+        ButtonElement.byType("submit").click();
+    }
 }
