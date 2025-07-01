@@ -5,7 +5,7 @@ import store.Citilink.pages.HomePage;
 import store.Citilink.pages.CatalogPage;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import store.Citilink.load_data.LoadProductData;
+import store.Citilink.load_and_write_data.LoadWriteProductData;
 import store.Citilink.pages.ComparePage;
 
 /**
@@ -17,7 +17,7 @@ public class AddProductToCompareTest extends BaseTest{
 
     @Test
     protected void addProductToCompare() {
-        LoadProductData loader = new LoadProductData();
+        LoadWriteProductData loader = new LoadWriteProductData(LoadWriteProductData.ActionType.PUT_COMPARE);
         String productName = loader.getRandomProduct();
 
         login();
