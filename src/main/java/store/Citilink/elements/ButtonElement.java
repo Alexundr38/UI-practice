@@ -39,6 +39,8 @@ public class ButtonElement extends BaseElement {
      */
     private static final String IN_ELEMENT_XPATH = ".//*[@%s=\"%s\"]";
 
+    private static final String IN_CONTAINS_XPATH = ".//*[contains(@%s, \"%s\")]";
+
     /**
      * Приватный конструктор для создания объекта ButtonElement.
      * @param xpath XPath-шаблон для поиска элемента
@@ -136,6 +138,21 @@ public class ButtonElement extends BaseElement {
         return new ButtonElement(parentElement,
                 IN_ELEMENT_XPATH.replaceFirst("%s", xpathParam), paramValue);
     }
+
+    /**
+     * Создает объект ButtonElement внутри указанного родительского элемента
+     * по содержанию произвольного атрибута и его значения.
+     *
+     * @param parentElement Родительский элемент, относительно которого выполняется поиск
+     * @param xpathParam    Имя атрибута для поиска
+     * @param paramValue    Значение атрибута, по которому ищется элемент
+     * @return новый экземпляр ButtonElement, соответствующий найденной кнопке
+     */
+    public static ButtonElement byInContains(BaseElement parentElement, String xpathParam, String paramValue) {
+        return new ButtonElement(parentElement,
+                IN_CONTAINS_XPATH.replaceFirst("%s", xpathParam), paramValue);
+    }
+
 
     /**
      * Создает объект ButtonElement для категории по атрибуту data-meta-name и тексту

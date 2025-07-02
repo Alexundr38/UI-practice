@@ -18,9 +18,6 @@ public class LoadWriteProductData {
     /** Список загруженных товаров */
     private final List<String> products = new ArrayList<>();
 
-    /** Название текущего товаров */
-    private String productName;
-
     /** Тип действия, которое будет выполнено с товаром */
     private ActionType actionType;
 
@@ -97,8 +94,8 @@ public class LoadWriteProductData {
             throw new IllegalStateException("Список продуктов пуст");
         }
         int idx = ThreadLocalRandom.current().nextInt(products.size());
-        productName = products.get(idx);
-        doActionLogic();
+        String productName = products.get(idx);
+        doActionLogic(productName);
         return productName;
     }
 
@@ -106,25 +103,25 @@ public class LoadWriteProductData {
      * Выполняет логику действия в зависимости от установленного типа действия.
      * Вызывает соответствующий метод для добавления или удаления товара.
      */
-    private void doActionLogic() {
+    public void doActionLogic(String productName) {
         switch (actionType) {
             case PUT_BASKET:
-                writeProduct("products_in_basket.json");
+                writeProduct("products_in_basket.json", productName);
                 break;
             case PUT_WISHLIST:
-                writeProduct("products_in_wishlist.json");
+                writeProduct("products_in_wishlist.json", productName);
                 break;
             case PUT_COMPARE:
-                writeProduct("products_in_compare.json");
+                writeProduct("products_in_compare.json", productName);
                 break;
             case REMOVE_BASKET:
-                removeProduct("products_in_basket.json");
+                removeProduct("products_in_basket.json", productName);
                 break;
             case REMOVE_WISHLIST:
-                removeProduct("products_in_wishlist.json");
+                removeProduct("products_in_wishlist.json", productName);
                 break;
             case REMOVE_COMPARE:
-                removeProduct("products_in_compare.json");
+                removeProduct("products_in_compare.json", productName);
                 break;
         }
     }
@@ -133,7 +130,7 @@ public class LoadWriteProductData {
      * Удаляет товар из указанного JSON-файла.
      * @param fileName Имя файла, из которого нужно удалить товар
      */
-    private void removeProduct(String fileName) {
+    private void removeProduct(String fileName, String productName) {
         try {
             Path filePath = Paths.get("src/main/java/store/Citilink/data", fileName);
             String content = new String(Files.readAllBytes(filePath));
@@ -159,7 +156,7 @@ public class LoadWriteProductData {
      * Записывает товар в указанный JSON-файл, если его там еще нет.
      * @param fileName Имя файла, в который нужно записать товар
      */
-    private void writeProduct(String fileName) {
+    private void writeProduct(String fileName, String productName) {
         try {
             Path filePath = Paths.get("src/main/java/store/Citilink/data/", fileName);
 

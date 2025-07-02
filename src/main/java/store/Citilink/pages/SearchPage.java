@@ -1,6 +1,7 @@
 package store.Citilink.pages;
 
 import store.Citilink.elements.ProductCardElement;
+import store.Citilink.elements.ProductCatalogElement;
 
 /**
  * Страница результатов поиска на сайте.
@@ -34,10 +35,10 @@ public class SearchPage extends BasePage {
      * Возвращает объект карточки товара по точному названию.
      *
      * @param productName точное название товара, отображаемое в элементе Snippet__title
-     * @return объект ProductCardElement для дальнейших действий
+     * @return объект ProductCatalogElement для дальнейших действий
      */
-    public ProductCardElement getProductCardByName(String productName) {
-        return ProductCardElement.byName("SnippetProductVerticalLayout", productName);
+    public ProductCatalogElement getProductCardByName(String productName) {
+        return ProductCatalogElement.byName("SnippetProductVerticalLayout", productName);
     }
 
     /**
@@ -58,7 +59,7 @@ public class SearchPage extends BasePage {
      * @param productName точное название товара, отображаемое заголовком в сниппете
      */
     public void addProductToCompareByName(String productName) {
-        ProductCardElement productCard = getProductCardByName(productName);
+        ProductCatalogElement productCard = getProductCardByName(productName);
         productCard.addToCompare();
     }
 
@@ -69,7 +70,7 @@ public class SearchPage extends BasePage {
      * @param productName точное название товара, отображаемое заголовком в сниппете
      */
     public void addProductToWishListByName(String productName) {
-        ProductCardElement productCard = getProductCardByName(productName);
+        ProductCatalogElement productCard = getProductCardByName(productName);
         productCard.addToWishlist();
     }
 

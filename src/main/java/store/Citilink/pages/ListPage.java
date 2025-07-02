@@ -1,13 +1,14 @@
 package store.Citilink.pages;
 
 import store.Citilink.elements.ButtonElement;
-import store.Citilink.elements.ProductCardElement;
+import store.Citilink.elements.ProductListElement;
+
 import java.lang.reflect.Constructor;
 
 
-public class ListPage extends BasePage {
-    ProductCardElement productSnippet;
-    ButtonElement removeListButton = ButtonElement.byTypeAndText("button", "Очистить список");
+public abstract class ListPage<T extends ProductListElement> extends BasePage {
+    protected T productSnippet;
+    protected ButtonElement removeListButton = ButtonElement.byTypeAndText("button", "Очистить список");
 
     protected ListPage(Class<? extends ListPage> pageClass, String partURL) {
         super(pageClass, partURL);
@@ -34,20 +35,42 @@ public class ListPage extends BasePage {
 
     /**
      * Нажимает на кнопку "Очистить список" на странице.
-     * Используется для удаления всех товаров из списка (например, сравнения или избранного).
+     * Используется для удаления всех товаров из списка
      */
-    public void clickRemoveListButton() {
+    private void clickRemoveListButton() {
         removeListButton.click();
     }
 
+    /**
+     * Нажимает на кнопку "Очистить список" на странице.
+     */
+    public void removeProductWithRemoveAll() {
+        clickRemoveListButton();
+    }
+
+    /**
+     * Удаляет товар по названию через кнопку крестика
+     * @param productName название товара
+     * @return false, если товар удален, true в противном случае
+     */
+    public boolean removeProductWithCross(String productName){
+        setUpElementByName(productName);
+        productSnippet.clickCrossButton();
+        return productSnippet.isDisplayed();
+    }
     /**
      * Проверяет, пуст ли список товаров на странице.
      * @return true, если ни один элемент с data-meta-name="SnippetProductVerticalLayout" не отображается,
      *         иначе false (то есть список не пуст)
      */
     public boolean isEmpty() {
-        return !ProductCardElement.byDataMetaName("SnippetProductVerticalLayout").isDisplayed();
+        setUpElement();
+        return !productSnippet.isDisplayed();
     }
+
+    protected abstract void setUpElement();
+
+    protected abstract void setUpElementByName(String productName);
 
     /**
      * Проверяет, что на странице присутствует товар с точным названием.
@@ -55,7 +78,7 @@ public class ListPage extends BasePage {
      * @return true, если элемент с таким названием виден на странице
      */
     public boolean containsProductWithName(String productName) {
-        productSnippet = ProductCardElement.byName("SnippetProductVerticalLayout", productName);
+        setUpElementByName(productName);
         return productSnippet.isDisplayed();
     }
 }

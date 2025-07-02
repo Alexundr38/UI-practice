@@ -57,7 +57,7 @@ public class BasketPage extends BasePage {
      * Удаляет товар из корзины с помощью кнопки корзины на элементе.
      * @return true, если товар больше не отображается (удален успешно), false - если товар остался
      */
-    public boolean removeUpProductWithBin(String productName) {
+    public boolean removeProductWithBin(String productName) {
         setUpElementByName(productName);
         productSnippet.removeElementWithBin();
         return productSnippet.isDisplayed();
@@ -67,7 +67,7 @@ public class BasketPage extends BasePage {
      * Удаляет товар из корзины посредством выделения товара и удаления через кнопку "Удалить выбранные".
      * @return true, если товар больше не отображается (удален успешно), false - если товар остался
      */
-    public boolean removeUpProductWithCheckBox(String productName) {
+    public boolean removeProductWithCheckBox(String productName) {
         setUpElementByName(productName);
         productSnippet.clickRemoveCheckBox();
         removeSelectedButton.click();

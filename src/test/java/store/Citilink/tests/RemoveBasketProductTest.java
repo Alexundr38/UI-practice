@@ -16,7 +16,7 @@ public class RemoveBasketProductTest extends BaseTest{
         openBasketPage();
         LoadWriteProductData loader = new LoadWriteProductData(LoadWriteProductData.ActionType.REMOVE_BASKET);
         String productName = loader.getRandomProduct();
-        assertTrue(basketPage.removeUpProductWithBin(productName));
+        assertTrue(basketPage.removeProductWithBin(productName));
     }
 
     @Test
@@ -24,7 +24,7 @@ public class RemoveBasketProductTest extends BaseTest{
         openBasketPage();
         LoadWriteProductData loader = new LoadWriteProductData(LoadWriteProductData.ActionType.REMOVE_BASKET);
         String productName = loader.getRandomProduct();
-        assertTrue(basketPage.removeUpProductWithCheckBox(productName));
+        assertTrue(basketPage.removeProductWithCheckBox(productName));
     }
 
     @Test
