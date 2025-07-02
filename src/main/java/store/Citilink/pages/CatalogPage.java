@@ -2,32 +2,30 @@ package store.Citilink.pages;
 
 import store.Citilink.elements.ProductCardElement;
 
-/**
- * Страница результатов поиска на сайте.
- */
-public class SearchPage extends BasePage {
+public class CatalogPage extends BasePage{
 
     /**
      * Ожидаемая часть URL для страницы результатов поиска.
      * Используется для проверки корректности загруженной страницы.
      */
-    private static final String URL_PART = "/search";
+    private static final String URL_PART = "/catalog";
+
 
     /**
      * Конструктор страницы результатов поиска.
      * Вызывает конструктор базового класса с передачей
      * класса текущей страницы и ожидаемой части URL.
      */
-    public SearchPage() {
-        super(SearchPage.class, URL_PART);
+    public CatalogPage() {
+        super(CatalogPage.class, URL_PART);
     }
 
     /**
      * Статический метод для создания страницы поиска.
      * @return новый объект SearchPage
      */
-    public static SearchPage openSearchPage(){
-        return new SearchPage();
+    public static CatalogPage openCatalogPage(){
+        return new CatalogPage();
     }
 
     /**
@@ -37,7 +35,7 @@ public class SearchPage extends BasePage {
      * @return объект ProductCardElement для дальнейших действий
      */
     public ProductCardElement getProductCardByName(String productName) {
-        return ProductCardElement.byName("SnippetProductVerticalLayout", productName);
+        return ProductCardElement.byName("ProductHorizontalSnippet", productName);
     }
 
     /**
@@ -72,5 +70,4 @@ public class SearchPage extends BasePage {
         ProductCardElement productCard = getProductCardByName(productName);
         productCard.addToWishlist();
     }
-
 }

@@ -1,7 +1,5 @@
 package store.Citilink.elements;
 
-import store.Citilink.pages.BasePage;
-
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.enabled;
@@ -17,6 +15,14 @@ public class ButtonElement extends BaseElement {
 
     /** XPath шаблон для поиска элемента по атрибуту data-meta-name */
     private static final String DATA_META_NAME_XPATH = "//*[@data-meta-name=\"%s\"]";
+
+    /** XPath шаблон для поиска категории по атрибуту data-meta-name и тексту*/
+    private static final String DATA_META_NAME_AND_TEXT_CATEGORY_XPATH =
+            "(//a[@data-meta-name=\"%s\" and .//span[contains(normalize-space(.), \"%s\")]])[2]";
+
+    /** XPath шаблон для поиска текста по атрибуту data-meta-name и тексту*/
+    private static final String DATA_META_NAME_AND_TEXT_XPATH =
+            "//a[@data-meta-name=\"%s\" and .//span[normalize-space(text())=\"%s\"]]";
 
     /** XPath шаблон для поиска кнопки по атрибуту type и тексту */
     private static final String TYPE_AND_TEXT_XPATH = "//button[@type=\"%s\" and .//text()[contains(., \"%s\")]]";
@@ -58,6 +64,13 @@ public class ButtonElement extends BaseElement {
      */
     public void click(){
         baseElement.click();
+    }
+
+    /**
+     * Наводит курсор мыши на кнопку.
+     */
+    public void hover() {
+        baseElement.hover();
     }
 
     /**
@@ -122,6 +135,27 @@ public class ButtonElement extends BaseElement {
     public static ButtonElement byInElement(BaseElement parentElement, String xpathParam, String paramValue) {
         return new ButtonElement(parentElement,
                 IN_ELEMENT_XPATH.replaceFirst("%s", xpathParam), paramValue);
+    }
+
+    /**
+     * Создает объект ButtonElement для категории по атрибуту data-meta-name и тексту
+     * @param dataMetaName Значение атрибута data-meta-name, указывающее категорию
+     * @param text          Текст внутри элемента <span> для поиска
+     * @return новый экземпляр ButtonElement, соответствующий найденной категории
+     */
+    public static ButtonElement byDataMetaNameAndTextCategory(String dataMetaName, String text) {
+        return new ButtonElement(DATA_META_NAME_AND_TEXT_CATEGORY_XPATH, dataMetaName, text);
+    }
+
+    /**
+     * Создает объект ButtonElement по атрибуту data-meta-name и тексту.
+     *
+     * @param dataMetaName Значение атрибута data-meta-name
+     * @param text         Текст внутри <span> для поиска
+     * @return новый экземпляр ButtonElement с указанными параметрами
+     */
+    public static ButtonElement byDataMetaNameAndText(String dataMetaName, String text) {
+        return new ButtonElement(DATA_META_NAME_AND_TEXT_XPATH, dataMetaName, text);
     }
 
     /**

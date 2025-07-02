@@ -29,6 +29,16 @@ public class ProductCardElement extends ProductSnippetElement {
     }
 
     /**
+     * Фабричный метод для поиска карточки товара по значению атрибута data-meta-name.
+     *
+     * @param snippetType значение атрибута data-meta-name
+     * @return новый объект ProductCardElement, соответствующий найденному элементу
+     */
+    public static ProductCardElement byDataMetaName(String snippetType) {
+        return new ProductCardElement(DATA_META_NAME_XPATH, snippetType);
+    }
+
+    /**
      * Добавляет товар в корзину (клик по кнопке "Оформить заказ").
      */
     public void addToCart() {

@@ -30,6 +30,7 @@ public class AddProductInBasketTest extends BaseTest {
         searchPage.addProductToCartByName(productName);
 
         homePage.openButton(HomePage.HeaderButton.BASKET);
+        sleep(1000);
         basketPage = BasketPage.openBasketPage();
         sleep(1000);
         assertTrue(basketPage.containsProductWithName(productName),
