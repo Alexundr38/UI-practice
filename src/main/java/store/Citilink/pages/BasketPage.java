@@ -71,7 +71,7 @@ public class BasketPage extends BasePage {
         setUpElementByName(productName);
         productSnippet.clickRemoveCheckBox();
         removeSelectedButton.click();
-        return productSnippet.isDisplayed();
+        return productSnippet.waitNotDisplayed();
     }
 
     /**

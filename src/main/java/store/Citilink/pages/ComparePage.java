@@ -1,7 +1,6 @@
 package store.Citilink.pages;
 
 
-import store.Citilink.elements.ButtonElement;
 import store.Citilink.elements.ProductCompareElement;
 
 /**
@@ -30,6 +29,17 @@ public class ComparePage extends ListPage<ProductCompareElement> {
      */
     public static ComparePage openComparePage() {
         return ListPage.openListPage(ComparePage.class, URL_PART);
+    }
+
+    /**
+     * Удаляет товар по названию через кнопку крестика
+     * @param productName название товара
+     * @return false, если товар удален, true в противном случае
+     */
+    public boolean removeProductWithCross(String productName){
+        setUpElementByName(productName);
+        productSnippet.clickCrossButton();
+        return productSnippet.isDisplayed();
     }
 
     protected void setUpElement() {

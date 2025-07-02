@@ -26,6 +26,8 @@ public abstract class ProductListElement extends ProductCardElement {
      * Нажимает на кнопку удаления товара.
      */
     public void clickCrossButton() {
-        ButtonElement.byInContains(this, "d", "M4.5 3.43934").click();
+        ButtonElement crossButton = ButtonElement.byInContains(this, "d", "M4.5 3.43934");
+        crossButton.hover();
+        crossButton.click();
     }
 }
