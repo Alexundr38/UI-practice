@@ -1,6 +1,8 @@
 package store.Citilink.pages;
 
 import store.Citilink.elements.ProductCardElement;
+import store.Citilink.elements.ButtonElement;
+import store.Citilink.elements.PriceFilterElement;
 
 /**
  * Страница результатов поиска на сайте Citilink.
@@ -73,4 +75,28 @@ public class SearchPage extends BasePage {
         productCard.addToWishlist();
     }
 
+    /**
+     * Использование фильтра цены
+     */
+    public void usePriceFilter(String minPrice) {
+        PriceFilterElement PFEmin = PriceFilterElement.byDataMetaName("FilterRangeGroup__input-min");
+
+        PFEmin.setValue(minPrice);
+
+        ButtonElement.byClass("e11203e30 app-catalog-1g3e94m-Button--StyledButton-Button--Button ekx3zbi0")
+                .scrollIntoViewCentered()
+                .waitUntilClickable()
+                .click();
+    }
+
+    /**
+     * Получение значения цены первого товара из найденного списка
+     */
+    public int getPrice() {
+        // Находим первый элемент с атрибутом data-meta-price
+        String rawPrice = com.codeborne.selenide.Selenide.$("[data-meta-price]").getAttribute("data-meta-price");
+
+        // Удаляем все нецифровые символы и преобразуем в число
+        return Integer.parseInt(rawPrice.replaceAll("[^0-9]", ""));
+    }
 }
