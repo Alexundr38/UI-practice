@@ -13,12 +13,18 @@ public abstract class ProductListElement extends ProductCardElement {
 
     /**
      * Приватный конструктор.
-     *
      * @param xpath XPath выражение для поиска карточки товара
      * @param param значение для подстановки в XPath
      */
     protected ProductListElement(String xpath, String param) {
         super(xpath, param);
+    }
+
+    /** Наводиться и нажимает на кнопку удаления товара (крестик). */
+    public void clickCrossButton() {
+        scrollToElement();
+        crossButton.hover();
+        crossButton.click();
     }
 
     /**
@@ -32,13 +38,5 @@ public abstract class ProductListElement extends ProductCardElement {
                                                              String productName, Function<String, T> constructor) {
         String cardXpath = SNIPPET_BY_NAME_XPATH.replaceFirst("%s", snippetType);
         return constructor.apply(cardXpath);
-    }
-
-    /**
-     * Наводиться и нажимает на кнопку удаления товара (крестик).
-     */
-    public void clickCrossButton() {
-        crossButton.hover();
-        crossButton.click();
     }
 }

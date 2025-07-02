@@ -7,14 +7,11 @@ import com.codeborne.selenide.WebDriverRunner;
  * Содержит общую логику, используемую в дочерних страницах.
  */
 public class BasePage {
-    /**
-     * Класс страницы, необходимый для возвращения объекта текущей страницы.
-     */
+
+    /** Класс страницы, необходимый для возвращения объекта текущей страницы. */
     protected final Class<? extends BasePage> pageClass;
 
-    /**
-     * Ожидаемая часть URL, используется для проверки, что открыта нужная страница.
-     */
+    /** Ожидаемая часть URL, используется для проверки, что открыта нужная страница. */
     protected final String expectedUrlPart;
 
     /**
@@ -29,16 +26,6 @@ public class BasePage {
     }
 
     /**
-     * Проверяет, что текущий URL содержит ожидаемую подстроку.
-     * Выбрасывает AssertionError, если URL не совпадает.
-     */
-    protected void verifyPageUrl(){
-        if (!WebDriverRunner.url().contains(expectedUrlPart)) {
-            throw new AssertionError("Page url doesn't match expected url part: " + expectedUrlPart);
-        }
-    }
-
-    /**
      * Обновляет страницу и возвращает новый объект текущего класса страницы.
      * @param <T> Тип страницы
      * @return Новый объект текущей страницы
@@ -49,13 +36,23 @@ public class BasePage {
     }
 
     /**
+     * Проверяет, что текущий URL содержит ожидаемую подстроку.
+     * Выбрасывает AssertionError, если URL не совпадает.
+     */
+    protected void verifyPageUrl(){
+        if (!WebDriverRunner.url().contains(expectedUrlPart)) {
+            throw new AssertionError("Page url doesn't match expected url part: " + expectedUrlPart);
+        }
+    }
+
+    /**
      * Создаёт новый объект страницы по её классу.
      * Используется для возвращения новой страницы после переходов или обновлений.
      * @param pageClass Класс страницы
      * @param <T> Тип страницы
      * @return Новый объект переданного класса страницы
      */
-    public <T extends BasePage> T page(Class<T> pageClass) {
+    private <T extends BasePage> T page(Class<T> pageClass) {
         try {
             return pageClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {

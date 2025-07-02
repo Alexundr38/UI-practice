@@ -37,7 +37,7 @@ public class BaseElement {
      * @param params Параметры для уточнения XPath
      */
     protected BaseElement(BaseElement parentElement, String xpath, String... params){
-        baseElement = parentElement.getBaseElement().$x(String.format(xpath, (Object[]) params));
+        baseElement = parentElement.baseElement.$x(String.format(xpath, (Object[]) params));
     }
 
     /**
@@ -74,11 +74,8 @@ public class BaseElement {
         }
     }
 
-    /** Возвращает baseElement
-     *
-     * @return baseElement Базовый Selenide элемент
-     */
-    protected SelenideElement getBaseElement() {
-        return baseElement;
+    /** Листает страницу так, чтобы baseElement был виден на странице */
+    public void scrollToElement() {
+        baseElement.scrollIntoView("{block: 'center', behavior: 'smooth'}");
     }
 }

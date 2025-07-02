@@ -1,6 +1,5 @@
 package store.Citilink.pages;
 
-import store.Citilink.elements.ProductCardElement;
 import store.Citilink.elements.ProductCatalogElement;
 
 /**
@@ -19,26 +18,8 @@ public class SearchPage extends BasePage {
      * Вызывает конструктор базового класса с передачей
      * класса текущей страницы и ожидаемой части URL.
      */
-    public SearchPage() {
+    private SearchPage() {
         super(SearchPage.class, URL_PART);
-    }
-
-    /**
-     * Статический метод для создания страницы поиска.
-     * @return новый объект SearchPage
-     */
-    public static SearchPage openSearchPage(){
-        return new SearchPage();
-    }
-
-    /**
-     * Возвращает объект карточки товара по точному названию.
-     *
-     * @param productName точное название товара, отображаемое в элементе Snippet__title
-     * @return объект ProductCatalogElement для дальнейших действий
-     */
-    public ProductCatalogElement getProductCardByName(String productName) {
-        return ProductCatalogElement.byName("SnippetProductVerticalLayout", productName);
     }
 
     /**
@@ -48,7 +29,7 @@ public class SearchPage extends BasePage {
      * @param productName точное название товара для добавления в корзину
      */
     public void addProductToCartByName(String productName) {
-        ProductCardElement productCard = getProductCardByName(productName);
+        ProductCatalogElement productCard = getProductCardByName(productName);
         productCard.addToCart();
     }
 
@@ -74,4 +55,21 @@ public class SearchPage extends BasePage {
         productCard.addToWishlist();
     }
 
+    /**
+     * Возвращает объект карточки товара по точному названию.
+     *
+     * @param productName точное название товара, отображаемое в элементе Snippet__title
+     * @return объект ProductCatalogElement для дальнейших действий
+     */
+    private ProductCatalogElement getProductCardByName(String productName) {
+        return ProductCatalogElement.byName("SnippetProductVerticalLayout", productName);
+    }
+
+    /**
+     * Статический метод для создания страницы поиска.
+     * @return новый объект SearchPage
+     */
+    public static SearchPage openSearchPage(){
+        return new SearchPage();
+    }
 }

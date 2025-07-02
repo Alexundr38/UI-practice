@@ -8,37 +8,57 @@ import store.Citilink.pages.WishlistPage;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class RemoveWishlistProductTest extends BaseTest {
+/**
+ * Тест-класс для проверки функциональности удаления товаров из раздела "избранное"
+ */
+public class RemoveWishlistProductTest extends TestWithProductName {
+
+    /** Страница раздела "избранное" */
     private WishlistPage wishlistPage;
 
+    /** Входит в раздел "избранное" и проверяет не пустой ли он */
     @Test
     public void openWishlistPage() {
-        login();
         homePage.openButton(HomePage.HeaderButton.WISHLIST);
         wishlistPage = WishlistPage.openWishlistPage();
-        sleep(500);
+        loadByActionType(LoadWriteProductData.ActionType.REMOVE_WISHLIST);
         assertTrue(!wishlistPage.isEmpty());
     }
 
-
+    /**
+     * Тест проверяет удаление товара из раздела "избранное"
+     * посредством кнопки крестика на сниппете товара.
+     *
+     * Заходит в раздел "избранное".
+     * Выбирает тестовый товар.
+     * Удаляет тестовый товар при помощи кнопки крестика.
+     * Проверяет, удалился ли товар.
+     */
     @Test
     public void removeWishlistProductWithCross() {
-        LoadWriteProductData loader = new LoadWriteProductData(LoadWriteProductData.ActionType.REMOVE_WISHLIST);
         String productName = loader.getRandomProduct();
 
         openWishlistPage();
-        assertTrue(wishlistPage.removeProductWithCross(productName));
+        wishlistPage.removeProductWithCross(productName);
+        assertTrue(wishlistPage.isProductRemoved(),
+                "Ожидали, что в разделе \"избранное\" нет товара с названием: " + productName);
     }
 
+    /**
+     * Тест проверяет удаление товара из раздела "избранное"
+     * посредством кнопки "Очистить список".
+     *
+     * Заходит в раздел "избранное".
+     * Нажимает на кнопку "Очистить список".
+     * Проверяет, удалились ли товары.
+     */
     @Test
     public void removeWishlistProductWithRemoveAll() {
-        LoadWriteProductData loader = new LoadWriteProductData(LoadWriteProductData.ActionType.REMOVE_WISHLIST);
-        String productName = loader.getRandomProduct();
+        productName = loader.getRandomProduct();
 
         openWishlistPage();
-
         wishlistPage.removeProductWithRemoveAll();
-        sleep(500);
-        assertTrue(wishlistPage.isEmpty());
+        assertTrue(wishlistPage.isProductRemoved(),
+                "Ожидали, что в разделе \"избранное\" нет товара с названием: " + productName);
     }
 }

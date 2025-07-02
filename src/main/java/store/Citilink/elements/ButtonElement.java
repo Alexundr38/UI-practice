@@ -69,6 +69,7 @@ public class ButtonElement extends BaseElement {
      * Выполняет клик по кнопке.
      */
     public void click(){
+        scrollToElement();
         baseElement.click();
     }
 
@@ -76,7 +77,22 @@ public class ButtonElement extends BaseElement {
      * Наводит курсор мыши на кнопку.
      */
     public void hover() {
+        scrollToElement();
         baseElement.hover();
+    }
+
+    /**
+     * Проверяет, доступна ли кнопка для взаимодействия.
+     * @return true, если кнопка доступна, false в противном случае
+     */
+    public boolean isEnabled(){
+        try {
+            return baseElement
+                    .shouldBe(enabled, Duration.ofSeconds(WAIT_SECONDS))
+                    .isEnabled();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
@@ -177,19 +193,5 @@ public class ButtonElement extends BaseElement {
      */
     public static ButtonElement byDataMetaNameAndText(String dataMetaName, String text) {
         return new ButtonElement(DATA_META_NAME_AND_TEXT_XPATH, dataMetaName, text);
-    }
-
-    /**
-     * Проверяет, доступна ли кнопка для взаимодействия.
-     * @return true, если кнопка доступна, false в противном случае
-     */
-    public boolean isEnabled(){
-        try {
-            return baseElement
-                    .shouldBe(enabled, Duration.ofSeconds(WAIT_SECONDS))
-                    .isEnabled();
-        } catch (Exception e) {
-            return false;
-        }
     }
 }

@@ -9,38 +9,57 @@ import store.Citilink.pages.HomePage;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class RemoveCompareProductTest extends BaseTest{
+/**
+ * Тест-класс для проверки функциональности удаления товаров из раздела "сравнение"
+ */
+public class RemoveCompareProductTest extends TestWithProductName{
 
+    /** Страница раздела "сравнение" */
     private ComparePage comparePage;
 
+    /** Входит в раздел "сравнение" и проверяет не пустой ли он */
     @Test
     public void openComparePage() {
-        login();
         homePage.openButton(HomePage.HeaderButton.COMPARE);
         comparePage = ComparePage.openComparePage();
-        sleep(500);
+        loadByActionType(LoadWriteProductData.ActionType.REMOVE_COMPARE);
         assertTrue(!comparePage.isEmpty());
     }
 
+    /**
+     * Тест проверяет удаление товара из раздела "сравнение"
+     * посредством кнопки "Очистить список".
+     *
+     * Заходит в раздел "сравнение".
+     * Нажимает на кнопку "Очистить список".
+     * Проверяет, удалились ли товары.
+     */
     @Test
     public void removeCompareProductWithRemoveAll() {
-        LoadWriteProductData loader = new LoadWriteProductData(LoadWriteProductData.ActionType.REMOVE_COMPARE);
-        String productName = loader.getRandomProduct();
+        productName = loader.getRandomProduct();
 
         openComparePage();
-
         comparePage.removeProductWithRemoveAll();
-        sleep(500);
-        assertTrue(comparePage.isEmpty());
+        assertTrue(comparePage.isProductRemoved(),
+                "Ожидали, что в разделе \"сравнение\" нет товара с названием: " + productName);
     }
 
+    /**
+     * Тест проверяет удаление товара из раздела "сравнение"
+     * посредством кнопки крестика на сниппете товара.
+     *
+     * Заходит в раздел "сравнение".
+     * Выбирает тестовый товар.
+     * Удаляет тестовый товар при помощи кнопки крестика.
+     * Проверяет, удалился ли товар.
+     */
     @Test
     public void removeCompareProductWithCross() {
-        LoadWriteProductData loader = new LoadWriteProductData(LoadWriteProductData.ActionType.REMOVE_COMPARE);
-        String productName = loader.getRandomProduct();
+        productName = loader.getRandomProduct();
 
         openComparePage();
-
-        assertTrue(comparePage.removeProductWithCross(productName));
+        comparePage.removeProductWithCross(productName);
+        assertTrue(comparePage.isProductRemoved(),
+                "Ожидали, что в разделе \"сравнение\" нет товара с названием: " + productName);
     }
 }
