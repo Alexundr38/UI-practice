@@ -1,11 +1,14 @@
 package store.Citilink.pages;
 
 
+import store.Citilink.elements.ButtonElement;
+import store.Citilink.elements.ProductCompareElement;
+
 /**
  * Класс представляет страницу сравнения товаров.
  * Наследуется от ListPage и предоставляет методы для работы со списком сравниваемых товаров.
  */
-public class ComparePage extends ListPage {
+public class ComparePage extends ListPage<ProductCompareElement> {
     /**
      * Часть URL для страницы сравнения.
      */
@@ -25,7 +28,16 @@ public class ComparePage extends ListPage {
      * Статический метод для открытия страницы сравнения.
      * @return новый экземпляр ComparePage
      */
-    public static ComparePage open() {
+    public static ComparePage openComparePage() {
         return ListPage.openListPage(ComparePage.class, URL_PART);
     }
+
+    protected void setUpElement() {
+        productSnippet = ProductCompareElement.byDataMetaName("SnippetProductVerticalLayout");
+    }
+
+    protected void setUpElementByName(String productName) {
+        productSnippet = ProductCompareElement.byName("SnippetProductVerticalLayout", productName);
+    }
+
 }

@@ -18,7 +18,8 @@ public class AddProductToCompareTest extends BaseTest{
     @Test
     protected void addProductToCompare() {
         LoadWriteProductData loader = new LoadWriteProductData(LoadWriteProductData.ActionType.PUT_COMPARE);
-        String productName = loader.getRandomProduct();
+        String productName = "Смартфон Huawei Pura 70 12/256Gb, ADY-LX9, белый";
+        loader.doActionLogic(productName);
 
         login();
         homePage.openButton(HomePage.HeaderButton.CATALOG);
@@ -33,9 +34,8 @@ public class AddProductToCompareTest extends BaseTest{
         sleep(500);
         homePage.openButton(HomePage.HeaderButton.COMPARE);
         sleep(1000);
-        ComparePage comparePage = ComparePage.open();
+        ComparePage comparePage = ComparePage.openComparePage();
         sleep(1000);
-        assertTrue(comparePage.containsProductWithName("Смартфон Huawei Pura 70 12/256Gb, ADY-LX9, белый"),
-                "Ожидали, что на странице сравнения будет товар с названием: " + productName);
+        assertTrue(comparePage.containsProductWithName(productName));
     }
 }

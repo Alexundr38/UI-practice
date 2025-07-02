@@ -1,6 +1,7 @@
 package store.Citilink.pages;
 
 import store.Citilink.elements.ProductCardElement;
+import store.Citilink.elements.ProductCatalogElement;
 
 public class CatalogPage extends BasePage{
 
@@ -16,7 +17,7 @@ public class CatalogPage extends BasePage{
      * Вызывает конструктор базового класса с передачей
      * класса текущей страницы и ожидаемой части URL.
      */
-    public CatalogPage() {
+    private CatalogPage() {
         super(CatalogPage.class, URL_PART);
     }
 
@@ -34,8 +35,8 @@ public class CatalogPage extends BasePage{
      * @param productName точное название товара, отображаемое в элементе Snippet__title
      * @return объект ProductCardElement для дальнейших действий
      */
-    public ProductCardElement getProductCardByName(String productName) {
-        return ProductCardElement.byName("ProductHorizontalSnippet", productName);
+    public ProductCatalogElement getProductCardByName(String productName) {
+        return ProductCatalogElement.byName("ProductHorizontalSnippet", productName);
     }
 
     /**
@@ -56,7 +57,7 @@ public class CatalogPage extends BasePage{
      * @param productName точное название товара, отображаемое заголовком в сниппете
      */
     public void addProductToCompareByName(String productName) {
-        ProductCardElement productCard = getProductCardByName(productName);
+        ProductCatalogElement productCard = getProductCardByName(productName);
         productCard.addToCompare();
     }
 
@@ -67,7 +68,7 @@ public class CatalogPage extends BasePage{
      * @param productName точное название товара, отображаемое заголовком в сниппете
      */
     public void addProductToWishListByName(String productName) {
-        ProductCardElement productCard = getProductCardByName(productName);
+        ProductCatalogElement productCard = getProductCardByName(productName);
         productCard.addToWishlist();
     }
 }
