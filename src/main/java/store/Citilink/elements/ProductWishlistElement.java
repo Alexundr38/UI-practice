@@ -1,6 +1,14 @@
 package store.Citilink.elements;
 
+/**
+ * Карточка товара (сниппет) на странице избранного.
+ * Добавляет метод добавления в сравнение.
+ */
 public class ProductWishlistElement extends ProductListElement {
+
+    /** Кнопка добавления в сравнение */
+    ButtonElement compareButton = ButtonElement.byInElement(this, "data-meta-name", "Snippet__compare-button");
+
     /**
      * Приватный конструктор.
      *
@@ -29,6 +37,6 @@ public class ProductWishlistElement extends ProductListElement {
      * Добавляет товар в сравнение (клик по кнопке compare).
      */
     public void addToCompare() {
-        ButtonElement.byInElement(this, "data-meta-name", "Snippet__compare-button").click();
+        compareButton.click();
     }
 }

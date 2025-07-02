@@ -81,7 +81,7 @@ public class LoadWriteProductData {
                 products.add(array.getString(i));
             }
         } catch (Exception e) {
-            throw new RuntimeException("Ошибка чтения products.json", e);
+            throw new RuntimeException("Error with read json file", e);
         }
     }
 
@@ -91,7 +91,7 @@ public class LoadWriteProductData {
      */
     public String getRandomProduct() {
         if (products.isEmpty()) {
-            throw new IllegalStateException("Список продуктов пуст");
+            throw new IllegalStateException("List of products is empty");
         }
         int idx = ThreadLocalRandom.current().nextInt(products.size());
         String productName = products.get(idx);
@@ -129,6 +129,7 @@ public class LoadWriteProductData {
     /**
      * Удаляет товар из указанного JSON-файла.
      * @param fileName Имя файла, из которого нужно удалить товар
+     * @param productName Название товара
      */
     private void removeProduct(String fileName, String productName) {
         try {
@@ -148,13 +149,14 @@ public class LoadWriteProductData {
             json.put("products", newProductsArray);
             Files.write(filePath, json.toString().getBytes());
         } catch (Exception e) {
-            throw new RuntimeException("Ошибка при удалении продукта из " + fileName, e);
+            throw new RuntimeException("Error with remove in  " + fileName, e);
         }
     }
 
     /**
      * Записывает товар в указанный JSON-файл, если его там еще нет.
      * @param fileName Имя файла, в который нужно записать товар
+     * @param productName Название товара
      */
     private void writeProduct(String fileName, String productName) {
         try {

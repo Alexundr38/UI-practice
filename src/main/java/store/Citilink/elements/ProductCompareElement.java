@@ -1,6 +1,14 @@
 package store.Citilink.elements;
 
+/**
+ * Карточка товара (сниппет) на странице сравнения.
+ * Добавляет метод добавления в избранное.
+ */
 public class ProductCompareElement extends ProductListElement {
+
+    /** Кнопка добавления в избранное */
+    ButtonElement wishlistButton = ButtonElement.byInElement(this, "data-meta-name", "Snippet__wishlist-button");
+
     /**
      * Приватный конструктор.
      *
@@ -11,6 +19,12 @@ public class ProductCompareElement extends ProductListElement {
         super(xpath, param);
     }
 
+    /**
+     * Фабричный метод для поиска карточки по названию товара.
+     * @param snippetType Тип текущего сниппета
+     * @param productName Точное название товара
+     * @return Новый объект ProductCardElement
+     */
     public static ProductCompareElement byName(String snippetType, String productName) {
         return ProductListElement.byName(snippetType, productName, xpath -> new ProductCompareElement(xpath, productName));
     }
@@ -29,6 +43,6 @@ public class ProductCompareElement extends ProductListElement {
      * Добавляет товар в избранное (клик по кнопке wishlist).
      */
     public void addToWishlist() {
-        ButtonElement.byInElement(this, "data-meta-name", "Snippet__wishlist-button").click();
+        wishlistButton.click();
     }
 }

@@ -42,10 +42,12 @@ public class ComparePage extends ListPage<ProductCompareElement> {
         return productSnippet.isDisplayed();
     }
 
+    /** Находит первый сниппет товара на странице */
     protected void setUpElement() {
         productSnippet = ProductCompareElement.byDataMetaName("SnippetProductVerticalLayout");
     }
 
+    /** Находит сниппет товара по названию товара */
     protected void setUpElementByName(String productName) {
         productSnippet = ProductCompareElement.byName("SnippetProductVerticalLayout", productName);
     }

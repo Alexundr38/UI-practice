@@ -39,6 +39,10 @@ public class ButtonElement extends BaseElement {
      */
     private static final String IN_ELEMENT_XPATH = ".//*[@%s=\"%s\"]";
 
+    /**
+     * XPath шаблон для поиска вложенного элемента по содержащемуся заданному атрибуту и
+     * его значению относительно родительского элемента.
+     */
     private static final String IN_CONTAINS_XPATH = ".//*[contains(@%s, \"%s\")]";
 
     /**

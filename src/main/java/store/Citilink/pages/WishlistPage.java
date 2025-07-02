@@ -30,10 +30,12 @@ public class WishlistPage extends ListPage<ProductWishlistElement> {
         return ListPage.openListPage(WishlistPage.class, URL_PART);
     }
 
+    /** Находит первый сниппет товара на странице */
     protected void setUpElement() {
         productSnippet = ProductWishlistElement.byDataMetaName("SnippetProductVerticalLayout");
     }
 
+    /** Находит сниппет товара по названию товара */
     protected void setUpElementByName(String productName) {
         productSnippet = ProductWishlistElement.byName("SnippetProductVerticalLayout", productName);
     }

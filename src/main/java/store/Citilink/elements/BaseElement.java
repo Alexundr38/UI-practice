@@ -59,6 +59,12 @@ public class BaseElement {
         }
     }
 
+    /**
+     * Проверяет, перестал ли элемент отображаться на странице.
+     * Ждёт до {@link #WAIT_SECONDS} секунд перед проверкой.
+     *
+     * @return true — если элемент не видим, false — если видим или возникла ошибка
+     */
     public boolean waitNotDisplayed() {
         try {
             baseElement.shouldNotBe(visible, Duration.ofSeconds(WAIT_SECONDS));

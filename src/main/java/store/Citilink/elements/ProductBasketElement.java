@@ -5,6 +5,8 @@ package store.Citilink.elements;
  * Наследуется от ProductSnippetElement, добавляя функциональность для работы с товарами в корзине.
  */
 public class ProductBasketElement extends ProductSnippetElement{
+
+    /** XPath для элемента в корзине */
     private static final String BASKET_SNIPPET_BY_NAME_XPATH = SNIPPET_BY_NAME_XPATH.replaceFirst("%s", "BasketSnippet");
 
 

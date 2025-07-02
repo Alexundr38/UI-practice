@@ -1,5 +1,8 @@
 package store.Citilink.elements;
 
+/**
+ * Класс элемента поиска
+ */
 public class SearchElement extends InputElement{
 
     /**

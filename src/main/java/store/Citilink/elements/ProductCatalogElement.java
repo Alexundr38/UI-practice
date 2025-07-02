@@ -1,6 +1,17 @@
 package store.Citilink.elements;
 
+/**
+ * Карточка товара (сниппет) в каталоге и посике.
+ * Добавляет методы для работы с товаром: кнопки добавления в сравнение и добавления в избранное.
+ */
 public class ProductCatalogElement extends ProductCardElement {
+
+    /** Кнопка добавления в сравнение */
+    ButtonElement compareButton = ButtonElement.byInElement(this, "data-meta-name", "Snippet__compare-button");
+
+    /** Кнопка добавления в избранное */
+    ButtonElement wishlistButton = ButtonElement.byInElement(this, "data-meta-name", "Snippet__wishlist-button");
+
     /**
      * Приватный конструктор.
      *
@@ -13,9 +24,9 @@ public class ProductCatalogElement extends ProductCardElement {
 
     /**
      * Фабричный метод для поиска карточки по названию товара.
-     *
-     * @param productName точное название товара
-     * @return новый объект ProductCardElement
+     * @param snippetType Тип текущего сниппета
+     * @param productName Точное название товара
+     * @return Новый объект ProductCardElement
      */
     public static ProductCatalogElement byName(String snippetType, String productName) {
         CARD_BY_NAME_XPATH = SNIPPET_BY_NAME_XPATH.replaceFirst("%s", snippetType);
@@ -36,13 +47,13 @@ public class ProductCatalogElement extends ProductCardElement {
      * Добавляет товар в сравнение (клик по кнопке compare).
      */
     public void addToCompare() {
-        ButtonElement.byInElement(this, "data-meta-name", "Snippet__compare-button").click();
+        compareButton.click();
     }
 
     /**
      * Добавляет товар в избранное (клик по кнопке wishlist).
      */
     public void addToWishlist() {
-        ButtonElement.byInElement(this, "data-meta-name", "Snippet__wishlist-button").click();
+        wishlistButton.click();
     }
 }

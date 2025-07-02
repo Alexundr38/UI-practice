@@ -6,6 +6,7 @@ package store.Citilink.elements;
  */
 public class ProductSnippetElement extends BaseElement {
 
+    /** XPath сниппета по data-meta-name и содержащемуся title (названию товара) */
     protected static final String SNIPPET_BY_NAME_XPATH =
             "//div[@data-meta-name='%s' " +
                     "and .//a[normalize-space(@title)='%s']]";

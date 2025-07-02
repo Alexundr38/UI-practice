@@ -7,9 +7,18 @@ import java.lang.reflect.Constructor;
 
 
 public abstract class ListPage<T extends ProductListElement> extends BasePage {
+
+    /** Найденный сниппет товара */
     protected T productSnippet;
+
+    /** Кнопка "Очистить список" */
     protected ButtonElement removeListButton = ButtonElement.byTypeAndText("button", "Очистить список");
 
+    /** Конструктор класса
+     *
+     * @param pageClass Текущий класс
+     * @param partURL Часть URl, которая должна быть на странице
+     */
     protected ListPage(Class<? extends ListPage> pageClass, String partURL) {
         super(pageClass, partURL);
     }
@@ -28,7 +37,7 @@ public abstract class ListPage<T extends ProductListElement> extends BasePage {
             return ctor.newInstance(pageClass, partURL);
         } catch (ReflectiveOperationException e) {
             throw new IllegalStateException(
-                    "Не удалось открыть страницу " + pageClass.getSimpleName(), e
+                    "Error with open page " + pageClass.getSimpleName(), e
             );
         }
     }

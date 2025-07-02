@@ -2,7 +2,15 @@ package store.Citilink.elements;
 
 import java.util.function.Function;
 
+/**
+ * Карточка товара (сниппет) в сравнении и избранном (его основа).
+ * Добавляет кнопку удаление товара (крестик).
+ */
 public abstract class ProductListElement extends ProductCardElement {
+
+    /** Кнопка удаления товара (крестик) */
+    ButtonElement crossButton = ButtonElement.byInContains(this, "d", "M4.5 3.43934");
+
     /**
      * Приватный конструктор.
      *
@@ -13,20 +21,23 @@ public abstract class ProductListElement extends ProductCardElement {
         super(xpath, param);
     }
 
+    /**
+     * Метод для поиска карточки по названию товара.
+     * @param snippetType Тип текущего сниппета
+     * @param productName Точное название товара
+     * @param constructor Конструктор класса
+     * @return Новый объект ProductCardElement
+     */
     protected static <T extends ProductListElement> T byName(String snippetType,
                                                              String productName, Function<String, T> constructor) {
         String cardXpath = SNIPPET_BY_NAME_XPATH.replaceFirst("%s", snippetType);
         return constructor.apply(cardXpath);
     }
 
-
-
-
     /**
-     * Нажимает на кнопку удаления товара.
+     * Наводиться и нажимает на кнопку удаления товара (крестик).
      */
     public void clickCrossButton() {
-        ButtonElement crossButton = ButtonElement.byInContains(this, "d", "M4.5 3.43934");
         crossButton.hover();
         crossButton.click();
     }
