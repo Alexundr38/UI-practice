@@ -5,10 +5,11 @@ import store.Citilink.elements.SearchElement;
 import store.Citilink.load_and_write_data.LoadLoginData;
 
 /**
- * Главная страница сайта Citilink.
+ * Главная страница сайта.
  * Содержит элементы и действия, доступные на главной странице.
  */
 public class HomePage extends BasePage {
+
     /** Поле поиска по сайту. */
     private SearchElement searchInput = SearchElement.byType("search");
 
@@ -54,14 +55,6 @@ public class HomePage extends BasePage {
      */
     protected HomePage() {
         super(HomePage.class, "https://www.citilink.ru");
-    }
-
-    /**
-     * Создает объект HomePage
-     * @return Объект NomePage
-     */
-    public static HomePage openHomePage() {
-        return new HomePage();
     }
 
     /**
@@ -131,4 +124,11 @@ public class HomePage extends BasePage {
         ButtonElement.byDataMetaNameAndTextCategory(button.getDataMetaName(), visibleText).hover();
     }
 
+    /**
+     * Создает объект HomePage
+     * @return Объект NomePage
+     */
+    public static HomePage openHomePage() {
+        return new HomePage();
+    }
 }

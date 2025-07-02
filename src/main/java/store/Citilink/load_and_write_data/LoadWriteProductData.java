@@ -15,12 +15,6 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class LoadWriteProductData {
 
-    /** Список загруженных товаров */
-    private final List<String> products = new ArrayList<>();
-
-    /** Тип действия, которое будет выполнено с товаром */
-    private ActionType actionType;
-
     /**
      * Перечисление возможных действий с товарами:
      * PUT_BASKET - добавление товара в корзину
@@ -38,6 +32,12 @@ public class LoadWriteProductData {
         REMOVE_WISHLIST,
         REMOVE_COMPARE;
     }
+
+    /** Список загруженных товаров */
+    private final List<String> products = new ArrayList<>();
+
+    /** Тип действия, которое будет выполнено с товаром */
+    private ActionType actionType;
 
     /**
      * Конструктор класса. Инициализирует тип действия и загружает соответствующий список товаров.
@@ -64,24 +64,6 @@ public class LoadWriteProductData {
             case REMOVE_COMPARE:
                 loadProducts("java/store/Citilink/data/products_in_compare.json");
                 break;
-        }
-    }
-
-    /**
-     * Загружает список продуктов из JSON-файла.
-     * @param fileName Имя файла для загрузки товаров
-     */
-    private void loadProducts(String fileName) {
-        try {
-            Path filePath = Paths.get("src/main", fileName);
-            String content = new String(Files.readAllBytes(filePath));
-            JSONObject json = new JSONObject(content);
-            JSONArray array = json.getJSONArray("products");
-            for (int i = 0; i < array.length(); i++) {
-                products.add(array.getString(i));
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("Error with read json file", e);
         }
     }
 
@@ -123,6 +105,24 @@ public class LoadWriteProductData {
             case REMOVE_COMPARE:
                 removeProduct("products_in_compare.json", productName);
                 break;
+        }
+    }
+
+    /**
+     * Загружает список продуктов из JSON-файла.
+     * @param fileName Имя файла для загрузки товаров
+     */
+    private void loadProducts(String fileName) {
+        try {
+            Path filePath = Paths.get("src/main", fileName);
+            String content = new String(Files.readAllBytes(filePath));
+            JSONObject json = new JSONObject(content);
+            JSONArray array = json.getJSONArray("products");
+            for (int i = 0; i < array.length(); i++) {
+                products.add(array.getString(i));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error with read json file", e);
         }
     }
 
@@ -192,5 +192,4 @@ public class LoadWriteProductData {
             throw new RuntimeException("Error with write in " + fileName, e);
         }
     }
-
 }

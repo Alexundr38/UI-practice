@@ -11,7 +11,6 @@ public class ProductWishlistElement extends ProductListElement {
 
     /**
      * Приватный конструктор.
-     *
      * @param xpath XPath выражение для поиска карточки товара
      * @param param значение для подстановки в XPath
      */
@@ -19,24 +18,27 @@ public class ProductWishlistElement extends ProductListElement {
         super(xpath, param);
     }
 
+    /** Добавляет товар в сравнение (клик по кнопке compare).*/
+    public void addToCompare() {
+        compareButton.click();
+    }
+
+    /**
+     * Фабричный метод для поиска карточки по названию товара.
+     * @param snippetType Тип текущего сниппета
+     * @param productName Точное название товара
+     * @return Новый объект ProductWishlistElement
+     */
     public static ProductWishlistElement byName(String snippetType, String productName) {
         return ProductListElement.byName(snippetType, productName, xpath -> new ProductWishlistElement(xpath, productName));
     }
 
     /**
      * Фабричный метод для поиска карточки товара по значению атрибута data-meta-name.
-     *
      * @param snippetType значение атрибута data-meta-name
-     * @return новый объект ProductCardElement, соответствующий найденному элементу
+     * @return новый объект ProductWishlistElement, соответствующий найденному элементу
      */
     public static ProductWishlistElement byDataMetaName(String snippetType) {
         return new ProductWishlistElement(DATA_META_NAME_XPATH, snippetType);
-    }
-
-    /**
-     * Добавляет товар в сравнение (клик по кнопке compare).
-     */
-    public void addToCompare() {
-        compareButton.click();
     }
 }

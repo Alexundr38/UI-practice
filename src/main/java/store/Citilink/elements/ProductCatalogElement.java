@@ -14,12 +14,25 @@ public class ProductCatalogElement extends ProductCardElement {
 
     /**
      * Приватный конструктор.
-     *
      * @param xpath XPath выражение для поиска карточки товара
      * @param param значение для подстановки в XPath
      */
     private ProductCatalogElement(String xpath, String param) {
         super(xpath, param);
+    }
+
+    /**
+     * Добавляет товар в сравнение (клик по кнопке compare).
+     */
+    public void addToCompare() {
+        compareButton.click();
+    }
+
+    /**
+     * Добавляет товар в избранное (клик по кнопке wishlist).
+     */
+    public void addToWishlist() {
+        wishlistButton.click();
     }
 
     /**
@@ -41,19 +54,5 @@ public class ProductCatalogElement extends ProductCardElement {
      */
     public static ProductCatalogElement byDataMetaName(String snippetType) {
         return new ProductCatalogElement(DATA_META_NAME_XPATH, snippetType);
-    }
-
-    /**
-     * Добавляет товар в сравнение (клик по кнопке compare).
-     */
-    public void addToCompare() {
-        compareButton.click();
-    }
-
-    /**
-     * Добавляет товар в избранное (клик по кнопке wishlist).
-     */
-    public void addToWishlist() {
-        wishlistButton.click();
     }
 }

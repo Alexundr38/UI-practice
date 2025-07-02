@@ -15,19 +15,19 @@ public class SearchElement extends InputElement{
     }
 
     /**
+     * Устанавливает значение в поле ввода.
+     * @param text Текст, который нужно ввести в поле
+     */
+    public void setValue(String text){
+        baseElement.setValue(text);
+    }
+
+    /**
      * Создает объект SearchElement, находящий Search-элемент по атрибуту type.
      * @param typeName Значение атрибута type
      * @return Объект SearchElement
      */
     public static SearchElement byType(String typeName) {
         return new SearchElement(TYPE_XPATH, typeName);
-    }
-
-    /**
-     * Устанавливает значение в поле ввода.
-     * @param text Текст, который нужно ввести в поле
-     */
-    public void setValue(String text){
-        baseElement.setValue(text);
     }
 }

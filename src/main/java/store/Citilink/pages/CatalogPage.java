@@ -22,24 +22,6 @@ public class CatalogPage extends BasePage{
     }
 
     /**
-     * Статический метод для создания страницы поиска.
-     * @return новый объект SearchPage
-     */
-    public static CatalogPage openCatalogPage(){
-        return new CatalogPage();
-    }
-
-    /**
-     * Возвращает объект карточки товара по точному названию.
-     *
-     * @param productName точное название товара, отображаемое в элементе Snippet__title
-     * @return объект ProductCardElement для дальнейших действий
-     */
-    public ProductCatalogElement getProductCardByName(String productName) {
-        return ProductCatalogElement.byName("ProductHorizontalSnippet", productName);
-    }
-
-    /**
      * Добавляет товар в корзину по точному названию.
      * Выполняет поиск карточки товара и вызывает действие добавления в корзину.
      *
@@ -70,5 +52,22 @@ public class CatalogPage extends BasePage{
     public void addProductToWishListByName(String productName) {
         ProductCatalogElement productCard = getProductCardByName(productName);
         productCard.addToWishlist();
+    }
+
+    /**
+     * Возвращает объект карточки товара по точному названию.
+     * @param productName точное название товара, отображаемое в элементе Snippet__title
+     * @return объект ProductCardElement для дальнейших действий
+     */
+    private ProductCatalogElement getProductCardByName(String productName) {
+        return ProductCatalogElement.byName("ProductHorizontalSnippet", productName);
+    }
+
+    /**
+     * Статический метод для создания страницы поиска.
+     * @return новый объект SearchPage
+     */
+    public static CatalogPage openCatalogPage(){
+        return new CatalogPage();
     }
 }

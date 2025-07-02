@@ -14,6 +14,24 @@ public class CheckBoxElement extends InputElement{
     }
 
     /**
+     * Активирует чекбокс, если он еще не был активен
+     */
+    public void activate() {
+        scrollToElement();
+        if (!isSelected()) {
+            baseElement.click();
+        }
+    }
+
+    /** Возвращает состояние чекбокса
+     *
+     * @return true, если чекбокс активен, false в противном случае
+     */
+    private boolean isSelected() {
+        return baseElement.isSelected();
+    }
+
+    /**
      * Создает объект CheckBoxElement, находящий элемент родительскому элементу и заданным параметрам.
      * @param parentElement Родительский элемент, относительно которого
      *                      осуществляется поиск элемента
@@ -24,12 +42,5 @@ public class CheckBoxElement extends InputElement{
     public static CheckBoxElement byCheckBoxInElement(BaseElement parentElement, String xpathParam, String paramValue) {
         return new CheckBoxElement(parentElement,
                 INPUT_IN_ELEMENT_XPATH.replaceFirst("%s", xpathParam), paramValue);
-    }
-
-    /**
-     * Активирует checkbox
-     */
-    public void activate() {
-        baseElement.click();
     }
 }
