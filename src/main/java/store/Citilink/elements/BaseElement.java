@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Condition.visible;
 import java.time.Duration;
 import com.codeborne.selenide.ex.ElementNotFound;
+import com.codeborne.selenide.ex.ElementShouldNot;
 
 /**
  * Базовый класс для веб-элементов, предоставляющий общие методы взаимодействия.
@@ -54,6 +55,15 @@ public class BaseElement {
         } catch (ElementNotFound e) {
             return false;
         } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean waitNotDisplayed() {
+        try {
+            baseElement.shouldNotBe(visible, Duration.ofSeconds(WAIT_SECONDS));
+            return true;
+        } catch (ElementShouldNot e){
             return false;
         }
     }

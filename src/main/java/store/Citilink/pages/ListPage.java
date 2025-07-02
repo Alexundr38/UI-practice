@@ -56,8 +56,9 @@ public abstract class ListPage<T extends ProductListElement> extends BasePage {
     public boolean removeProductWithCross(String productName){
         setUpElementByName(productName);
         productSnippet.clickCrossButton();
-        return productSnippet.isDisplayed();
+        return productSnippet.waitNotDisplayed();
     }
+
     /**
      * Проверяет, пуст ли список товаров на странице.
      * @return true, если ни один элемент с data-meta-name="SnippetProductVerticalLayout" не отображается,

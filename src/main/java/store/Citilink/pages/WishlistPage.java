@@ -1,6 +1,5 @@
 package store.Citilink.pages;
 
-import store.Citilink.elements.ProductCompareElement;
 import store.Citilink.elements.ProductWishlistElement;
 
 /**

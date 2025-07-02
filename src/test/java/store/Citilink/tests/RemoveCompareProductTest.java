@@ -41,6 +41,6 @@ public class RemoveCompareProductTest extends BaseTest{
 
         openComparePage();
 
-        assertTrue(!comparePage.removeProductWithCross(productName));
+        assertTrue(comparePage.removeProductWithCross(productName));
     }
 }
