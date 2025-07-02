@@ -36,9 +36,9 @@ public class RemoveBasketProductTest extends TestWithProductName {
      */
     @Test
     protected void removeBasketProductWithBin() {
+        openBasketPage();
         productName = loader.getRandomProduct();
 
-        openBasketPage();
         basketPage.removeProductWithBin(productName);
         assertTrue(basketPage.isProductRemoved(),
                 "Ожидали, что в корзине нет товара с названием: " + productName);
@@ -56,9 +56,9 @@ public class RemoveBasketProductTest extends TestWithProductName {
      */
     @Test
     protected void removeBasketProductWithCheckBox() {
+        openBasketPage();
         String productName = loader.getRandomProduct();
 
-        openBasketPage();
         basketPage.selectProductWithCheckBox(productName);
         basketPage.clickRemoveSelectedButton();
         assertTrue(basketPage.isProductRemoved(),

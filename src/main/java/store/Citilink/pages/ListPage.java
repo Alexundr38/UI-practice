@@ -46,7 +46,7 @@ public abstract class ListPage<T extends ProductListElement> extends BasePage {
      */
     public boolean isEmpty() {
         setUpElement();
-        return productSnippet.isDisplayed();
+        return !productSnippet.isDisplayed();
     }
 
     /** Проверяет, удалился ли элемент со страницы
