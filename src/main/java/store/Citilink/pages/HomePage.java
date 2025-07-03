@@ -14,7 +14,7 @@ public class HomePage extends BasePage {
     private final SearchElement searchInput = SearchElement.byType("search");
 
     /** Кнопка входа в личный кабинет. */
-    private final ButtonElement loginButton = ButtonElement.byDataMetaName("UserButtonContainer");
+    private ButtonElement loginButton = ButtonElement.byDataMetaName("UserButtonContainer");
     /** Кнопка перехода в избранное. */
     private final ButtonElement wishlistButton = ButtonElement.byDataMetaName("WishlistButton");
     /** Кнопка перехода в сравнение. */
@@ -114,6 +114,13 @@ public class HomePage extends BasePage {
         if (endLoginButton.isEnabled()) {
             endLoginButton.click();
         }
+    }
+
+    public void openProfile() {
+        loginButton = ButtonElement.byParam("data-meta-count", "0");
+        loginButton.click();
+        ButtonElement profileButton = ButtonElement.byDataMetaName("ProfileMenu_Item_Мой профиль");
+        profileButton.click();
     }
 
     /**

@@ -18,6 +18,8 @@ public class ButtonElement extends BaseElement {
     /** XPath шаблон для поиска кнопки по атрибуту type */
     private static final String TYPE_XPATH = "//*[@type=\"%s\"]";
 
+    private static final String PARAM_XPATH = "//*[@%s=\"%s\"]";
+
     /** XPath шаблон для поиска элемента по атрибуту data-meta-name */
     private static final String DATA_META_NAME_XPATH = "//*[@data-meta-name=\"%s\"]";
 
@@ -102,6 +104,17 @@ public class ButtonElement extends BaseElement {
             return false;
         }
     }
+
+    /**
+     * Создает объект ButtonElement, находящий кнопку по атрибуту type.
+     * @param paramName Название параметра
+     * @param paramValue Значение параметра
+     * @return Объект ButtonElement
+     */
+    public static ButtonElement byParam(String paramName, String paramValue) {
+        return new ButtonElement(PARAM_XPATH.replaceFirst("%s", paramName), paramValue);
+    }
+
 
     /**
      * Создает объект ButtonElement, находящий кнопку по атрибуту type.
