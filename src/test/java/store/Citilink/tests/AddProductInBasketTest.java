@@ -13,25 +13,31 @@ import store.Citilink.load_and_write_data.LoadWriteProductData;
  * Тест проверяет добавление в корзину случайно выбранного товара.
  * Название товара берётся из внешнего JSON-файла со списком продуктов.
  */
-public class AddProductInBasketTest extends BaseTest {
+public class AddProductInBasketTest extends TestWithProductName {
+
+    /** Страница корзины */
     protected BasketPage basketPage;
+
+    /** Страница поиска */
     protected SearchPage searchPage;
 
+    /**
+     * Добавление товара в корзину посредством поиска через строку поиска.
+     * Ищет товар по тестируемому запросу.
+     * Добавляет товар в корзину.
+     * Проверяет, находиться ли товар в корзине.
+     */
     @Test
     protected void addProductToBasket() {
-        LoadWriteProductData loader = new LoadWriteProductData(LoadWriteProductData.ActionType.PUT_BASKET);
-        String productName = loader.getRandomProduct();
+        loadByActionType(LoadWriteProductData.ActionType.PUT_BASKET);
+        productName = loader.getRandomProduct();
 
-        login();
         homePage.search(productName);
-        sleep(1000);
-
         searchPage = SearchPage.openSearchPage();
         searchPage.addProductToCartByName(productName);
 
         homePage.openButton(HomePage.HeaderButton.BASKET);
         basketPage = BasketPage.openBasketPage();
-        sleep(1000);
         assertTrue(basketPage.containsProductWithName(productName),
                 "Ожидали, что в корзине есть товар с названием: " + productName);
     }

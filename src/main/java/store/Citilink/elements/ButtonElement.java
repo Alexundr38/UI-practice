@@ -21,6 +21,14 @@ public class ButtonElement extends BaseElement {
     /** XPath шаблон для поиска элемента по атрибуту data-meta-name */
     private static final String DATA_META_NAME_XPATH = "//*[@data-meta-name=\"%s\"]";
 
+    /** XPath шаблон для поиска категории по атрибуту data-meta-name и тексту*/
+    private static final String DATA_META_NAME_AND_TEXT_CATEGORY_XPATH =
+            "(//a[@data-meta-name=\"%s\" and .//span[contains(normalize-space(.), \"%s\")]])[2]";
+
+    /** XPath шаблон для поиска текста по атрибуту data-meta-name и тексту*/
+    private static final String DATA_META_NAME_AND_TEXT_XPATH =
+            "//a[@data-meta-name=\"%s\" and .//span[normalize-space(text())=\"%s\"]]";
+
     /** XPath шаблон для поиска кнопки по атрибуту type и тексту */
     private static final String TYPE_AND_TEXT_XPATH = "//button[@type=\"%s\" and .//text()[contains(., \"%s\")]]";
 
@@ -38,6 +46,12 @@ public class ButtonElement extends BaseElement {
      * относительно родительского элемента.
      */
     private static final String IN_ELEMENT_XPATH = ".//*[@%s=\"%s\"]";
+
+    /**
+     * XPath шаблон для поиска вложенного элемента по содержащемуся заданному атрибуту и
+     * его значению относительно родительского элемента.
+     */
+    private static final String IN_CONTAINS_XPATH = ".//*[contains(@%s, \"%s\")]";
 
     /**
      * Приватный конструктор для создания объекта ButtonElement.
@@ -63,7 +77,30 @@ public class ButtonElement extends BaseElement {
      * Выполняет клик по кнопке.
      */
     public void click(){
+        scrollToElement();
         baseElement.click();
+    }
+
+    /**
+     * Наводит курсор мыши на кнопку.
+     */
+    public void hover() {
+        scrollToElement();
+        baseElement.hover();
+    }
+
+    /**
+     * Проверяет, доступна ли кнопка для взаимодействия.
+     * @return true, если кнопка доступна, false в противном случае
+     */
+    public boolean isEnabled(){
+        try {
+            return baseElement
+                    .shouldBe(enabled, Duration.ofSeconds(WAIT_SECONDS))
+                    .isEnabled();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
@@ -142,15 +179,39 @@ public class ButtonElement extends BaseElement {
     /**
      * Проверяет, доступна ли кнопка для взаимодействия.
      * @return true, если кнопка доступна, false в противном случае
+     * Создает объект ButtonElement внутри указанного родительского элемента
+     * по содержанию произвольного атрибута и его значения.
+     *
+     * @param parentElement Родительский элемент, относительно которого выполняется поиск
+     * @param xpathParam    Имя атрибута для поиска
+     * @param paramValue    Значение атрибута, по которому ищется элемент
+     * @return новый экземпляр ButtonElement, соответствующий найденной кнопке
      */
-    public boolean isEnabled(){
-        try {
-            return baseElement
-                    .shouldBe(enabled, Duration.ofSeconds(WAIT_SECONDS))
-                    .isEnabled();
-        } catch (Exception e) {
-            return false;
-        }
+    public static ButtonElement byInContains(BaseElement parentElement, String xpathParam, String paramValue) {
+        return new ButtonElement(parentElement,
+                IN_CONTAINS_XPATH.replaceFirst("%s", xpathParam), paramValue);
+    }
+
+
+    /**
+     * Создает объект ButtonElement для категории по атрибуту data-meta-name и тексту
+     * @param dataMetaName Значение атрибута data-meta-name, указывающее категорию
+     * @param text          Текст внутри элемента <span> для поиска
+     * @return новый экземпляр ButtonElement, соответствующий найденной категории
+     */
+    public static ButtonElement byDataMetaNameAndTextCategory(String dataMetaName, String text) {
+        return new ButtonElement(DATA_META_NAME_AND_TEXT_CATEGORY_XPATH, dataMetaName, text);
+    }
+
+    /**
+     * Создает объект ButtonElement по атрибуту data-meta-name и тексту.
+     *
+     * @param dataMetaName Значение атрибута data-meta-name
+     * @param text         Текст внутри <span> для поиска
+     * @return новый экземпляр ButtonElement с указанными параметрами
+     */
+    public static ButtonElement byDataMetaNameAndText(String dataMetaName, String text) {
+        return new ButtonElement(DATA_META_NAME_AND_TEXT_XPATH, dataMetaName, text);
     }
 
     /**

@@ -15,15 +15,6 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class LoadWriteProductData {
 
-    /** Список загруженных товаров */
-    private final List<String> products = new ArrayList<>();
-
-    /** Название текущего товаров */
-    private String productName;
-
-    /** Тип действия, которое будет выполнено с товаром */
-    private ActionType actionType;
-
     /**
      * Перечисление возможных действий с товарами:
      * PUT_BASKET - добавление товара в корзину
@@ -41,6 +32,12 @@ public class LoadWriteProductData {
         REMOVE_WISHLIST,
         REMOVE_COMPARE;
     }
+
+    /** Список загруженных товаров */
+    private final List<String> products = new ArrayList<>();
+
+    /** Тип действия, которое будет выполнено с товаром */
+    private ActionType actionType;
 
     /**
      * Конструктор класса. Инициализирует тип действия и загружает соответствующий список товаров.
@@ -71,6 +68,47 @@ public class LoadWriteProductData {
     }
 
     /**
+     * Возвращает случайное название товара из загруженного списка.
+     * @return Название товара
+     */
+    public String getRandomProduct() {
+        if (products.isEmpty()) {
+            throw new IllegalStateException("List of products is empty");
+        }
+        int idx = ThreadLocalRandom.current().nextInt(products.size());
+        String productName = products.get(idx);
+        doActionLogic(productName);
+        return productName;
+    }
+
+    /**
+     * Выполняет логику действия в зависимости от установленного типа действия.
+     * Вызывает соответствующий метод для добавления или удаления товара.
+     */
+    public void doActionLogic(String productName) {
+        switch (actionType) {
+            case PUT_BASKET:
+                writeProduct("products_in_basket.json", productName);
+                break;
+            case PUT_WISHLIST:
+                writeProduct("products_in_wishlist.json", productName);
+                break;
+            case PUT_COMPARE:
+                writeProduct("products_in_compare.json", productName);
+                break;
+            case REMOVE_BASKET:
+                removeProduct("products_in_basket.json", productName);
+                break;
+            case REMOVE_WISHLIST:
+                removeProduct("products_in_wishlist.json", productName);
+                break;
+            case REMOVE_COMPARE:
+                removeProduct("products_in_compare.json", productName);
+                break;
+        }
+    }
+
+    /**
      * Загружает список продуктов из JSON-файла.
      * @param fileName Имя файла для загрузки товаров
      */
@@ -84,56 +122,16 @@ public class LoadWriteProductData {
                 products.add(array.getString(i));
             }
         } catch (Exception e) {
-            throw new RuntimeException("Ошибка чтения products.json", e);
-        }
-    }
-
-    /**
-     * Возвращает случайное название товара из загруженного списка.
-     * @return Название товара
-     */
-    public String getRandomProduct() {
-        if (products.isEmpty()) {
-            throw new IllegalStateException("Список продуктов пуст");
-        }
-        int idx = ThreadLocalRandom.current().nextInt(products.size());
-        productName = products.get(idx);
-        doActionLogic();
-        return productName;
-    }
-
-    /**
-     * Выполняет логику действия в зависимости от установленного типа действия.
-     * Вызывает соответствующий метод для добавления или удаления товара.
-     */
-    private void doActionLogic() {
-        switch (actionType) {
-            case PUT_BASKET:
-                writeProduct("products_in_basket.json");
-                break;
-            case PUT_WISHLIST:
-                writeProduct("products_in_wishlist.json");
-                break;
-            case PUT_COMPARE:
-                writeProduct("products_in_compare.json");
-                break;
-            case REMOVE_BASKET:
-                removeProduct("products_in_basket.json");
-                break;
-            case REMOVE_WISHLIST:
-                removeProduct("products_in_wishlist.json");
-                break;
-            case REMOVE_COMPARE:
-                removeProduct("products_in_compare.json");
-                break;
+            throw new RuntimeException("Error with read json file", e);
         }
     }
 
     /**
      * Удаляет товар из указанного JSON-файла.
      * @param fileName Имя файла, из которого нужно удалить товар
+     * @param productName Название товара
      */
-    private void removeProduct(String fileName) {
+    private void removeProduct(String fileName, String productName) {
         try {
             Path filePath = Paths.get("src/main/java/store/Citilink/data", fileName);
             String content = new String(Files.readAllBytes(filePath));
@@ -151,15 +149,16 @@ public class LoadWriteProductData {
             json.put("products", newProductsArray);
             Files.write(filePath, json.toString().getBytes());
         } catch (Exception e) {
-            throw new RuntimeException("Ошибка при удалении продукта из " + fileName, e);
+            throw new RuntimeException("Error with remove in  " + fileName, e);
         }
     }
 
     /**
      * Записывает товар в указанный JSON-файл, если его там еще нет.
      * @param fileName Имя файла, в который нужно записать товар
+     * @param productName Название товара
      */
-    private void writeProduct(String fileName) {
+    private void writeProduct(String fileName, String productName) {
         try {
             Path filePath = Paths.get("src/main/java/store/Citilink/data/", fileName);
 
@@ -193,5 +192,4 @@ public class LoadWriteProductData {
             throw new RuntimeException("Error with write in " + fileName, e);
         }
     }
-
 }

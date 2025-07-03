@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Condition.visible;
 import java.time.Duration;
 import com.codeborne.selenide.ex.ElementNotFound;
+import com.codeborne.selenide.ex.ElementShouldNot;
 
 /**
  * Базовый класс для веб-элементов, предоставляющий общие методы взаимодействия.
@@ -36,7 +37,7 @@ public class BaseElement {
      * @param params Параметры для уточнения XPath
      */
     protected BaseElement(BaseElement parentElement, String xpath, String... params){
-        baseElement = parentElement.getBaseElement().$x(String.format(xpath, (Object[]) params));
+        baseElement = parentElement.baseElement.$x(String.format(xpath, (Object[]) params));
     }
 
     /**
@@ -58,11 +59,23 @@ public class BaseElement {
         }
     }
 
-    /** Возвращает baseElement
+    /**
+     * Проверяет, перестал ли элемент отображаться на странице.
+     * Ждёт до {@link #WAIT_SECONDS} секунд перед проверкой.
      *
-     * @return baseElement Базовый Selenide элемент
+     * @return true — если элемент не видим, false — если видим или возникла ошибка
      */
-    protected SelenideElement getBaseElement() {
-        return baseElement;
+    public boolean waitNotDisplayed() {
+        try {
+            baseElement.shouldNotBe(visible, Duration.ofSeconds(WAIT_SECONDS));
+            return true;
+        } catch (ElementShouldNot e){
+            return false;
+        }
+    }
+
+    /** Листает страницу так, чтобы baseElement был виден на странице */
+    public void scrollToElement() {
+        baseElement.scrollIntoView("{block: 'center', behavior: 'smooth'}");
     }
 }

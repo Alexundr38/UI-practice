@@ -1,28 +1,24 @@
 package store.Citilink.pages;
 
 import store.Citilink.elements.ProductCardElement;
-import store.Citilink.elements.ButtonElement;
-import store.Citilink.elements.PriceFilterElement;
 import store.Citilink.elements.ProductCatalogElement;
 
-/**
- * Страница результатов поиска на сайте.
- */
-public class SearchPage extends BasePage {
+public class CatalogPage extends BasePage{
 
     /**
      * Ожидаемая часть URL для страницы результатов поиска.
      * Используется для проверки корректности загруженной страницы.
      */
-    private static final String URL_PART = "/search";
+    private static final String URL_PART = "/catalog";
+
 
     /**
      * Конструктор страницы результатов поиска.
      * Вызывает конструктор базового класса с передачей
      * класса текущей страницы и ожидаемой части URL.
      */
-    private SearchPage() {
-        super(SearchPage.class, URL_PART);
+    private CatalogPage() {
+        super(CatalogPage.class, URL_PART);
     }
 
     /**
@@ -32,7 +28,7 @@ public class SearchPage extends BasePage {
      * @param productName точное название товара для добавления в корзину
      */
     public void addProductToCartByName(String productName) {
-        ProductCatalogElement productCard = getProductCardByName(productName);
+        ProductCardElement productCard = getProductCardByName(productName);
         productCard.addToCart();
     }
 
@@ -59,50 +55,19 @@ public class SearchPage extends BasePage {
     }
 
     /**
-     * Использование фильтра цены
-     */
-    public void usePriceFilter(String minPrice) {
-        PriceFilterElement PFEmin = PriceFilterElement.byDataMetaName("FilterRangeGroup__input-min");
-
-        PFEmin.setValue(minPrice);
-
-        ButtonElement.byClass("e11203e30 app-catalog-1g3e94m-Button--StyledButton-Button--Button ekx3zbi0")
-                .scrollIntoViewCentered()
-                .waitUntilClickable()
-                .click();
-    }
-
-    /**
-     * Получение значения цены первого товара из найденного списка
-     */
-    public int getPrice() {
-        ProductCardElement elem = ProductCardElement.byDataMetaName();
-        return elem.getPrice();
-    }
-
-    /**
-     * Возвращает стоимость, которая является максимальной среди найденных товаров.
-     */
-    public int getMaxPrice() {
-        PriceFilterElement elem = PriceFilterElement.byDataMetaName("FilterRangeGroup__input-max");
-        return elem.getValue();
-    }
-  
-     /**
      * Возвращает объект карточки товара по точному названию.
-     *
      * @param productName точное название товара, отображаемое в элементе Snippet__title
-     * @return объект ProductCatalogElement для дальнейших действий
+     * @return объект ProductCardElement для дальнейших действий
      */
     private ProductCatalogElement getProductCardByName(String productName) {
-        return ProductCatalogElement.byName("SnippetProductVerticalLayout", productName);
+        return ProductCatalogElement.byName("ProductHorizontalSnippet", productName);
     }
 
     /**
      * Статический метод для создания страницы поиска.
      * @return новый объект SearchPage
      */
-    public static SearchPage openSearchPage(){
-        return new SearchPage();
+    public static CatalogPage openCatalogPage(){
+        return new CatalogPage();
     }
 }

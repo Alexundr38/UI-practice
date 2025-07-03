@@ -22,6 +22,22 @@ public class LoadLoginData {
     }
 
     /**
+     * Возвращает имя пользователя, загруженное из JSON-файла.
+     * @return Имя пользователя
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * Возвращает пароль, загруженный из JSON-файла.
+     * @return Пароль
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
      * Загружает учетные данные из JSON-файла "login_data.json".
      * Файл должен находиться в ресурсах (resources) проекта.
      * @throws RuntimeException Если произошла ошибка при чтении или парсинге файла
@@ -37,21 +53,5 @@ public class LoadLoginData {
         } catch (Exception e) {
             throw new RuntimeException("Error with reading JSON", e);
         }
-    }
-
-    /**
-     * Возвращает имя пользователя, загруженное из JSON-файла.
-     * @return Имя пользователя
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * Возвращает пароль, загруженный из JSON-файла.
-     * @return Пароль
-     */
-    public String getPassword() {
-        return password;
     }
 }

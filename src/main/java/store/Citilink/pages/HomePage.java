@@ -5,10 +5,11 @@ import store.Citilink.elements.SearchElement;
 import store.Citilink.load_and_write_data.LoadLoginData;
 
 /**
- * Главная страница сайта Citilink.
+ * Главная страница сайта.
  * Содержит элементы и действия, доступные на главной странице.
  */
 public class HomePage extends BasePage {
+
     /** Поле поиска по сайту. */
     private SearchElement searchInput = SearchElement.byType("search");
 
@@ -22,7 +23,11 @@ public class HomePage extends BasePage {
     public enum HeaderButton {
         WISHLIST("WishlistButton"),
         COMPARE("CompareButton"),
-        BASKET("BasketButton");
+        BASKET("BasketButton"),
+        CATALOG("DesktopHeaderFixed__catalog-menu"),
+        CATEGORY("DesktopMenu__category--menu-item"),
+        SUBCATEGORY("DesktopMenu__sub-category"),
+        SUBSUBCATEGORY("DesktopMenu__sub-sub-category");
 
         /** Значение атрибута data-meta-name, уникально идентифицирующее кнопку. */
         private final String dataMetaName;
@@ -50,14 +55,6 @@ public class HomePage extends BasePage {
      */
     protected HomePage() {
         super(HomePage.class, "https://www.citilink.ru");
-    }
-
-    /**
-     * Создает объект HomePage
-     * @return Объект NomePage
-     */
-    public static HomePage openHomePage() {
-        return new HomePage();
     }
 
     /**
@@ -105,5 +102,33 @@ public class HomePage extends BasePage {
     public void search(String query) {
         searchInput.setValue(query);
         ButtonElement.byType("submit").click();
+    }
+
+    /**
+     * Нажимает кнопку, отбирая её по сочетанию data-meta-name и видимого текста.
+     *
+     * @param button      константа из HeaderButton, определяющая значение data-meta-name элемента
+     * @param visibleText точный текст, который должен содержаться внутри кнопки
+     */
+    public void openButtonText(HeaderButton button, String visibleText) {
+        ButtonElement.byDataMetaNameAndText(button.getDataMetaName(), visibleText).click();
+    }
+
+    /**
+     * Наводит на кнопку, отбирая её по сочетанию data-meta-name и видимого текста.
+     *
+     * @param button      константа из HeaderButton, определяющая значение data-meta-name элемента
+     * @param visibleText точный текст, который должен содержаться внутри кнопки
+     */
+    public void hoverButtonTextCategory(HeaderButton button, String visibleText) {
+        ButtonElement.byDataMetaNameAndTextCategory(button.getDataMetaName(), visibleText).hover();
+    }
+
+    /**
+     * Создает объект HomePage
+     * @return Объект NomePage
+     */
+    public static HomePage openHomePage() {
+        return new HomePage();
     }
 }

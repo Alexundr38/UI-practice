@@ -14,10 +14,16 @@ import java.util.UUID;
 
 import static com.codeborne.selenide.Selenide.*;
 
+/**
+ * Базовый класс тестов.
+ * Настраивает пользователя, открывает браузер, выполняет вход в аккаунт, закрывает браузер после теста.
+ */
 public class BaseTest {
 
+    /** Главная страница */
     protected HomePage homePage;
 
+    /** Настройка пользователя */
     @BeforeEach
     public void setup() {
         WebDriverManager.edgedriver().setup();
@@ -46,17 +52,17 @@ public class BaseTest {
         Configuration.timeout = 15000;
     }
 
+    /** Открытие браузера и вход в аккаунт */
+    @BeforeEach
+    protected void login() {
+        open("https://www.citilink.ru/");
+        homePage = HomePage.openHomePage();
+        homePage.login();
+    }
+
+    /** Закрытие браузера */
     @AfterEach
     public void tearDown() {
         closeWebDriver();
-    }
-
-    @Test
-    protected void login() {
-        open("https://www.citilink.ru/");
-        sleep(1000);
-        homePage = HomePage.openHomePage();
-        homePage.login();
-        sleep(1000);
     }
 }

@@ -1,12 +1,18 @@
 package store.Citilink.elements;
 
 /**
- * Карточка товара (сниппет) в результатах поиска.
- * Содержит методы для добавления товара в корзину, сравнение и избранное.
+ * Карточка товара (сниппет) в результатах поиска (его основа).
+ * Содержит методы для добавления товара в корзину.
  */
 public class ProductCardElement extends ProductSnippetElement {
-    private static String CARD_BY_NAME_XPATH;
+
     private static final String DATA_META_NAME_XPATH = "//*[@data-meta-name=\"%s\"]";
+
+    /** Кнопка добавления товара в корзину */
+    ButtonElement addToBasketButton = ButtonElement.byInElement(this, "data-meta-name", "Snippet__cart-button");
+
+    /** XPath для элемента товара */
+    protected static String CARD_BY_NAME_XPATH;
 
     /**
      * Приватный конструктор.
@@ -43,21 +49,7 @@ public class ProductCardElement extends ProductSnippetElement {
      * Добавляет товар в корзину (клик по кнопке "Оформить заказ").
      */
     public void addToCart() {
-        ButtonElement.byInElement(this, "data-meta-name", "Snippet__cart-button").click();
-    }
-
-    /**
-     * Добавляет товар в сравнение (клик по кнопке compare).
-     */
-    public void addToCompare() {
-        ButtonElement.byInElement(this, "data-meta-name", "Snippet__compare-button").click();
-    }
-
-    /**
-     * Добавляет товар в избранное (клик по кнопке wishlist).
-     */
-    public void addToWishlist() {
-        ButtonElement.byInElement(this, "data-meta-name", "Snippet__wishlist-button").click();
+        addToBasketButton.click();
     }
 
     /**

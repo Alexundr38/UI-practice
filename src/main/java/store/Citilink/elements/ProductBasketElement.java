@@ -5,8 +5,9 @@ package store.Citilink.elements;
  * Наследуется от ProductSnippetElement, добавляя функциональность для работы с товарами в корзине.
  */
 public class ProductBasketElement extends ProductSnippetElement{
-    private static final String BASKET_SNIPPET_BY_NAME_XPATH = SNIPPET_BY_NAME_XPATH.replaceFirst("%s", "BasketSnippet");
 
+    /** XPath для элемента в корзине */
+    private static final String BASKET_SNIPPET_BY_NAME_XPATH = SNIPPET_BY_NAME_XPATH.replaceFirst("%s", "BasketSnippet");
 
     /** Кнопка удаления товара из корзины */
     private final ButtonElement removeButton = ButtonElement.byButtonInElement(
@@ -26,6 +27,20 @@ public class ProductBasketElement extends ProductSnippetElement{
     }
 
     /**
+     * Удаляет товар из корзины (нажимает кнопку удаления)
+     */
+    public void removeElementWithBin(){
+        removeButton.click();
+    }
+
+    /**
+     * Активирует выделение товара в корзине (для дальнейшего удаления)
+     */
+    public void clickRemoveCheckBox() {
+        removeCheckBox.activate();
+    }
+
+    /**
      * Статический метод для создания элемента по data-meta-name
      * @param productName Значение атрибута data-meta-name
      * @return Новый объект ProductBasketElement
@@ -41,19 +56,5 @@ public class ProductBasketElement extends ProductSnippetElement{
      */
     public static ProductBasketElement byDataMetaName(String dataMetaName){
         return new ProductBasketElement(DATA_META_NAME_XPATH, dataMetaName);
-    }
-
-    /**
-     * Удаляет товар из корзины (нажимает кнопку удаления)
-     */
-    public void removeElementWithBin(){
-        removeButton.click();
-    }
-
-    /**
-     * Активирует выделение товара в корзине (для дальнейшего удаления)
-     */
-    public void clickRemoveCheckBox() {
-        removeCheckBox.activate();
     }
 }
