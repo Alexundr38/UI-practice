@@ -6,8 +6,6 @@ package store.Citilink.elements;
  */
 public class ProductCardElement extends ProductSnippetElement {
 
-    private static final String DATA_META_NAME_XPATH = "//*[@data-meta-name=\"%s\"]";
-
     /** Кнопка добавления товара в корзину */
     ButtonElement addToBasketButton = ButtonElement.byInElement(this, "data-meta-name", "Snippet__cart-button");
 
@@ -33,16 +31,6 @@ public class ProductCardElement extends ProductSnippetElement {
     public static ProductCardElement byName(String snippetType, String productName) {
         CARD_BY_NAME_XPATH = SNIPPET_BY_NAME_XPATH.replaceFirst("%s", snippetType);
         return new ProductCardElement(CARD_BY_NAME_XPATH, productName);
-    }
-
-    /**
-     * Создает объект ProductCardElement, находящий элемент по атрибуту data-meta-name (первый на странице).
-     * dataMetaName Значение атрибута data-meta-name (нет так как константен)
-     * @return Объект ProductCardElement
-     */
-    public static ProductCardElement byDataMetaName() {
-        String dataMetaName = "SnippetProductVerticalLayout";
-        return new ProductCardElement(DATA_META_NAME_XPATH, dataMetaName);
     }
 
     /**

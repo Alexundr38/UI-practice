@@ -76,7 +76,7 @@ public class SearchPage extends BasePage {
      * Получение значения цены первого товара из найденного списка
      */
     public int getPrice() {
-        ProductCardElement elem = ProductCardElement.byDataMetaName();
+        ProductCatalogElement elem = ProductCatalogElement.byDataMetaName("SnippetProductVerticalLayout");
         return elem.getPrice();
     }
 

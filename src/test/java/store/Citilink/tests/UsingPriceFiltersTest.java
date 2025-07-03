@@ -12,29 +12,23 @@ import store.Citilink.load_and_write_data.LoadWriteProductData;
  * Тест проверяет работу фильтров цены.
  * Цена первого товара в списке должна попадать в выбранный интервал, после применения фильтра.
  */
-public class UsingPriceFiltersTest extends BaseTest {
+public class UsingPriceFiltersTest extends TestWithProductName {
     private int testPrice = 10000;
 
     protected SearchPage searchPage;
 
     @Test
     protected void usePriceFilters() {
-        LoadWriteProductData loader = new LoadWriteProductData(LoadWriteProductData.ActionType.PUT_BASKET);
-        String productName = loader.getRandomProduct();
-
-        login();
+        loadByActionType(LoadWriteProductData.ActionType.GET_COMMON);
+        productName = loader.getRandomProduct();
 
         homePage.search(productName);
-        sleep(1000);
 
         searchPage = SearchPage.openSearchPage();
-
         searchPage.usePriceFilter(Integer.toString(testPrice));
-
         int result = searchPage.getPrice();
         int maxPrice = searchPage.getMaxPrice();
 
-        sleep(1000);
         assertTrue(testPrice <= maxPrice,
                 "Минимальная цена в тесте (" + testPrice + ") выше максимальной найденной: " + maxPrice);
         assertTrue(result >= testPrice,
