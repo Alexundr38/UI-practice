@@ -1,6 +1,5 @@
 package store.Citilink.pages;
 
-import store.Citilink.elements.ProductCardElement;
 import store.Citilink.elements.ButtonElement;
 import store.Citilink.elements.PriceFilterElement;
 import store.Citilink.elements.ProductCatalogElement;
