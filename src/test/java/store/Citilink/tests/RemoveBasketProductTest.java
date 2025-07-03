@@ -19,7 +19,7 @@ public class RemoveBasketProductTest extends TestWithProductName {
     /** Входит в корзину и проверяет не пустая ли она */
     @Test
     protected void openBasketPage() {
-        homePage.openButton(HomePage.HeaderButton.BASKET);
+        homePage.clickBasketButton();
         basketPage = BasketPage.openBasketPage();
         loadByActionType(LoadWriteProductData.ActionType.REMOVE_BASKET);
         assertTrue(!basketPage.isEmptyOrder());

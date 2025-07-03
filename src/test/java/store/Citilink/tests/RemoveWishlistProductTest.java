@@ -19,7 +19,7 @@ public class RemoveWishlistProductTest extends TestWithProductName {
     /** Входит в раздел "избранное" и проверяет не пустой ли он */
     @Test
     public void openWishlistPage() {
-        homePage.openButton(HomePage.HeaderButton.WISHLIST);
+        homePage.clickWishListButton();
         wishlistPage = WishlistPage.openWishlistPage();
         loadByActionType(LoadWriteProductData.ActionType.REMOVE_WISHLIST);
         assertTrue(!wishlistPage.isEmpty());

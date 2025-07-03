@@ -20,7 +20,7 @@ public class RemoveCompareProductTest extends TestWithProductName{
     /** Входит в раздел "сравнение" и проверяет не пустой ли он */
     @Test
     public void openComparePage() {
-        homePage.openButton(HomePage.HeaderButton.COMPARE);
+        homePage.clickCompareButton();
         comparePage = ComparePage.openComparePage();
         loadByActionType(LoadWriteProductData.ActionType.REMOVE_COMPARE);
         assertTrue(!comparePage.isEmpty());

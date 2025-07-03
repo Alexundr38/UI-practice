@@ -11,43 +11,24 @@ import store.Citilink.load_and_write_data.LoadLoginData;
 public class HomePage extends BasePage {
 
     /** Поле поиска по сайту. */
-    private SearchElement searchInput = SearchElement.byType("search");
+    private final SearchElement searchInput = SearchElement.byType("search");
 
     /** Кнопка входа в личный кабинет. */
     private final ButtonElement loginButton = ButtonElement.byDataMetaName("UserButtonContainer");
-
-    /**
-     * Перечисление enum для кнопок в шапке сайта, доступных с главной страницы.
-     * Используется для универсального открытия различных кнопок.
-     */
-    public enum HeaderButton {
-        WISHLIST("WishlistButton"),
-        COMPARE("CompareButton"),
-        BASKET("BasketButton"),
-        CATALOG("DesktopHeaderFixed__catalog-menu"),
-        CATEGORY("DesktopMenu__category--menu-item"),
-        SUBCATEGORY("DesktopMenu__sub-category"),
-        SUBSUBCATEGORY("DesktopMenu__sub-sub-category");
-
-        /** Значение атрибута data-meta-name, уникально идентифицирующее кнопку. */
-        private final String dataMetaName;
-
-        /**
-         * Конструктор перечисления.
-         * @param dataMetaName Значение data-meta-name, по которому будет найден элемент
-         */
-        HeaderButton(String dataMetaName) {
-            this.dataMetaName = dataMetaName;
-        }
-
-        /**
-         * Передает значение data-meta-name.
-         * @return Строка — значение атрибута
-         */
-        public String getDataMetaName() {
-            return dataMetaName;
-        }
-    }
+    /** Кнопка перехода в избранное. */
+    private final ButtonElement wishlistButton = ButtonElement.byDataMetaName("WishlistButton");
+    /** Кнопка перехода в сравнение. */
+    private final ButtonElement compareButton = ButtonElement.byDataMetaName("CompareButton");
+    /** Кнопка перехода в корзину. */
+    private final ButtonElement basketButton = ButtonElement.byDataMetaName("BasketButton");
+    /** Кнопка перехода в каталог. */
+    private final ButtonElement catalogButton = ButtonElement.byDataMetaName("DesktopHeaderFixed__catalog-menu");
+    /** Кнопка перехода в категорию каталога. */
+    private final ButtonElement categoryButton = ButtonElement.byDataMetaName("DesktopMenu__category--menu-item");
+    /** Кнопка перехода в подкатегорию каталога. */
+    private final ButtonElement subcategoryButton = ButtonElement.byDataMetaName("DesktopMenu__sub-category");
+    /** Кнопка перехода в подподкатегорию каталога. */
+    private final ButtonElement subsubcategoryButton = ButtonElement.byDataMetaName("DesktopMenu__sub-sub-category");
 
     /**
      * Конструктор главной страницы.
@@ -58,12 +39,52 @@ public class HomePage extends BasePage {
     }
 
     /**
-     * Нажимает на кнопку в шапке сайта.
-     * @param button кнопка из перечисления HeaderButton
+     * Нажимает на кнопку избранного в шапке сайта.
      */
-    public void openButton(HeaderButton button) {
-        ButtonElement btn = ButtonElement.byDataMetaName(button.getDataMetaName());
-        btn.click();
+    public void clickWishListButton() {
+        wishlistButton.click();
+    }
+
+    /**
+     * Нажимает на кнопку сравнения в шапке сайта.
+     */
+    public void clickCompareButton() {
+        compareButton.click();
+    }
+
+    /**
+     * Нажимает на кнопку корзины в шапке сайта.
+     */
+    public void clickBasketButton() {
+        basketButton.click();
+    }
+
+    /**
+     * Нажимает на кнопку каталога товаров.
+     */
+    public void clickCatalogButton() {
+        catalogButton.click();
+    }
+
+    /**
+     * Нажимает на кнопку категории в каталоге.
+     */
+    public void clickCategoryButton() {
+        categoryButton.click();
+    }
+
+    /**
+     * Нажимает на кнопку подкатегории в каталоге.
+     */
+    public void clickSubCategoryButton() {
+        subcategoryButton.click();
+    }
+
+    /**
+     * Нажимает на кнопку подподкатегории в каталоге.
+     */
+    public void clickSubSubCategoryButton() {
+        subsubcategoryButton.click();
     }
 
     /**
@@ -105,23 +126,19 @@ public class HomePage extends BasePage {
     }
 
     /**
-     * Нажимает кнопку, отбирая её по сочетанию data-meta-name и видимого текста.
-     *
-     * @param button      константа из HeaderButton, определяющая значение data-meta-name элемента
+     * Нажимает кнопку подподкатегории, отбирая по тексту.
      * @param visibleText точный текст, который должен содержаться внутри кнопки
      */
-    public void openButtonText(HeaderButton button, String visibleText) {
-        ButtonElement.byDataMetaNameAndText(button.getDataMetaName(), visibleText).click();
+    public void clickSubCategoryButtonText(String visibleText) {
+        ButtonElement.byDataMetaNameAndText("DesktopMenu__sub-sub-category", visibleText).click();
     }
 
     /**
-     * Наводит на кнопку, отбирая её по сочетанию data-meta-name и видимого текста.
-     *
-     * @param button      константа из HeaderButton, определяющая значение data-meta-name элемента
+     * Наводит на кнопку категории, отбирая по тексту.
      * @param visibleText точный текст, который должен содержаться внутри кнопки
      */
-    public void hoverButtonTextCategory(HeaderButton button, String visibleText) {
-        ButtonElement.byDataMetaNameAndTextCategory(button.getDataMetaName(), visibleText).hover();
+    public void hoverButtonTextCategory(String visibleText) {
+        ButtonElement.byDataMetaNameAndTextCategory("DesktopMenu__category--menu-item", visibleText).hover();
     }
 
     /**
