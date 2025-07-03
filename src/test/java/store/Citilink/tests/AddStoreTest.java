@@ -1,18 +1,19 @@
 package store.Citilink.tests;
 
 import org.junit.jupiter.api.Test;
+import store.Citilink.load_and_write_data.LoadWriteData;
 import store.Citilink.pages.StoresPage;
 
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /** Тест-класс, проверяющий добавление магазина в избранные */
-public class AddStoreTest extends BaseTest{
+public class AddStoreTest extends TestWithDataName{
 
     /** Страница магазинов */
     StoresPage storesPage;
 
-    /** Тест проверяет добавление магазина в избранные.
+    /**
+     * Тест проверяет добавление магазина в избранные.
      * Открывает страницу магазинов.
      * Выбирает магазин.
      * Нажимает на кнопку сердечка.
@@ -20,9 +21,12 @@ public class AddStoreTest extends BaseTest{
      */
     @Test
     public void addStore() {
+        loadByActionType(LoadWriteData.ActionType.GET_STORE);
+        dataName = loader.getRandomData();
+
         homePage.openStores();
         storesPage = StoresPage.openStoresPage();
-        String storeName = "Магазин ул. Оптиков (метро Старая Деревня)";
+        String storeName = dataName;
         storesPage.addStore(storeName);
         assertTrue(storesPage.isAdded());
     }

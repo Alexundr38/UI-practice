@@ -1,17 +1,15 @@
 package store.Citilink.tests;
 
 import org.junit.jupiter.api.Test;
-import store.Citilink.load_and_write_data.LoadWriteProductData;
+import store.Citilink.load_and_write_data.LoadWriteData;
 import store.Citilink.pages.BasketPage;
-import store.Citilink.pages.HomePage;
 
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Тест-класс для проверки функциональности удаления товаров из корзины
  */
-public class RemoveBasketProductTest extends TestWithProductName {
+public class RemoveBasketProductTest extends TestWithDataName {
 
     /** Страница корзины */
     protected BasketPage basketPage;
@@ -21,7 +19,7 @@ public class RemoveBasketProductTest extends TestWithProductName {
     protected void openBasketPage() {
         homePage.clickBasketButton();
         basketPage = BasketPage.openBasketPage();
-        loadByActionType(LoadWriteProductData.ActionType.REMOVE_BASKET);
+        loadByActionType(LoadWriteData.ActionType.REMOVE_BASKET);
         assertTrue(!basketPage.isEmptyOrder());
     }
 
@@ -37,11 +35,11 @@ public class RemoveBasketProductTest extends TestWithProductName {
     @Test
     protected void removeBasketProductWithBin() {
         openBasketPage();
-        productName = loader.getRandomProduct();
+        dataName = loader.getRandomData();
 
-        basketPage.removeProductWithBin(productName);
+        basketPage.removeProductWithBin(dataName);
         assertTrue(basketPage.isProductRemoved(),
-                "Ожидали, что в корзине нет товара с названием: " + productName);
+                "Ожидали, что в корзине нет товара с названием: " + dataName);
     }
 
     /**
@@ -57,7 +55,7 @@ public class RemoveBasketProductTest extends TestWithProductName {
     @Test
     protected void removeBasketProductWithCheckBox() {
         openBasketPage();
-        String productName = loader.getRandomProduct();
+        String productName = loader.getRandomData();
 
         basketPage.selectProductWithCheckBox(productName);
         basketPage.clickRemoveSelectedButton();

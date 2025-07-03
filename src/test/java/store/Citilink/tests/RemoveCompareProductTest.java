@@ -1,18 +1,15 @@
 package store.Citilink.tests;
 
 import org.junit.jupiter.api.Test;
-import store.Citilink.load_and_write_data.LoadWriteProductData;
-import store.Citilink.pages.BasketPage;
+import store.Citilink.load_and_write_data.LoadWriteData;
 import store.Citilink.pages.ComparePage;
-import store.Citilink.pages.HomePage;
 
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Тест-класс для проверки функциональности удаления товаров из раздела "сравнение"
  */
-public class RemoveCompareProductTest extends TestWithProductName{
+public class RemoveCompareProductTest extends TestWithDataName {
 
     /** Страница раздела "сравнение" */
     private ComparePage comparePage;
@@ -22,7 +19,7 @@ public class RemoveCompareProductTest extends TestWithProductName{
     public void openComparePage() {
         homePage.clickCompareButton();
         comparePage = ComparePage.openComparePage();
-        loadByActionType(LoadWriteProductData.ActionType.REMOVE_COMPARE);
+        loadByActionType(LoadWriteData.ActionType.REMOVE_COMPARE);
         assertTrue(!comparePage.isEmpty());
     }
 
@@ -37,11 +34,11 @@ public class RemoveCompareProductTest extends TestWithProductName{
     @Test
     public void removeCompareProductWithRemoveAll() {
         openComparePage();
-        productName = loader.getRandomProduct();
+        dataName = loader.getRandomData();
 
         comparePage.removeProductWithRemoveAll();
         assertTrue(comparePage.isProductRemoved(),
-                "Ожидали, что в разделе \"сравнение\" нет товара с названием: " + productName);
+                "Ожидали, что в разделе \"сравнение\" нет товара с названием: " + dataName);
     }
 
     /**
@@ -56,10 +53,10 @@ public class RemoveCompareProductTest extends TestWithProductName{
     @Test
     public void removeCompareProductWithCross() {
         openComparePage();
-        productName = loader.getRandomProduct();
+        dataName = loader.getRandomData();
 
-        comparePage.removeProductWithCross(productName);
+        comparePage.removeProductWithCross(dataName);
         assertTrue(comparePage.isProductRemoved(),
-                "Ожидали, что в разделе \"сравнение\" нет товара с названием: " + productName);
+                "Ожидали, что в разделе \"сравнение\" нет товара с названием: " + dataName);
     }
 }

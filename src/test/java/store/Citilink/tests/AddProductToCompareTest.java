@@ -3,14 +3,14 @@ package store.Citilink.tests;
 import org.junit.jupiter.api.Test;
 import store.Citilink.pages.CatalogPage;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import store.Citilink.load_and_write_data.LoadWriteProductData;
+
 import store.Citilink.pages.ComparePage;
 
 /**
  * Тест-класс для проверки функциональности добавления товара в список сравнения на сайте.
  * Сценарий проверяет, что товар, добавленный из каталога, действительно отображается на странице сравнения.
  */
-public class AddProductToCompareTest extends TestWithProductName {
+public class AddProductToCompareTest extends TestWithDataName {
 
     /** Страница каталога */
     protected CatalogPage catalogPage;
@@ -26,17 +26,19 @@ public class AddProductToCompareTest extends TestWithProductName {
      */
     @Test
     protected void addProductToCompare() {
-        productName = "Смартфон Huawei nova 13 12/512Gb, BLK-LX9, черный";
+        dataName = "Смартфон Huawei nova 13 12/512Gb, BLK-LX9, черный";
+        String categoryName = "Смартфоны и планшеты";
+        String subCategoryName = "Смартфоны HUAWEI";
 
         homePage.clickCatalogButton();
-        homePage.hoverButtonTextCategory("Смартфоны и планшеты");
-        homePage.clickSubCategoryButtonText("Смартфоны HUAWEI");
+        homePage.hoverButtonTextCategory(categoryName);
+        homePage.clickSubCategoryButtonText(subCategoryName);
         catalogPage = CatalogPage.openCatalogPage();
-        catalogPage.addProductToCompareByName(productName);
+        catalogPage.addProductToCompareByName(dataName);
 
         homePage.clickCompareButton();
         ComparePage comparePage = ComparePage.openComparePage();
-        assertTrue(comparePage.containsProductWithName(productName),
-                "Ожидали, что в разделе \"сранение\" есть товар с названием: " + productName);
+        assertTrue(comparePage.containsProductWithName(dataName),
+                "Ожидали, что в разделе \"сранение\" есть товар с названием: " + dataName);
     }
 }
