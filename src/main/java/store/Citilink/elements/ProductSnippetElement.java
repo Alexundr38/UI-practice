@@ -9,7 +9,7 @@ public class ProductSnippetElement extends BaseElement {
     /** XPath сниппета по data-meta-name и содержащемуся title (названию товара) */
     protected static final String SNIPPET_BY_NAME_XPATH =
             "//div[@data-meta-name='%s' " +
-                    "and .//a[normalize-space(@title)='%s']]";
+                    "and .//a[contains(normalize-space(@title), '%s')]]";
 
     /** XPath шаблон для поиска элементов по атрибуту data-meta-name */
     protected static final String DATA_META_NAME_XPATH = "//div[@data-meta-name=\"%s\"]";

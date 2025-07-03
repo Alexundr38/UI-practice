@@ -1,9 +1,7 @@
 package store.Citilink.tests;
 
 import org.junit.jupiter.api.Test;
-import store.Citilink.pages.HomePage;
 import store.Citilink.pages.CatalogPage;
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import store.Citilink.load_and_write_data.LoadWriteProductData;
 import store.Citilink.pages.ComparePage;
@@ -28,15 +26,13 @@ public class AddProductToCompareTest extends TestWithProductName {
      */
     @Test
     protected void addProductToCompare() {
-        loadByActionType(LoadWriteProductData.ActionType.PUT_COMPARE);
-        productName = "Смартфон Huawei Pura 70 12/256Gb, ADY-LX9, белый";
-        loader.doActionLogic(productName);
+        productName = "Смартфон Huawei nova 13 12/512Gb, BLK-LX9, черный";
 
         homePage.clickCatalogButton();
         homePage.hoverButtonTextCategory("Смартфоны и планшеты");
         homePage.clickSubCategoryButtonText("Смартфоны HUAWEI");
         catalogPage = CatalogPage.openCatalogPage();
-        catalogPage.addProductToCompareByName("Смартфон Huawei Pura 70 12/256Gb, ADY-LX9, белый");
+        catalogPage.addProductToCompareByName(productName);
 
         homePage.clickCompareButton();
         ComparePage comparePage = ComparePage.openComparePage();

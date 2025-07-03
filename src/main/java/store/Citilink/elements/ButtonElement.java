@@ -74,14 +74,6 @@ public class ButtonElement extends BaseElement {
     }
 
     /**
-     * Наводит курсор мыши на кнопку.
-     */
-    public void hover() {
-        scrollToElement();
-        baseElement.hover();
-    }
-
-    /**
      * Проверяет, доступна ли кнопка для взаимодействия.
      * @return true, если кнопка доступна, false в противном случае
      */

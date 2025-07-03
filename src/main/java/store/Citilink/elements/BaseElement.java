@@ -7,6 +7,8 @@ import static com.codeborne.selenide.Condition.visible;
 import java.time.Duration;
 import com.codeborne.selenide.ex.ElementNotFound;
 import com.codeborne.selenide.ex.ElementShouldNot;
+import com.codeborne.selenide.ScrollOptions;
+
 
 /**
  * Базовый класс для веб-элементов, предоставляющий общие методы взаимодействия.
@@ -77,5 +79,13 @@ public class BaseElement {
     /** Листает страницу так, чтобы baseElement был виден на странице */
     public void scrollToElement() {
         baseElement.scrollIntoView("{block: 'center', behavior: 'smooth'}");
+    }
+
+    /**
+     * Наводит курсор мыши на кнопку.
+     */
+    public void hover() {
+        scrollToElement();
+        baseElement.hover();
     }
 }

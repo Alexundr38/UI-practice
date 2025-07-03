@@ -12,7 +12,6 @@ public class HomePage extends BasePage {
 
     /** Поле поиска по сайту. */
     private final SearchElement searchInput = SearchElement.byType("search");
-
     /** Кнопка входа в личный кабинет. */
     private final ButtonElement loginButton = ButtonElement.byDataMetaName("UserButtonContainer");
     /** Кнопка перехода в избранное. */
@@ -29,6 +28,10 @@ public class HomePage extends BasePage {
     private final ButtonElement subcategoryButton = ButtonElement.byDataMetaName("DesktopMenu__sub-category");
     /** Кнопка перехода в подподкатегорию каталога. */
     private final ButtonElement subsubcategoryButton = ButtonElement.byDataMetaName("DesktopMenu__sub-sub-category");
+    /** Кнопка перехода в раздел акций. */
+    private final ButtonElement actionButton = ButtonElement.byDataMetaName("HeaderTopLink");
+    /** Кнопка согласия на cookie. */
+    private final ButtonElement cookieButton = ButtonElement.byTypeAndText("button", "Я согласен");
 
     /**
      * Конструктор главной страницы.
@@ -85,6 +88,13 @@ public class HomePage extends BasePage {
      */
     public void clickSubSubCategoryButton() {
         subsubcategoryButton.click();
+    }
+
+    /**
+     * Нажимает на кнопку "Акции".
+     */
+    public void clickActionButton() {
+        actionButton.click();
     }
 
     /**
@@ -147,5 +157,11 @@ public class HomePage extends BasePage {
      */
     public static HomePage openHomePage() {
         return new HomePage();
+    }
+
+    public void clickCookie() {
+        if (cookieButton.isDisplayed()) {
+            cookieButton.click();
+        }
     }
 }
