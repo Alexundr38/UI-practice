@@ -13,7 +13,7 @@ public class ProductCardElement extends ProductSnippetElement {
     protected static String CARD_BY_NAME_XPATH;
 
     /**
-     * Приватный конструктор.
+     * Protected конструктор.
      *
      * @param xpath XPath выражение для поиска карточки товара
      * @param param значение для подстановки в XPath
