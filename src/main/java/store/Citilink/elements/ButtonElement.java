@@ -18,6 +18,7 @@ public class ButtonElement extends BaseElement {
     /** XPath шаблон для поиска кнопки по атрибуту type */
     private static final String TYPE_XPATH = "//*[@type=\"%s\"]";
 
+    /** XPath шаблон для поиска кнопки по параметру */
     private static final String PARAM_XPATH = "//*[@%s=\"%s\"]";
 
     /** XPath шаблон для поиска элемента по атрибуту data-meta-name */
@@ -81,14 +82,6 @@ public class ButtonElement extends BaseElement {
     public void click(){
         scrollToElement();
         baseElement.click();
-    }
-
-    /**
-     * Наводит курсор мыши на кнопку.
-     */
-    public void hover() {
-        scrollToElement();
-        baseElement.hover();
     }
 
     /**

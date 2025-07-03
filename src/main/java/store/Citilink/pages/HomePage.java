@@ -30,6 +30,7 @@ public class HomePage extends BasePage {
     /** Кнопка перехода в подподкатегорию каталога. */
     private final ButtonElement subsubcategoryButton = ButtonElement.byDataMetaName("DesktopMenu__sub-sub-category");
 
+    private final ButtonElement storeButton = ButtonElement.byParam("data-meta-value", "stores");
     /**
      * Конструктор главной страницы.
      * Передаёт ожидаемый URL в базовый класс.
@@ -116,11 +117,17 @@ public class HomePage extends BasePage {
         }
     }
 
+    /** Открывает страницу профиля */
     public void openProfile() {
         loginButton = ButtonElement.byParam("data-meta-count", "0");
         loginButton.click();
         ButtonElement profileButton = ButtonElement.byDataMetaName("ProfileMenu_Item_Мой профиль");
         profileButton.click();
+    }
+
+    /** Открывает страницу магазинов */
+    public void openStores() {
+        storeButton.click();
     }
 
     /**
