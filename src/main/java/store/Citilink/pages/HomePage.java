@@ -148,4 +148,9 @@ public class HomePage extends BasePage {
     public static HomePage openHomePage() {
         return new HomePage();
     }
+
+    /**
+     * Выполняет переход на страницу конфигуратора ПК
+     */
+    public void goToConfiguratorPage() { ButtonElement.byDataMetaValue("configurator").click(); }
 }

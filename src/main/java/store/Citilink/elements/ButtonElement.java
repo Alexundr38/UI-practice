@@ -21,6 +21,9 @@ public class ButtonElement extends BaseElement {
     /** XPath шаблон для поиска элемента по атрибуту data-meta-name */
     private static final String DATA_META_NAME_XPATH = "//*[@data-meta-name=\"%s\"]";
 
+    /** XPath шаблон для поиска элемента по атрибуту data-meta-value */
+    private static final String DATA_META_VALUE_XPATH = "//*[@data-meta-value=\"%s\"]";
+
     /** XPath шаблон для поиска категории по атрибуту data-meta-name и тексту*/
     private static final String DATA_META_NAME_AND_TEXT_CATEGORY_XPATH =
             "(//a[@data-meta-name=\"%s\" and .//span[contains(normalize-space(.), \"%s\")]])[2]";
@@ -40,6 +43,9 @@ public class ButtonElement extends BaseElement {
 
     /** Константа для XPath поиска по классу */
     private static final String CLASS_XPATH = "//*[@class=\"%s\"]";
+
+    /** Константа для XPath поиска по id */
+    private static final String ID_XPATH = "//*[@id=\"%s\"]";
 
     /**
      * XPath шаблон для поиска вложенного элемента по заданному атрибуту и его значению
@@ -132,6 +138,15 @@ public class ButtonElement extends BaseElement {
     }
 
     /**
+     * Создает объект ButtonElement, находящий элемент по атрибуту data-meta-value.
+     * @param dataMetaValue Значение атрибута data-meta-value
+     * @return Объект ButtonElement
+     */
+    public static ButtonElement byDataMetaValue(String dataMetaValue) {
+        return new ButtonElement(DATA_META_VALUE_XPATH, dataMetaValue);
+    }
+
+    /**
      * Создает объект ButtonElement, находящий элемент родительскому элементу и заданным параметрам.
      * @param parentElement Родительский элемент, относительно которого
      *                      осуществляется поиск элемента
@@ -212,6 +227,16 @@ public class ButtonElement extends BaseElement {
      */
     public static ButtonElement byDataMetaNameAndText(String dataMetaName, String text) {
         return new ButtonElement(DATA_META_NAME_AND_TEXT_XPATH, dataMetaName, text);
+    }
+
+    /**
+     * Создает объект ButtonElement по атрибуту id.
+     *
+     * @param id Значение атрибута id
+     * @return новый экземпляр ButtonElement с указанными параметрами
+     */
+    public static ButtonElement byId(String id) {
+        return new ButtonElement(ID_XPATH, id);
     }
 
     /**
