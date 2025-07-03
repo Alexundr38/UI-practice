@@ -5,14 +5,14 @@ import store.Citilink.pages.BasketPage;
 import store.Citilink.pages.SearchPage;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import store.Citilink.load_and_write_data.LoadWriteProductData;
+import store.Citilink.load_and_write_data.LoadWriteData;
 
 
 /**
  * Тест проверяет добавление в корзину случайно выбранного товара.
  * Название товара берётся из внешнего JSON-файла со списком продуктов.
  */
-public class AddProductToBasketTest extends TestWithProductName {
+public class AddProductToBasketTest extends TestWithDataName {
 
     /** Страница корзины */
     protected BasketPage basketPage;
@@ -28,16 +28,16 @@ public class AddProductToBasketTest extends TestWithProductName {
      */
     @Test
     protected void addProductToBasket() {
-        loadByActionType(LoadWriteProductData.ActionType.PUT_BASKET);
-        productName = loader.getRandomProduct();
+        loadByActionType(LoadWriteData.ActionType.PUT_BASKET);
+        dataName = loader.getRandomData();
 
-        homePage.search(productName);
+        homePage.search(dataName);
         searchPage = SearchPage.openSearchPage();
-        searchPage.addProductToCartByName(productName);
+        searchPage.addProductToCartByName(dataName);
 
         homePage.clickBasketButton();
         basketPage = BasketPage.openBasketPage();
-        assertTrue(basketPage.containsProductWithName(productName),
-                "Ожидали, что в корзине есть товар с названием: " + productName);
+        assertTrue(basketPage.containsProductWithName(dataName),
+                "Ожидали, что в корзине есть товар с названием: " + dataName);
     }
 }

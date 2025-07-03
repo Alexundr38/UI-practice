@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Класс для загрузки и записи списка названий товаров из JSON-файлов и выбора случайного.
  */
-public class LoadWriteProductData {
+public class LoadWriteData {
 
     /**
      * Перечисление возможных действий с товарами:
@@ -23,6 +23,8 @@ public class LoadWriteProductData {
      * REMOVE_BASKET - удаление товара из корзины
      * REMOVE_WISHLIST - удаление товара из избранного
      * REMOVE_COMPARE - удаление товара из сравнения
+     * GET_COMMON - достать общее название товара
+     * GET_STORE - достать название магазина
      */
     public enum ActionType {
         PUT_BASKET,
@@ -31,11 +33,12 @@ public class LoadWriteProductData {
         REMOVE_BASKET,
         REMOVE_WISHLIST,
         REMOVE_COMPARE,
-        GET_COMMON;
+        GET_COMMON,
+        GET_STORE;
     }
 
     /** Список загруженных товаров */
-    private final List<String> products = new ArrayList<>();
+    private final List<String> data = new ArrayList<>();
 
     /** Тип действия, которое будет выполнено с товаром */
     private ActionType actionType;
@@ -44,44 +47,47 @@ public class LoadWriteProductData {
      * Конструктор класса. Инициализирует тип действия и загружает соответствующий список товаров.
      * @param actionType Тип действия, которое будет выполняться с товарами
      */
-    public LoadWriteProductData(ActionType actionType) {
+    public LoadWriteData(ActionType actionType) {
         this.actionType = actionType;
         switch (actionType) {
             case PUT_BASKET:
-                loadProducts("resources/products.json");
+                loadData("resources/products.json", true);
                 break;
             case PUT_WISHLIST:
-                loadProducts("resources/products.json");
+                loadData("resources/products.json", true);
                 break;
             case PUT_COMPARE:
-                loadProducts("resources/products.json");
+                loadData("resources/products.json", true);
                 break;
             case REMOVE_BASKET:
-                loadProducts("java/store/Citilink/data/products_in_basket.json");
+                loadData("java/store/Citilink/data/products_in_basket.json", true);
                 break;
             case REMOVE_WISHLIST:
-                loadProducts("java/store/Citilink/data/products_in_wishlist.json");
+                loadData("java/store/Citilink/data/products_in_wishlist.json", true);
                 break;
             case REMOVE_COMPARE:
-                loadProducts("java/store/Citilink/data/products_in_compare.json");
+                loadData("java/store/Citilink/data/products_in_compare.json", true);
                 break;
             case GET_COMMON:
-                loadProducts("resources/common_products.json");
+                loadData("resources/common_products.json", true);
+                break;
+            case GET_STORE:
+                loadData("resources/stores.json", false);
                 break;
 
         }
     }
 
     /**
-     * Возвращает случайное название товара из загруженного списка.
-     * @return Название товара
+     * Возвращает случайное название из загруженного списка.
+     * @return Название из списка
      */
-    public String getRandomProduct() {
-        if (products.isEmpty()) {
-            throw new IllegalStateException("List of products is empty");
+    public String getRandomData() {
+        if (data.isEmpty()) {
+            throw new IllegalStateException("List of data is empty");
         }
-        int idx = ThreadLocalRandom.current().nextInt(products.size());
-        String productName = products.get(idx);
+        int idx = ThreadLocalRandom.current().nextInt(data.size());
+        String productName = data.get(idx);
         doActionLogic(productName);
         return productName;
     }
@@ -111,22 +117,27 @@ public class LoadWriteProductData {
                 removeProduct("products_in_compare.json", productName);
                 break;
             case GET_COMMON:
+            case GET_STORE:
                 break;
         }
     }
 
     /**
-     * Загружает список продуктов из JSON-файла.
+     * Загружает список товаров из JSON-файла.
      * @param fileName Имя файла для загрузки товаров
      */
-    private void loadProducts(String fileName) {
+    private void loadData(String fileName, boolean isProducts) {
         try {
             Path filePath = Paths.get("src/main", fileName);
             String content = new String(Files.readAllBytes(filePath));
             JSONObject json = new JSONObject(content);
-            JSONArray array = json.getJSONArray("products");
+            String key = "products";
+            if (!isProducts) {
+                key = "stores";
+            }
+            JSONArray array = json.getJSONArray(key);
             for (int i = 0; i < array.length(); i++) {
-                products.add(array.getString(i));
+                data.add(array.getString(i));
             }
         } catch (Exception e) {
             throw new RuntimeException("Error with read json file", e);

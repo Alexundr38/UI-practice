@@ -1,5 +1,7 @@
 package store.Citilink.pages;
 
+import store.Citilink.elements.ButtonElement;
+
 /** Класс страницы профиля */
 public class ProfilePage extends BasePage {
 
@@ -19,4 +21,8 @@ public class ProfilePage extends BasePage {
         return new ProfilePage();
     }
 
+    /** Открывает страницу настроек */
+    public void openSettings() {
+        ButtonElement.byHref("/profile/edit/").scrollIntoViewCentered().click();
+    }
 }

@@ -31,9 +31,8 @@ public class StoresPage extends BasePage {
     public void addStore(String storeName) {
         storeCard = StoreCardElement.byParamAndText("data-meta-name",
                 "StoreItemLayout__FULL_FORMAT_SHOP", storeName);
-        if (storeCard.getParamValue("class").contains("9jqu4")) {
-            storeCard.addToWishlist();
-        }
+        storeCard.scrollToElement();
+        storeCard.addToWishlist();
     }
 
     /**
@@ -41,10 +40,7 @@ public class StoresPage extends BasePage {
      * @return true, если добавлен, false в противном случае
      */
     public boolean isAdded() {
-        if (storeCard.getParamValue("class").contains("072imz")) {
-            return true;
-        }
-        return false;
+        return storeCard.isDisplayed();
     }
 
 }

@@ -1,17 +1,15 @@
 package store.Citilink.tests;
 
 import org.junit.jupiter.api.Test;
-import store.Citilink.load_and_write_data.LoadWriteProductData;
-import store.Citilink.pages.HomePage;
+import store.Citilink.load_and_write_data.LoadWriteData;
 import store.Citilink.pages.WishlistPage;
 
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Тест-класс для проверки функциональности удаления товаров из раздела "избранное"
  */
-public class RemoveWishlistProductTest extends TestWithProductName {
+public class RemoveWishlistProductTest extends TestWithDataName {
 
     /** Страница раздела "избранное" */
     private WishlistPage wishlistPage;
@@ -21,7 +19,7 @@ public class RemoveWishlistProductTest extends TestWithProductName {
     public void openWishlistPage() {
         homePage.clickWishListButton();
         wishlistPage = WishlistPage.openWishlistPage();
-        loadByActionType(LoadWriteProductData.ActionType.REMOVE_WISHLIST);
+        loadByActionType(LoadWriteData.ActionType.REMOVE_WISHLIST);
         assertTrue(!wishlistPage.isEmpty());
     }
 
@@ -37,7 +35,7 @@ public class RemoveWishlistProductTest extends TestWithProductName {
     @Test
     public void removeWishlistProductWithCross() {
         openWishlistPage();
-        String productName = loader.getRandomProduct();
+        String productName = loader.getRandomData();
 
         wishlistPage.removeProductWithCross(productName);
         assertTrue(wishlistPage.isProductRemoved(),
@@ -55,11 +53,11 @@ public class RemoveWishlistProductTest extends TestWithProductName {
     @Test
     public void removeWishlistProductWithRemoveAll() {
         openWishlistPage();
-        productName = loader.getRandomProduct();
+        dataName = loader.getRandomData();
 
         openWishlistPage();
         wishlistPage.removeProductWithRemoveAll();
         assertTrue(wishlistPage.isProductRemoved(),
-                "Ожидали, что в разделе \"избранное\" нет товара с названием: " + productName);
+                "Ожидали, что в разделе \"избранное\" нет товара с названием: " + dataName);
     }
 }

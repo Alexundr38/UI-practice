@@ -178,4 +178,7 @@ public class HomePage extends BasePage {
             cookieButton.click();
         }
     }
+
+    public void goToConfiguratorPage() { ButtonElement.byDataMetaValue("configurator").click(); }
+
 }
