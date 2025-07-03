@@ -1,5 +1,8 @@
 package store.Citilink.pages;
 
+import store.Citilink.elements.ProductCardElement;
+import store.Citilink.elements.ButtonElement;
+import store.Citilink.elements.PriceFilterElement;
 import store.Citilink.elements.ProductCatalogElement;
 
 /**
@@ -56,6 +59,36 @@ public class SearchPage extends BasePage {
     }
 
     /**
+     * Использование фильтра цены
+     */
+    public void usePriceFilter(String minPrice) {
+        PriceFilterElement PFEmin = PriceFilterElement.byDataMetaName("FilterRangeGroup__input-min");
+
+        PFEmin.setValue(minPrice);
+
+        ButtonElement.byClass("e11203e30 app-catalog-1g3e94m-Button--StyledButton-Button--Button ekx3zbi0")
+                .scrollIntoViewCentered()
+                .waitUntilClickable()
+                .click();
+    }
+
+    /**
+     * Получение значения цены первого товара из найденного списка
+     */
+    public int getPrice() {
+        ProductCardElement elem = ProductCardElement.byDataMetaName();
+        return elem.getPrice();
+    }
+
+    /**
+     * Возвращает стоимость, которая является максимальной среди найденных товаров.
+     */
+    public int getMaxPrice() {
+        PriceFilterElement elem = PriceFilterElement.byDataMetaName("FilterRangeGroup__input-max");
+        return elem.getValue();
+    }
+  
+     /**
      * Возвращает объект карточки товара по точному названию.
      *
      * @param productName точное название товара, отображаемое в элементе Snippet__title

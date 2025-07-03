@@ -1,8 +1,13 @@
 package store.Citilink.elements;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+import store.Citilink.pages.BasePage;
+
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.enabled;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 /**
  * Класс, представляющий элемент кнопки на веб-странице.
@@ -32,6 +37,9 @@ public class ButtonElement extends BaseElement {
 
     /** XPath шаблон для поиска кнопки по атрибуту text */
     private static final String TEXT_XPATH = "//button[.//text()=\"%s\"]";
+
+    /** Константа для XPath поиска по классу */
+    private static final String CLASS_XPATH = "//*[@class=\"%s\"]";
 
     /**
      * XPath шаблон для поиска вложенного элемента по заданному атрибуту и его значению
@@ -160,6 +168,17 @@ public class ButtonElement extends BaseElement {
     }
 
     /**
+     * Создает объект ButtonElement, находящий кнопку по классу.
+     * @param className Значение атрибута class
+     * @return Объект ButtonElement
+     */
+    public static ButtonElement byClass(String className) {
+        return new ButtonElement(CLASS_XPATH, className);
+    }
+
+    /**
+     * Проверяет, доступна ли кнопка для взаимодействия.
+     * @return true, если кнопка доступна, false в противном случае
      * Создает объект ButtonElement внутри указанного родительского элемента
      * по содержанию произвольного атрибута и его значения.
      *
@@ -193,5 +212,31 @@ public class ButtonElement extends BaseElement {
      */
     public static ButtonElement byDataMetaNameAndText(String dataMetaName, String text) {
         return new ButtonElement(DATA_META_NAME_AND_TEXT_XPATH, dataMetaName, text);
+    }
+
+    /**
+     * Прокручивает страницу к элементу с выравниванием по центру
+     * @return текущий объект ButtonElement
+     */
+    public ButtonElement scrollIntoViewCentered() {
+        executeJavaScript(
+                "arguments[0].scrollIntoView({block: 'center', inline: 'center', behavior: 'instant'});",
+                baseElement
+        );
+        return this;
+    }
+
+    /**
+     * Ожидает, пока элемент станет кликабельным
+     * @return текущий объект ButtonElement
+     */
+    public ButtonElement waitUntilClickable() {
+        baseElement.shouldBe(Condition.and(
+                "clickable",
+                Condition.visible,
+                Condition.enabled,
+                Condition.interactable
+        ), Duration.ofSeconds(10));
+        return this;
     }
 }
