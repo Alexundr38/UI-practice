@@ -2,8 +2,8 @@ package store.Citilink.tests;
 
 import org.junit.jupiter.api.Test;
 import store.Citilink.pages.StoresPage;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static com.codeborne.selenide.Selenide.sleep;
 
 /** Тест-класс, проверяющий добавление магазина в избранные */
 public class AddStoreTest extends BaseTest{

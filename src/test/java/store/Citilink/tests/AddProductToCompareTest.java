@@ -26,8 +26,9 @@ public class AddProductToCompareTest extends TestWithProductName {
      */
     @Test
     protected void addProductToCompare() {
+        loadByActionType(LoadWriteProductData.ActionType.PUT_COMPARE);
         productName = "Смартфон Huawei nova 13 12/512Gb, BLK-LX9, черный";
-
+        loader.doActionLogic(productName);
         homePage.clickCatalogButton();
         homePage.hoverButtonTextCategory("Смартфоны и планшеты");
         homePage.clickSubCategoryButtonText("Смартфоны HUAWEI");

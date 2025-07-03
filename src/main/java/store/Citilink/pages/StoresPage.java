@@ -30,7 +30,7 @@ public class StoresPage extends BasePage {
      */
     public void addStore(String storeName) {
         storeCard = StoreCardElement.byParamAndText("data-meta-name",
-                "StoreItemLayout__FULL_FORMAT_SHOP", "Магазин ул. Одоевского (метро Приморская)");
+                "StoreItemLayout__FULL_FORMAT_SHOP", storeName);
         if (storeCard.getParamValue("class").contains("9jqu4")) {
             storeCard.addToWishlist();
         }
