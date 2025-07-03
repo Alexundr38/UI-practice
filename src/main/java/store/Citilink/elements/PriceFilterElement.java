@@ -30,4 +30,13 @@ public class PriceFilterElement extends InputElement {
     public void setValue(String text){
         baseElement.setValue(text);
     }
+
+    /**
+     * Возвращает стоимость, которая является максимальной среди найденных товаров.
+     */
+    public int getValue() {
+        String rawPrice = baseElement.getValue();
+        // Удаляем все нецифровые символы и преобразуем в число
+        return Integer.parseInt(rawPrice.replaceAll("[^0-9]", ""));
+    }
 }

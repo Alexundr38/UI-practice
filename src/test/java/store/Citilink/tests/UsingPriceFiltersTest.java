@@ -32,8 +32,11 @@ public class UsingPriceFiltersTest extends BaseTest {
         searchPage.usePriceFilter(Integer.toString(testPrice));
 
         int result = searchPage.getPrice();
+        int maxPrice = searchPage.getMaxPrice();
 
         sleep(1000);
+        assertTrue(testPrice <= maxPrice,
+                "Минимальная цена в тесте (" + testPrice + ") выше максимальной найденной: " + maxPrice);
         assertTrue(result >= testPrice,
                 "При поиске с применением фильтра по минимальной стоимости был найден " + productName + ", у которого цена меньше " + testPrice + " : " + result);
     }

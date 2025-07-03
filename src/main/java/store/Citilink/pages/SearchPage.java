@@ -93,10 +93,15 @@ public class SearchPage extends BasePage {
      * Получение значения цены первого товара из найденного списка
      */
     public int getPrice() {
-        // Находим первый элемент с атрибутом data-meta-price
-        String rawPrice = com.codeborne.selenide.Selenide.$("[data-meta-price]").getAttribute("data-meta-price");
+        ProductCardElement elem = ProductCardElement.byDataMetaName();
+        return elem.getPrice();
+    }
 
-        // Удаляем все нецифровые символы и преобразуем в число
-        return Integer.parseInt(rawPrice.replaceAll("[^0-9]", ""));
+    /**
+     * Возвращает стоимость, которая является максимальной среди найденных товаров.
+     */
+    public int getMaxPrice() {
+        PriceFilterElement elem = PriceFilterElement.byDataMetaName("FilterRangeGroup__input-max");
+        return elem.getValue();
     }
 }
