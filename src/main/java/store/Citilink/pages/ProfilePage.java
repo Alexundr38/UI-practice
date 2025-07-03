@@ -1,5 +1,6 @@
 package store.Citilink.pages;
 
+/** Класс страницы профиля */
 public class ProfilePage extends BasePage {
 
     /**
@@ -12,7 +13,7 @@ public class ProfilePage extends BasePage {
 
     /**
      * Статический метод для создания страницы корзины.
-     * @return новый объект BasketPage
+     * @return новый объект ProfilePage
      */
     public static ProfilePage openProfilePage(){
         return new ProfilePage();
