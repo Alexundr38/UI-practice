@@ -30,7 +30,8 @@ public class LoadWriteProductData {
         PUT_COMPARE,
         REMOVE_BASKET,
         REMOVE_WISHLIST,
-        REMOVE_COMPARE;
+        REMOVE_COMPARE,
+        GET_COMMON;
     }
 
     /** Список загруженных товаров */
@@ -64,6 +65,10 @@ public class LoadWriteProductData {
             case REMOVE_COMPARE:
                 loadProducts("java/store/Citilink/data/products_in_compare.json");
                 break;
+            case GET_COMMON:
+                loadProducts("resources/common_products.json");
+                break;
+
         }
     }
 
@@ -104,6 +109,8 @@ public class LoadWriteProductData {
                 break;
             case REMOVE_COMPARE:
                 removeProduct("products_in_compare.json", productName);
+                break;
+            case GET_COMMON:
                 break;
         }
     }
