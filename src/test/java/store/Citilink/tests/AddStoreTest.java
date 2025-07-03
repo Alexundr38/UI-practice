@@ -3,6 +3,7 @@ package store.Citilink.tests;
 import org.junit.jupiter.api.Test;
 import store.Citilink.pages.StoresPage;
 
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /** Тест-класс, проверяющий добавление магазина в избранные */
@@ -15,7 +16,7 @@ public class AddStoreTest extends BaseTest{
      * Открывает страницу магазинов.
      * Выбирает магазин.
      * Нажимает на кнопку сердечка.
-     * Проверяет, что магазин добавлен в избранные.
+     * Проверяет, что магазин добавлен в избранные.л
      */
     @Test
     public void addStore() {

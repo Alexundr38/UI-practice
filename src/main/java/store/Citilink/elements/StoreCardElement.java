@@ -44,6 +44,12 @@ public class StoreCardElement extends BaseElement {
 
     /** Нажимает на кнопку сердечка */
     public void addToWishlist() {
-        wishlistButton.click();
+        if (!isInWishlist()) {
+            wishlistButton.click();
+        }
+    }
+
+    public boolean isInWishlist() {
+        return wishlistButton.getParamValue("class").contains("072imz");
     }
 }
