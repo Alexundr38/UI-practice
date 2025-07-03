@@ -17,7 +17,7 @@ public class ProductCatalogElement extends ProductCardElement {
      * @param xpath XPath выражение для поиска карточки товара
      * @param param значение для подстановки в XPath
      */
-    private ProductCatalogElement(String xpath, String param) {
+    protected ProductCatalogElement(String xpath, String param) {
         super(xpath, param);
     }
 
