@@ -7,6 +7,8 @@ import static com.codeborne.selenide.Condition.visible;
 import java.time.Duration;
 import com.codeborne.selenide.ex.ElementNotFound;
 import com.codeborne.selenide.ex.ElementShouldNot;
+import com.codeborne.selenide.ScrollOptions;
+
 
 /**
  * Базовый класс для веб-элементов, предоставляющий общие методы взаимодействия.

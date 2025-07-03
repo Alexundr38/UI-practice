@@ -2,9 +2,8 @@ package store.Citilink.tests;
 
 import org.junit.jupiter.api.Test;
 import store.Citilink.pages.BasketPage;
-import store.Citilink.pages.HomePage;
 import store.Citilink.pages.SearchPage;
-import static com.codeborne.selenide.Selenide.sleep;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import store.Citilink.load_and_write_data.LoadWriteProductData;
 
@@ -13,7 +12,7 @@ import store.Citilink.load_and_write_data.LoadWriteProductData;
  * Тест проверяет добавление в корзину случайно выбранного товара.
  * Название товара берётся из внешнего JSON-файла со списком продуктов.
  */
-public class AddProductInBasketTest extends TestWithProductName {
+public class AddProductToBasketTest extends TestWithProductName {
 
     /** Страница корзины */
     protected BasketPage basketPage;

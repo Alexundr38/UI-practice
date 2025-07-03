@@ -7,10 +7,10 @@ package store.Citilink.elements;
 public class ProductCatalogElement extends ProductCardElement {
 
     /** Кнопка добавления в сравнение */
-    ButtonElement compareButton = ButtonElement.byInElement(this, "data-meta-name", "Snippet__compare-button");
+    private final ButtonElement compareButton = ButtonElement.byInElement(this, "data-meta-name", "Snippet__compare-button");
 
     /** Кнопка добавления в избранное */
-    ButtonElement wishlistButton = ButtonElement.byInElement(this, "data-meta-name", "Snippet__wishlist-button");
+    private final ButtonElement wishlistButton = ButtonElement.byInElement(this, "data-meta-name", "Snippet__wishlist-button");
 
     /**
      * Приватный конструктор.
