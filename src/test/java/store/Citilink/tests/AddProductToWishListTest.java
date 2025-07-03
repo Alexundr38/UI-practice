@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Тест проверяет добавление в избранное через раздел акции.
  * Название товара берётся из внешнего JSON-файла со списком продуктов.
  */
-public class AddProductToWishListTest extends TestWithProductName {
+public class AddProductToWishListTest extends TestWithDataName {
 
     /** Страница избранного */
     protected WishlistPage wishlistPage;

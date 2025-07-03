@@ -1,28 +1,27 @@
 package store.Citilink.tests;
 
 import org.junit.jupiter.api.Test;
-import store.Citilink.pages.HomePage;
 import store.Citilink.pages.SearchPage;
-import static com.codeborne.selenide.Selenide.sleep;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import store.Citilink.load_and_write_data.LoadWriteProductData;
+import store.Citilink.load_and_write_data.LoadWriteData;
 
 
 /**
  * Тест проверяет работу фильтров цены.
  * Цена первого товара в списке должна попадать в выбранный интервал, после применения фильтра.
  */
-public class UsingPriceFiltersTest extends TestWithProductName {
+public class UsingPriceFiltersTest extends TestWithDataName {
     private int testPrice = 10000;
 
     protected SearchPage searchPage;
 
     @Test
     protected void usePriceFilters() {
-        loadByActionType(LoadWriteProductData.ActionType.GET_COMMON);
-        productName = loader.getRandomProduct();
+        loadByActionType(LoadWriteData.ActionType.GET_COMMON);
+        dataName = loader.getRandomData();
 
-        homePage.search(productName);
+        homePage.search(dataName);
 
         searchPage = SearchPage.openSearchPage();
         searchPage.usePriceFilter(Integer.toString(testPrice));
@@ -32,6 +31,6 @@ public class UsingPriceFiltersTest extends TestWithProductName {
         assertTrue(testPrice <= maxPrice,
                 "Минимальная цена в тесте (" + testPrice + ") выше максимальной найденной: " + maxPrice);
         assertTrue(result >= testPrice,
-                "При поиске с применением фильтра по минимальной стоимости был найден " + productName + ", у которого цена меньше " + testPrice + " : " + result);
+                "При поиске с применением фильтра по минимальной стоимости был найден " + dataName + ", у которого цена меньше " + testPrice + " : " + result);
     }
 }

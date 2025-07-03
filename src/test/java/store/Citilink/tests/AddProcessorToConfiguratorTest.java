@@ -1,15 +1,11 @@
 package store.Citilink.tests;
 
 import org.junit.jupiter.api.Test;
-import store.Citilink.elements.ProductCatalogElement;
 import store.Citilink.elements.ProductConfiguratorElement;
 import store.Citilink.elements.ProductConfiguratorListElement;
-import store.Citilink.pages.HomePage;
 import store.Citilink.pages.ConfiguratorPage;
-import static com.codeborne.selenide.Selenide.sleep;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import store.Citilink.load_and_write_data.LoadWriteProductData;
-import store.Citilink.tests.TestWithProductName;
 
 
 /**

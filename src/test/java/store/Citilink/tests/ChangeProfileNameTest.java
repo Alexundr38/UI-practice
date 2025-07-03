@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Цена первого товара в списке должна попадать в выбранный интервал, после применения фильтра.
  */
 public class ChangeProfileNameTest extends BaseTest {
-    private String testFirstname = "mo";
+    private String testFirstname = "mo1";
     private String testLastname = "evm";
 
     protected ProfilePage profilePage;
