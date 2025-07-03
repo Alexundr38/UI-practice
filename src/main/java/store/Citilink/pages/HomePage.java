@@ -13,7 +13,7 @@ public class HomePage extends BasePage {
     /** Поле поиска по сайту. */
     private final SearchElement searchInput = SearchElement.byType("search");
     /** Кнопка входа в личный кабинет. */
-    private final ButtonElement loginButton = ButtonElement.byDataMetaName("UserButtonContainer");
+    private ButtonElement loginButton = ButtonElement.byDataMetaName("UserButtonContainer");
     /** Кнопка перехода в избранное. */
     private final ButtonElement wishlistButton = ButtonElement.byDataMetaName("WishlistButton");
     /** Кнопка перехода в сравнение. */
@@ -33,6 +33,7 @@ public class HomePage extends BasePage {
     /** Кнопка согласия на cookie. */
     private final ButtonElement cookieButton = ButtonElement.byTypeAndText("button", "Я согласен");
 
+    private final ButtonElement storeButton = ButtonElement.byParam("data-meta-value", "stores");
     /**
      * Конструктор главной страницы.
      * Передаёт ожидаемый URL в базовый класс.
@@ -124,6 +125,19 @@ public class HomePage extends BasePage {
         if (endLoginButton.isEnabled()) {
             endLoginButton.click();
         }
+    }
+
+    /** Открывает страницу профиля */
+    public void openProfile() {
+        loginButton = ButtonElement.byParam("data-meta-count", "0");
+        loginButton.click();
+        ButtonElement profileButton = ButtonElement.byDataMetaName("ProfileMenu_Item_Мой профиль");
+        profileButton.click();
+    }
+
+    /** Открывает страницу магазинов */
+    public void openStores() {
+        storeButton.click();
     }
 
     /**

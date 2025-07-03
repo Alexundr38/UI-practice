@@ -82,10 +82,19 @@ public class BaseElement {
     }
 
     /**
-     * Наводит курсор мыши на кнопку.
+     * Наводит курсор мыши на элемент.
      */
     public void hover() {
         scrollToElement();
         baseElement.hover();
+    }
+
+    /**
+     * Возвращает все CSS-параметры элемента в виде одной строки (через пробел)
+     * @param param Название параметра
+     * @return строка с перечислением всех параметров элемента или пустая строка, если атрибут отсутствует
+     */
+    public String getParamValue(String param) {
+        return baseElement.getAttribute(param);
     }
 }
