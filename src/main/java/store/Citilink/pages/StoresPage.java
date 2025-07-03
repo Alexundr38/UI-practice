@@ -31,7 +31,6 @@ public class StoresPage extends BasePage {
     public void addStore(String storeName) {
         storeCard = StoreCardElement.byParamAndText("data-meta-name",
                 "StoreItemLayout__FULL_FORMAT_SHOP", storeName);
-        System.out.println(storeCard.isDisplayed());
         storeCard.scrollToElement();
         storeCard.addToWishlist();
     }

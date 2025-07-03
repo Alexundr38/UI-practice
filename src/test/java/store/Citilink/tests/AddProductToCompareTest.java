@@ -29,7 +29,6 @@ public class AddProductToCompareTest extends TestWithDataName {
         dataName = "Смартфон Huawei nova 13 12/512Gb, BLK-LX9, черный";
         String categoryName = "Смартфоны и планшеты";
         String subCategoryName = "Смартфоны HUAWEI";
-
         homePage.clickCatalogButton();
         homePage.hoverButtonTextCategory(categoryName);
         homePage.clickSubCategoryButtonText(subCategoryName);
