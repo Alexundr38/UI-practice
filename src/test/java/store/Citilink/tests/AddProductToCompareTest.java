@@ -32,13 +32,13 @@ public class AddProductToCompareTest extends TestWithProductName {
         productName = "Смартфон Huawei Pura 70 12/256Gb, ADY-LX9, белый";
         loader.doActionLogic(productName);
 
-        homePage.openButton(HomePage.HeaderButton.CATALOG);
-        homePage.hoverButtonTextCategory(HomePage.HeaderButton.CATEGORY, "Смартфоны и планшеты");
-        homePage.openButtonText(HomePage.HeaderButton.SUBSUBCATEGORY, "Смартфоны HUAWEI");
+        homePage.clickCatalogButton();
+        homePage.hoverButtonTextCategory("Смартфоны и планшеты");
+        homePage.clickSubCategoryButtonText("Смартфоны HUAWEI");
         catalogPage = CatalogPage.openCatalogPage();
         catalogPage.addProductToCompareByName("Смартфон Huawei Pura 70 12/256Gb, ADY-LX9, белый");
 
-        homePage.openButton(HomePage.HeaderButton.COMPARE);
+        homePage.clickCompareButton();
         ComparePage comparePage = ComparePage.openComparePage();
         assertTrue(comparePage.containsProductWithName(productName),
                 "Ожидали, что в разделе \"сранение\" есть товар с названием: " + productName);

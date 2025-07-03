@@ -36,7 +36,7 @@ public class AddProductInBasketTest extends TestWithProductName {
         searchPage = SearchPage.openSearchPage();
         searchPage.addProductToCartByName(productName);
 
-        homePage.openButton(HomePage.HeaderButton.BASKET);
+        homePage.clickBasketButton();
         basketPage = BasketPage.openBasketPage();
         assertTrue(basketPage.containsProductWithName(productName),
                 "Ожидали, что в корзине есть товар с названием: " + productName);
