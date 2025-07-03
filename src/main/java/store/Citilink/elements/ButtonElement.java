@@ -50,6 +50,9 @@ public class ButtonElement extends BaseElement {
     /** Константа для XPath поиска по id */
     private static final String ID_XPATH = "//*[@id=\"%s\"]";
 
+    /** Константа для XPath поиска по href */
+    private static final String HREF_XPATH = "//*[@href=\"%s\"]";
+
     /**
      * XPath шаблон для поиска вложенного элемента по заданному атрибуту и его значению
      * относительно родительского элемента.
@@ -172,6 +175,15 @@ public class ButtonElement extends BaseElement {
      */
     public static ButtonElement byText(String text) {
         return new ButtonElement(TEXT_XPATH, text);
+    }
+
+    /**
+     * Создает объект ButtonElement, находящий кнопку по атрибуту href.
+     * @param href Значение атрибута href
+     * @return Объект ButtonElement
+     */
+    public static ButtonElement byHref(String href) {
+        return new ButtonElement(HREF_XPATH, href);
     }
 
     /**
