@@ -174,7 +174,7 @@ public class HomePage extends BasePage {
     }
 
     public void clickCookie() {
-        if (cookieButton.isDisplayed()) {
+        if (cookieButton.isEnabled()) {
             cookieButton.click();
         }
     }

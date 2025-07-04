@@ -24,6 +24,7 @@ public class AddProductToWishListTest extends TestWithDataName {
      */
     @Test
     void addProductToWishList() {
+        homePage.clickCookie();
         ProductActionElement promoItem = ProductActionElement.firstAction();
         promoItem.scrollToElement();
         promoItem.hover();
