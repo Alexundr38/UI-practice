@@ -2,7 +2,7 @@ package store.Citilink.tests;
 
 import org.junit.jupiter.api.Test;
 import store.Citilink.elements.ProductActionElement;
-import store.Citilink.load_and_write_data.LoadWriteProductData;
+import store.Citilink.load_and_write_data.LoadWriteData;
 import store.Citilink.pages.WishlistPage;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -28,7 +28,7 @@ public class AddProductToWishListTest extends TestWithDataName {
         promoItem.scrollToElement();
         promoItem.hover();
         promoItem.addToWishlist();
-        loadByActionType(LoadWriteProductData.ActionType.PUT_WISHLIST);
+        loadByActionType(LoadWriteData.ActionType.PUT_WISHLIST);
         String productName = promoItem.getTitle();
         loader.doActionLogic(productName);
         homePage.clickWishListButton();
