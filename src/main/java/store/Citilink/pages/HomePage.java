@@ -205,5 +205,4 @@ public class HomePage extends BasePage {
     public static HomePage openHomePage() {
         return new HomePage();
     }
-
 }

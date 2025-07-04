@@ -58,7 +58,6 @@ public class BaseTest {
         open("https://www.citilink.ru/");
         homePage = HomePage.openHomePage();
         homePage.login();
-        homePage.clickCookie();
     }
 
     /** Закрытие браузера */
