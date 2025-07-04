@@ -11,7 +11,6 @@ public class CatalogPage extends BasePage{
      */
     private static final String URL_PART = "/catalog";
 
-
     /**
      * Конструктор страницы результатов поиска.
      * Вызывает конструктор базового класса с передачей
@@ -24,7 +23,6 @@ public class CatalogPage extends BasePage{
     /**
      * Добавляет товар в корзину по точному названию.
      * Выполняет поиск карточки товара и вызывает действие добавления в корзину.
-     *
      * @param productName точное название товара для добавления в корзину
      */
     public void addProductToCartByName(String productName) {

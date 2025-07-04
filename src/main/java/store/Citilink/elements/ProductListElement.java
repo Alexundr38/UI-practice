@@ -9,7 +9,7 @@ import java.util.function.Function;
 public abstract class ProductListElement extends ProductCardElement {
 
     /** Кнопка удаления товара (крестик) */
-    ButtonElement crossButton = ButtonElement.byInContains(this, "d", "M4.5 3.43934");
+    protected ButtonElement crossButton = ButtonElement.byInContains(this, "d", "M4.5 3.43934");
 
     /**
      * Приватный конструктор.
@@ -30,12 +30,10 @@ public abstract class ProductListElement extends ProductCardElement {
     /**
      * Метод для поиска карточки по названию товара.
      * @param snippetType Тип текущего сниппета
-     * @param productName Точное название товара
      * @param constructor Конструктор класса
      * @return Новый объект ProductCardElement
      */
-    protected static <T extends ProductListElement> T byName(String snippetType,
-                                                             String productName, Function<String, T> constructor) {
+    protected static <T extends ProductListElement> T byName(String snippetType, Function<String, T> constructor) {
         String cardXpath = SNIPPET_BY_NAME_XPATH.replaceFirst("%s", snippetType);
         return constructor.apply(cardXpath);
     }

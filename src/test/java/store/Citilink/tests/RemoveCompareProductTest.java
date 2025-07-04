@@ -35,7 +35,6 @@ public class RemoveCompareProductTest extends TestWithDataName {
     public void removeCompareProductWithRemoveAll() {
         openComparePage();
         dataName = loader.getRandomData();
-
         comparePage.removeProductWithRemoveAll();
         assertTrue(comparePage.isProductRemoved(),
                 "Ожидали, что в разделе \"сравнение\" нет товара с названием: " + dataName);
@@ -54,7 +53,6 @@ public class RemoveCompareProductTest extends TestWithDataName {
     public void removeCompareProductWithCross() {
         openComparePage();
         dataName = loader.getRandomData();
-
         comparePage.removeProductWithCross(dataName);
         assertTrue(comparePage.isProductRemoved(),
                 "Ожидали, что в разделе \"сравнение\" нет товара с названием: " + dataName);

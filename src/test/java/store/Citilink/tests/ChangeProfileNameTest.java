@@ -30,7 +30,7 @@ public class ChangeProfileNameTest extends BaseTest {
      * Переходит на страницу настроек.
      * Меняет Имя и Фамилию в соответствующих полях.
      * Подтверждает изменения.
-     * Проверяет изменилось или нет.
+     * Проверяет, изменилось или нет.
      */
     @Test
     protected void changeProfileName() {
@@ -42,7 +42,6 @@ public class ChangeProfileNameTest extends BaseTest {
         settingsPage.submitChanges();
         String currentFirstname = settingsPage.getFirstname();
         String currentLastname = settingsPage.getLastname();
-        sleep(10000);
         assertTrue(currentLastname.equals(testLastname) && currentFirstname.equals(testFirstname),
                 "Текущее Имя и Фамилия: " + currentFirstname + " " + currentLastname +
                         ", а должно быть: " + testFirstname + " " + testLastname);

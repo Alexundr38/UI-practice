@@ -27,7 +27,7 @@ public class AddProductToBasketTest extends TestWithDataName {
      * Проверяет, находиться ли товар в корзине.
      */
     @Test
-    protected void addProductToBasket() {
+    public void addProductToBasket() {
         loadByActionType(LoadWriteData.ActionType.PUT_BASKET);
         dataName = loader.getRandomData();
 

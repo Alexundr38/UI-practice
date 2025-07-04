@@ -22,7 +22,7 @@ public class ProductBasketElement extends ProductSnippetElement{
      * @param xpath XPath выражение для поиска элемента
      * @param param Параметр для подстановки в XPath
      */
-    protected ProductBasketElement(String xpath, String param){
+    private ProductBasketElement(String xpath, String param){
         super(xpath, param);
     }
 

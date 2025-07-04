@@ -25,7 +25,7 @@ public class AddProductToCompareTest extends TestWithDataName {
      * Проверяет, находиться ли тестовый товар в разделе сравнения.
      */
     @Test
-    protected void addProductToCompare() {
+    public void addProductToCompare() {
         dataName = "Смартфон Huawei nova 13 12/512Gb, BLK-LX9, черный";
         String categoryName = "Смартфоны и планшеты";
         String subCategoryName = "Смартфоны HUAWEI";

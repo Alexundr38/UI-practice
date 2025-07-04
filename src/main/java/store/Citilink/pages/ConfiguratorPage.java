@@ -6,6 +6,8 @@ import store.Citilink.elements.ProductCatalogElement;
 import store.Citilink.elements.ProductConfiguratorElement;
 
 public class ConfiguratorPage extends BasePage {
+
+    /** Товар в конфигурации */
     private ProductConfiguratorElement processor;
 
     /**

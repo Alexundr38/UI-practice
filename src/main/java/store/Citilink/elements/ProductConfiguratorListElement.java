@@ -1,16 +1,27 @@
 package store.Citilink.elements;
 
-import com.codeborne.selenide.SelenideElement;
-
+/**
+ * Товар в списке конфигурации ПК.
+ * Добавляет метод для получения кода товара из списка конфигурации ПК.
+ */
 public class ProductConfiguratorListElement extends BaseElement {
+
     /**
      * Приватный конструктор.
-     *
      * @param xpath XPath выражение для поиска карточки товара
      * @param param значение для подстановки в XPath
      */
     private ProductConfiguratorListElement(String xpath, String param) {
         super(xpath, param);
+    }
+
+    /**
+     * Получение кода товара, добавленного в конфигуратор
+     * @return числовой код товара
+     */
+    public int getAddedDataId() {
+        String dataId = baseElement.getAttribute("data-id");
+        return Integer.parseInt(dataId.replaceAll("[^0-9]", ""));
     }
 
     /**
@@ -20,17 +31,5 @@ public class ProductConfiguratorListElement extends BaseElement {
      */
     public static ProductConfiguratorListElement byClass(String className) {
         return new ProductConfiguratorListElement("//*[@class=\"%s\"]", className);
-    }
-
-    /**
-     * Получение кода товара, добавленного в конфигуратор
-     * @return числовой код товара
-     */
-    public int getAddedDataId() {
-        // Находим элемент по классу и получаем его атрибут data-id
-        String dataId = baseElement.getAttribute("data-id");
-
-        // Преобразуем в число (удаляем возможные нецифровые символы)
-        return Integer.parseInt(dataId.replaceAll("[^0-9]", ""));
     }
 }
