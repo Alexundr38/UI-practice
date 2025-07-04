@@ -6,6 +6,7 @@ import store.Citilink.elements.ProductCatalogElement;
 import store.Citilink.elements.ProductConfiguratorElement;
 
 public class ConfiguratorPage extends BasePage {
+    private ProductConfiguratorElement processor;
 
     /**
      * Ожидаемая часть URL для страницы результатов конфигуратора.
@@ -42,10 +43,30 @@ public class ConfiguratorPage extends BasePage {
 
     /**
      * Получение сниппета процессора
-     * @return Возвращает случайный процессор со страницы
      */
-    public ProductConfiguratorElement getRandomProcessor() {
-        return ProductConfiguratorElement.byDataMetaNameRandom("ProductHorizontalSnippet");
+    public void getRandomProcessor() {
+        processor = ProductConfiguratorElement.byDataMetaNameRandom("ProductHorizontalSnippet");
+    }
+
+    /**
+     * Получение data-id процессора
+     */
+    public int getDataIdProcessor(){
+        if(processor == null){
+            getRandomProcessor();
+        }
+        processor.scrollToElement();
+        return processor.getDataId();
+    }
+
+    /**
+     * Добавление процессора в конфигурацию
+     */
+    public void addProcessorToConfigurator(){
+        if(processor == null){
+            getRandomProcessor();
+        }
+        processor.addToConfigurator();
     }
 
     /**

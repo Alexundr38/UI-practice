@@ -13,19 +13,29 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * После добавления добавленный процессор должен появиться в конфигураторе.
  */
 public class AddProcessorToConfiguratorTest extends BaseTest {
+    /** Страница конфигуратора */
     protected ConfiguratorPage configuratorPage;
 
+    /**
+     * Добавление процессора в конфигуратор.
+     * Открывает страницу конфигуратора.
+     * Создаёт новую конфигурацию.
+     * Переходит в каталог выбора процессора.
+     * Выбирает случайный процессор в каталоге.
+     * Запоминает код товара выбранного процессора.
+     * Добавляет в конфигурацию.
+     * Проверяет, что процессор был добавлен в конфигурацию.
+     * Сравнивает код товара добавленного в конфигурацию процессора с тем, который был сохранён.
+     */
     @Test
     protected void addProcessorToConfigurator() {
         homePage.goToConfiguratorPage();
-
         configuratorPage = configuratorPage.openConfiguratorPage();
         configuratorPage.createConfiguration();
         configuratorPage.goToProcessorCatalog();
-        ProductConfiguratorElement processor = configuratorPage.getRandomProcessor();
-        processor.scrollToElement();
-        int dataId = processor.getDataId();
-        processor.addToConfigurator();
+        configuratorPage.getRandomProcessor();
+        int dataId = configuratorPage.getDataIdProcessor();
+        configuratorPage.addProcessorToConfigurator();
         assertTrue(ProductConfiguratorListElement.byClass("js--configuration-aside-list__item").isDisplayed(),
                 "Товар не был добавлен в конфигурацию.");
         int addedDataId = ProductConfiguratorListElement.byClass("js--configuration-aside-list__item").getAddedDataId();
