@@ -17,7 +17,7 @@ public class WishlistPage extends ListPage<ProductWishlistElement> {
      * @param classType Класс-наследник
      * @param partURL Часть URL для навигации к странице избранного
      */
-    protected WishlistPage(Class<? extends ListPage> classType, String partURL) {
+    private WishlistPage(Class<? extends ListPage> classType, String partURL) {
         super(classType, partURL);
     }
 

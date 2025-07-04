@@ -9,8 +9,14 @@ import store.Citilink.elements.ProductBasketElement;
  */
 public class BasketPage extends BasePage {
 
+    /**
+     * Ожидаемая часть URL для страницы корзины.
+     * Используется для проверки корректности загруженной страницы.
+     */
+    private static final String URL_PART = "/order";
+
     /** Элемент сниппета товара в корзине */
-    ProductBasketElement productSnippet;
+    private ProductBasketElement productSnippet;
 
     /** Кнопка "Удалить выбранные" */
     private final ButtonElement removeSelectedButton = ButtonElement.byText("Удалить выбранные");
@@ -19,8 +25,8 @@ public class BasketPage extends BasePage {
      * Конструктор страницы корзины.
      * Инициализирует страницу с указанием класса и идентификатором "order".
      */
-    protected BasketPage(){
-        super(BasketPage.class, "order");
+    private BasketPage(){
+        super(BasketPage.class, URL_PART);
     }
 
     /**

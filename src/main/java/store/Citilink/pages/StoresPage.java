@@ -9,19 +9,17 @@ public class StoresPage extends BasePage {
     private StoreCardElement storeCard;
 
     /**
+     * Ожидаемая часть URL для страницы корзины.
+     * Используется для проверки корректности загруженной страницы.
+     */
+    private static final String URL_PART = "/stores";
+
+    /**
      * Конструктор профиля.
      * Инициализирует страницу с указанием класса и идентификатором "stores".
      */
-    protected StoresPage(){
-        super(StoresPage.class, "stores");
-    }
-
-    /**
-     * Статический метод для создания страницы корзины.
-     * @return новый объект StoresPage
-     */
-    public static StoresPage openStoresPage(){
-        return new StoresPage();
+    private StoresPage(){
+        super(StoresPage.class, URL_PART);
     }
 
     /**
@@ -42,5 +40,14 @@ public class StoresPage extends BasePage {
     public boolean isAdded() {
         return storeCard.isDisplayed();
     }
+
+    /**
+     * Статический метод для создания страницы корзины.
+     * @return новый объект StoresPage
+     */
+    public static StoresPage openStoresPage(){
+        return new StoresPage();
+    }
+
 
 }

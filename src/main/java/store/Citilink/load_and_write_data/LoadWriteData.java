@@ -125,6 +125,7 @@ public class LoadWriteData {
     /**
      * Загружает список товаров из JSON-файла.
      * @param fileName Имя файла для загрузки товаров
+     * @param isProducts Флаг, указывающий происходит считывание магазинов или товаров
      */
     private void loadData(String fileName, boolean isProducts) {
         try {

@@ -12,34 +12,55 @@ public class HomePage extends BasePage {
 
     /** Поле поиска по сайту. */
     private final SearchElement searchInput = SearchElement.byType("search");
+
     /** Кнопка входа в личный кабинет. */
     private ButtonElement loginButton = ButtonElement.byDataMetaName("UserButtonContainer");
+
     /** Кнопка перехода в избранное. */
     private final ButtonElement wishlistButton = ButtonElement.byDataMetaName("WishlistButton");
+
     /** Кнопка перехода в сравнение. */
     private final ButtonElement compareButton = ButtonElement.byDataMetaName("CompareButton");
+
     /** Кнопка перехода в корзину. */
     private final ButtonElement basketButton = ButtonElement.byDataMetaName("BasketButton");
+
     /** Кнопка перехода в каталог. */
     private final ButtonElement catalogButton = ButtonElement.byDataMetaName("DesktopHeaderFixed__catalog-menu");
+
     /** Кнопка перехода в категорию каталога. */
     private final ButtonElement categoryButton = ButtonElement.byDataMetaName("DesktopMenu__category--menu-item");
+
     /** Кнопка перехода в подкатегорию каталога. */
     private final ButtonElement subcategoryButton = ButtonElement.byDataMetaName("DesktopMenu__sub-category");
+
     /** Кнопка перехода в подподкатегорию каталога. */
     private final ButtonElement subsubcategoryButton = ButtonElement.byDataMetaName("DesktopMenu__sub-sub-category");
+
     /** Кнопка перехода в раздел акций. */
     private final ButtonElement actionButton = ButtonElement.byDataMetaName("HeaderTopLink");
+
     /** Кнопка согласия на cookie. */
     private final ButtonElement cookieButton = ButtonElement.byTypeAndText("button", "Я согласен");
 
+    /** Кнопка перехода в раздел магазины. */
     private final ButtonElement storeButton = ButtonElement.byParam("data-meta-value", "stores");
+
+    /** кнопка перехода в раздел конфигуратора. */
+    private final ButtonElement configuratorButton = ButtonElement.byDataMetaValue("configurator");
+
+    /**
+     * Ожидаемая часть URL для начальной страницы.
+     * Используется для проверки корректности загруженной страницы.
+     */
+    private static final String URL_PART = "https://www.citilink.ru";
+
     /**
      * Конструктор главной страницы.
      * Передаёт ожидаемый URL в базовый класс.
      */
-    protected HomePage() {
-        super(HomePage.class, "https://www.citilink.ru");
+    private HomePage() {
+        super(HomePage.class, URL_PART);
     }
 
     /**
@@ -140,6 +161,11 @@ public class HomePage extends BasePage {
         storeButton.click();
     }
 
+    /** Переходит на страницу конфигуратора */
+    public void openConfigurator() {
+        configuratorButton.click();
+    }
+
     /**
      * Выполняет поиск по сайту.
      * @param query строка для поиска
@@ -165,6 +191,13 @@ public class HomePage extends BasePage {
         ButtonElement.byDataMetaNameAndTextCategory("DesktopMenu__category--menu-item", visibleText).hover();
     }
 
+    /** Нажимает на кнопку принятия cookie, если она есть */
+    public void clickCookie() {
+        if (cookieButton.isDisplayed()) {
+            cookieButton.click();
+        }
+    }
+
     /**
      * Создает объект HomePage
      * @return Объект NomePage
@@ -172,13 +205,5 @@ public class HomePage extends BasePage {
     public static HomePage openHomePage() {
         return new HomePage();
     }
-
-    public void clickCookie() {
-        if (cookieButton.isDisplayed()) {
-            cookieButton.click();
-        }
-    }
-
-    public void goToConfiguratorPage() { ButtonElement.byDataMetaValue("configurator").click(); }
 
 }

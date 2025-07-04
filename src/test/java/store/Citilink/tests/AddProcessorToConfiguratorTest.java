@@ -1,7 +1,6 @@
 package store.Citilink.tests;
 
 import org.junit.jupiter.api.Test;
-import store.Citilink.elements.ProductConfiguratorElement;
 import store.Citilink.elements.ProductConfiguratorListElement;
 import store.Citilink.pages.ConfiguratorPage;
 
@@ -28,8 +27,8 @@ public class AddProcessorToConfiguratorTest extends BaseTest {
      * Сравнивает код товара добавленного в конфигурацию процессора с тем, который был сохранён.
      */
     @Test
-    protected void addProcessorToConfigurator() {
-        homePage.goToConfiguratorPage();
+    public void addProcessorToConfigurator() {
+        homePage.openConfigurator();
         configuratorPage = configuratorPage.openConfiguratorPage();
         configuratorPage.createConfiguration();
         configuratorPage.goToProcessorCatalog();

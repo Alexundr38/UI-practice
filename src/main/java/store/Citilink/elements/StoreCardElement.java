@@ -3,9 +3,6 @@ package store.Citilink.elements;
 /** Класс карточки магазина на странице магазинов */
 public class StoreCardElement extends BaseElement {
 
-    /** XPath для параметра внутри */
-    private static final String PARAM_XPATH = "//*[@%s=\"%s\"]";
-
     /** XPath для параметра и текста внутри */
     private static final String PARAM_AND_TEXT_XPATH = "//*[@%s=\"%s\" and .//text()[contains(., \"%s\")]]";
 
@@ -14,7 +11,6 @@ public class StoreCardElement extends BaseElement {
                                                                 "class", "e19vs7y00");
 
     /** Конструктор
-     *
      * @param xpath XPath элемента
      * @param params Параметры XPath
      */
@@ -22,14 +18,16 @@ public class StoreCardElement extends BaseElement {
         super(xpath, params);
     }
 
-    /**
-     * Создает объект StoreCardElement, находящий кнопку по атрибуту type.
-     * @param paramName Название параметра
-     * @param paramValue Значение параметра
-     * @return Объект ButtonElement
-     */
-    public static StoreCardElement byParam(String paramName, String paramValue) {
-        return new StoreCardElement(PARAM_XPATH.replaceFirst("%s", paramName), paramValue);
+    /** Нажимает на кнопку сердечка */
+    public void addToWishlist() {
+        if (!isInWishlist()) {
+            wishlistButton.click();
+        }
+    }
+
+    /** Проверяет, находиться ли карточка магазина в избранных */
+    public boolean isInWishlist() {
+        return wishlistButton.getParamValue("class").contains("072imz");
     }
 
     /**
@@ -40,16 +38,5 @@ public class StoreCardElement extends BaseElement {
      */
     public static StoreCardElement byParamAndText(String paramName, String paramValue, String text) {
         return new StoreCardElement(PARAM_AND_TEXT_XPATH.replaceFirst("%s", paramName), paramValue, text);
-    }
-
-    /** Нажимает на кнопку сердечка */
-    public void addToWishlist() {
-        if (!isInWishlist()) {
-            wishlistButton.click();
-        }
-    }
-
-    public boolean isInWishlist() {
-        return wishlistButton.getParamValue("class").contains("072imz");
     }
 }

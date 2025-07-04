@@ -5,21 +5,31 @@ import store.Citilink.elements.NameElement;
 
 /** Класс страницы настроек */
 public class SettingsPage extends BasePage {
+
+    /** Поля имени и фамилии */
     private NameElement firstname, lastname;
 
+    /** Кнопка сохранить */
+    private final ButtonElement saveButton = ButtonElement.byClass("e11203e30 css-suhtla-Button--StyledButton-Button--Button ekx3zbi0");
+
+    /**
+     * Ожидаемая часть URL для страницы корзины.
+     * Используется для проверки корректности загруженной страницы.
+     */
+    private static final String URL_PART = "/edit";
 
     /**
      * Конструктор настроек.
      * Инициализирует страницу с указанием класса и идентификатором "order".
      */
-    protected SettingsPage(){
-        super(SettingsPage.class, "edit");
+    private SettingsPage(){
+        super(SettingsPage.class, URL_PART);
     }
 
     /**
      * Меняет имя и фамилию на переданные параметры.
-     * @param firstname - Имя
-     * @param lastname - Фамилия
+     * @param newFirstname - Имя
+     * @param newLastname - Фамилия
      */
     public void changeName(String newFirstname, String newLastname) {
         firstname = NameElement.byName("firstname");
@@ -49,6 +59,13 @@ public class SettingsPage extends BasePage {
     }
 
     /**
+     * Нажатие кнопки "Сохранить"
+     */
+    public void submitChanges() {
+        saveButton.scrollIntoViewCentered().click();
+    }
+
+    /**
      * Статический метод для создания страницы корзины.
      * @return новый объект ProfilePage
      */
@@ -56,10 +73,4 @@ public class SettingsPage extends BasePage {
         return new SettingsPage();
     }
 
-    /**
-     * Нажатие кнопки "Сохранить"
-     */
-    public void submitChanges() {
-        ButtonElement.byClass("e11203e30 css-suhtla-Button--StyledButton-Button--Button ekx3zbi0").scrollIntoViewCentered().click();
-    }
 }

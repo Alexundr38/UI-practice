@@ -5,7 +5,7 @@ import store.Citilink.elements.ProductListElement;
 
 import java.lang.reflect.Constructor;
 
-
+/** Базовый абстрактный класс для страниц разделов избранное и сравнение */
 public abstract class ListPage<T extends ProductListElement> extends BasePage {
 
     /** Найденный сниппет товара */

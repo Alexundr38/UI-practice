@@ -23,7 +23,7 @@ public class AddProductToWishListTest extends TestWithDataName {
      * Проверяет, находиться ли товар в избранном.
      */
     @Test
-    void addProductToWishList() {
+    public void addProductToWishList() {
         ProductActionElement promoItem = ProductActionElement.firstAction();
         promoItem.scrollToElement();
         promoItem.hover();

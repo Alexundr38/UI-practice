@@ -7,14 +7,14 @@ package store.Citilink.elements;
 public class ProductWishlistElement extends ProductListElement {
 
     /** Кнопка добавления в сравнение */
-    ButtonElement compareButton = ButtonElement.byInElement(this, "data-meta-name", "Snippet__compare-button");
+    private final ButtonElement compareButton = ButtonElement.byInElement(this, "data-meta-name", "Snippet__compare-button");
 
     /**
      * Приватный конструктор.
      * @param xpath XPath выражение для поиска карточки товара
      * @param param значение для подстановки в XPath
      */
-    protected ProductWishlistElement(String xpath, String param) {
+    private ProductWishlistElement(String xpath, String param) {
         super(xpath, param);
     }
 
@@ -30,7 +30,7 @@ public class ProductWishlistElement extends ProductListElement {
      * @return Новый объект ProductWishlistElement
      */
     public static ProductWishlistElement byName(String snippetType, String productName) {
-        return ProductListElement.byName(snippetType, productName, xpath -> new ProductWishlistElement(xpath, productName));
+        return ProductListElement.byName(snippetType, xpath -> new ProductWishlistElement(xpath, productName));
     }
 
     /**

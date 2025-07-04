@@ -1,8 +1,6 @@
 package store.Citilink.elements;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
-import store.Citilink.pages.BasePage;
 
 import java.time.Duration;
 
@@ -105,6 +103,32 @@ public class ButtonElement extends BaseElement {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    /**
+     * Прокручивает страницу к элементу с выравниванием по центру
+     * @return текущий объект ButtonElement
+     */
+    public ButtonElement scrollIntoViewCentered() {
+        executeJavaScript(
+                "arguments[0].scrollIntoView({block: 'center', inline: 'center', behavior: 'instant'});",
+                baseElement
+        );
+        return this;
+    }
+
+    /**
+     * Ожидает, пока элемент станет кликабельным
+     * @return текущий объект ButtonElement
+     */
+    public ButtonElement waitUntilClickable() {
+        baseElement.shouldBe(Condition.and(
+                "clickable",
+                Condition.visible,
+                Condition.enabled,
+                Condition.interactable
+        ), Duration.ofSeconds(10));
+        return this;
     }
 
     /**
@@ -255,31 +279,5 @@ public class ButtonElement extends BaseElement {
      */
     public static ButtonElement byId(String id) {
         return new ButtonElement(ID_XPATH, id);
-    }
-
-    /**
-     * Прокручивает страницу к элементу с выравниванием по центру
-     * @return текущий объект ButtonElement
-     */
-    public ButtonElement scrollIntoViewCentered() {
-        executeJavaScript(
-                "arguments[0].scrollIntoView({block: 'center', inline: 'center', behavior: 'instant'});",
-                baseElement
-        );
-        return this;
-    }
-
-    /**
-     * Ожидает, пока элемент станет кликабельным
-     * @return текущий объект ButtonElement
-     */
-    public ButtonElement waitUntilClickable() {
-        baseElement.shouldBe(Condition.and(
-                "clickable",
-                Condition.visible,
-                Condition.enabled,
-                Condition.interactable
-        ), Duration.ofSeconds(10));
-        return this;
     }
 }

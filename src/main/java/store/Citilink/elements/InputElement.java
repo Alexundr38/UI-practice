@@ -5,6 +5,7 @@ package store.Citilink.elements;
  * Наследуется от BaseElement и предоставляет методы для работы с input.
  */
 public class InputElement extends BaseElement {
+
     /** XPath шаблон для поиска элемента input по атрибуту type */
     protected static final String TYPE_XPATH = "//input[@type=\"%s\"]";
 

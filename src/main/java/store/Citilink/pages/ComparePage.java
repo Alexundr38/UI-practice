@@ -17,7 +17,7 @@ public class ComparePage extends ListPage<ProductCompareElement> {
      * @param classType Класс-наследник
      * @param partURL часть URL для навигации к странице сравнения
      */
-    protected ComparePage(Class<? extends ListPage> classType, String partURL) {
+    private ComparePage(Class<? extends ListPage> classType, String partURL) {
         super(classType, partURL);
     }
 

@@ -39,7 +39,7 @@ public class BasePage {
      * Проверяет, что текущий URL содержит ожидаемую подстроку.
      * Выбрасывает AssertionError, если URL не совпадает.
      */
-    protected void verifyPageUrl(){
+    private void verifyPageUrl(){
         if (!WebDriverRunner.url().contains(expectedUrlPart)) {
             throw new AssertionError("Page url doesn't match expected url part: " + expectedUrlPart);
         }

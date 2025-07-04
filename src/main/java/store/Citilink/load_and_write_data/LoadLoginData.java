@@ -8,6 +8,7 @@ import java.nio.file.Paths;
  * Класс для загрузки учетных данных (логина и пароля) из JSON-файла.
  */
 public class LoadLoginData {
+
     /** Поле для хранения имени пользователя */
     private String username;
 

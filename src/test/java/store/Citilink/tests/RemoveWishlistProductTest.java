@@ -36,7 +36,6 @@ public class RemoveWishlistProductTest extends TestWithDataName {
     public void removeWishlistProductWithCross() {
         openWishlistPage();
         String productName = loader.getRandomData();
-
         wishlistPage.removeProductWithCross(productName);
         assertTrue(wishlistPage.isProductRemoved(),
                 "Ожидали, что в разделе \"избранное\" нет товара с названием: " + productName);
@@ -54,7 +53,6 @@ public class RemoveWishlistProductTest extends TestWithDataName {
     public void removeWishlistProductWithRemoveAll() {
         openWishlistPage();
         dataName = loader.getRandomData();
-
         openWishlistPage();
         wishlistPage.removeProductWithRemoveAll();
         assertTrue(wishlistPage.isProductRemoved(),
