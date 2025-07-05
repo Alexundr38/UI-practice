@@ -23,7 +23,7 @@ public class ChangeProfileNameTest extends BaseTest {
      * Проверяет, изменилось или нет.
      */
     @Test
-    protected void changeProfileName() {
+    public void changeProfileName() {
         String testFirstname = "Алеша";
         String testLastname = "Попович";
         homePage.openProfile();

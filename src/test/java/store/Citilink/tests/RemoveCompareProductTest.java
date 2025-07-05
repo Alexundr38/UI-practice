@@ -11,12 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class RemoveCompareProductTest extends TestWithDataName {
     /** Входит в раздел "сравнение" и проверяет не пустой ли он */
-    @Test
-    public void openComparePage() {
+    private ComparePage openComparePage() {
         homePage.clickCompareButton();
         ComparePage comparePage = ComparePage.openComparePage();
         loadByActionType(LoadWriteData.ActionType.REMOVE_COMPARE);
         assertTrue(!comparePage.isEmpty());
+        return comparePage;
     }
 
     /**
@@ -29,8 +29,7 @@ public class RemoveCompareProductTest extends TestWithDataName {
      */
     @Test
     public void removeCompareProductWithRemoveAll() {
-        openComparePage();
-        ComparePage comparePage = ComparePage.openComparePage();
+        ComparePage comparePage = openComparePage();
         dataName = loader.getRandomData();
         comparePage.removeProductWithRemoveAll();
         assertTrue(comparePage.isProductRemoved(),
@@ -48,8 +47,7 @@ public class RemoveCompareProductTest extends TestWithDataName {
      */
     @Test
     public void removeCompareProductWithCross() {
-        openComparePage();
-        ComparePage comparePage = ComparePage.openComparePage();
+        ComparePage comparePage = openComparePage();
         dataName = loader.getRandomData();
         comparePage.removeProductWithCross(dataName);
         assertTrue(comparePage.isProductRemoved(),

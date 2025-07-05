@@ -11,12 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class RemoveBasketProductTest extends TestWithDataName {
     /** Входит в корзину и проверяет не пустая ли она */
-    @Test
-    protected void openBasketPage() {
+    private BasketPage openBasketPage() {
         homePage.clickBasketButton();
         BasketPage basketPage = BasketPage.openBasketPage();
         loadByActionType(LoadWriteData.ActionType.REMOVE_BASKET);
         assertTrue(!basketPage.isEmptyOrder());
+        return basketPage;
     }
 
     /**
@@ -30,8 +30,7 @@ public class RemoveBasketProductTest extends TestWithDataName {
      */
     @Test
     public void removeBasketProductWithBin() {
-        openBasketPage();
-        BasketPage basketPage = BasketPage.openBasketPage();
+        BasketPage basketPage = openBasketPage();
         dataName = loader.getRandomData();
         basketPage.removeProductWithBin(dataName);
         assertTrue(basketPage.isProductRemoved(),
@@ -50,8 +49,7 @@ public class RemoveBasketProductTest extends TestWithDataName {
      */
     @Test
     public void removeBasketProductWithCheckBox() {
-        openBasketPage();
-        BasketPage basketPage = BasketPage.openBasketPage();
+        BasketPage basketPage = openBasketPage();
         String productName = loader.getRandomData();
         basketPage.selectProductWithCheckBox(productName);
         basketPage.clickRemoveSelectedButton();
