@@ -12,9 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * После добавления добавленный процессор должен появиться в конфигураторе.
  */
 public class AddProcessorToConfiguratorTest extends BaseTest {
-    /** Страница конфигуратора */
-    protected ConfiguratorPage configuratorPage;
-
     /**
      * Добавление процессора в конфигуратор.
      * Открывает страницу конфигуратора.
@@ -29,7 +26,7 @@ public class AddProcessorToConfiguratorTest extends BaseTest {
     @Test
     public void addProcessorToConfigurator() {
         homePage.openConfigurator();
-        configuratorPage = configuratorPage.openConfiguratorPage();
+        ConfiguratorPage configuratorPage = ConfiguratorPage.openConfiguratorPage();
         configuratorPage.createConfiguration();
         configuratorPage.goToProcessorCatalog();
         configuratorPage.getRandomProcessor();

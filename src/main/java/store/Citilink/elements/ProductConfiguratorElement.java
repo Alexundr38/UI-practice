@@ -21,23 +21,6 @@ public class ProductConfiguratorElement extends ProductCatalogElement {
     }
 
     /**
-     * Фабричный метод для поиска СЛУЧАЙНОЙ карточки товара по значению атрибута data-meta-name.
-     *
-     * @param snippetType значение атрибута data-meta-name
-     * @return новый объект ProductCatalogElement, соответствующий случайному элементу
-     */
-    public static ProductConfiguratorElement byDataMetaNameRandom(String snippetType) {
-        String baseXpath = DATA_META_NAME_XPATH.replace("%s", snippetType);
-        ElementsCollection elements = com.codeborne.selenide.Selenide.$$x(baseXpath);
-        if (elements.isEmpty()) {
-            throw new RuntimeException("Не найдено элементов с data-meta-name: " + snippetType);
-        }
-        int randomIndex = new Random().nextInt(elements.size());
-        String randomXpath = "(" + baseXpath + ")[" + (randomIndex + 1) + "]";
-        return new ProductConfiguratorElement(randomXpath, "");
-    }
-
-    /**
      * Получение кода товара
      * @return числовой код товара
      */
@@ -54,5 +37,22 @@ public class ProductConfiguratorElement extends ProductCatalogElement {
         ButtonElement.byInElement(this, "class", "e1yzfrwe0 app-catalog-10rqwk7-Button--StyledButton-Button--Button-StyledTabletActionButton ekx3zbi0")
                 .scrollIntoViewCentered()
                 .click();
+    }
+
+    /**
+     * Фабричный метод для поиска СЛУЧАЙНОЙ карточки товара по значению атрибута data-meta-name.
+     *
+     * @param snippetType значение атрибута data-meta-name
+     * @return новый объект ProductCatalogElement, соответствующий случайному элементу
+     */
+    public static ProductConfiguratorElement byDataMetaNameRandom(String snippetType) {
+        String baseXpath = DATA_META_NAME_XPATH.replace("%s", snippetType);
+        ElementsCollection elements = com.codeborne.selenide.Selenide.$$x(baseXpath);
+        if (elements.isEmpty()) {
+            throw new RuntimeException("Не найдено элементов с data-meta-name: " + snippetType);
+        }
+        int randomIndex = new Random().nextInt(elements.size());
+        String randomXpath = "(" + baseXpath + ")[" + (randomIndex + 1) + "]";
+        return new ProductConfiguratorElement(randomXpath, "");
     }
 }

@@ -12,13 +12,6 @@ import store.Citilink.load_and_write_data.LoadWriteData;
  * Цена первого товара в списке должна попадать в выбранный интервал, после применения фильтра.
  */
 public class UsingPriceFiltersTest extends TestWithDataName {
-
-    /** Значение для теста */
-    private int testPrice = 10000;
-
-    /** Страница поиска */
-    protected SearchPage searchPage;
-
     /**
      * Использование фильтра цены на странице поиска.
      * Ищет товар по тестируемому запросу.
@@ -27,10 +20,11 @@ public class UsingPriceFiltersTest extends TestWithDataName {
      */
     @Test
     public void usePriceFilters() {
+        int testPrice = 10000;
         loadByActionType(LoadWriteData.ActionType.GET_COMMON);
         dataName = loader.getRandomData();
         homePage.search(dataName);
-        searchPage = SearchPage.openSearchPage();
+        SearchPage searchPage = SearchPage.openSearchPage();
         searchPage.usePriceFilter(Integer.toString(testPrice));
         int result = searchPage.getPrice();
         int maxPrice = searchPage.getMaxPrice();
