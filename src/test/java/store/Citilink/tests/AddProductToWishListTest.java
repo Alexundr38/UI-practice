@@ -19,7 +19,7 @@ public class AddProductToWishListTest extends TestWithDataName {
      * Проверяет, находиться ли товар в избранном.
      */
     @Test
-    void addProductToWishList() {
+    public void addProductToWishList() {
         homePage.clickCookie();
         ProductActionElement promoItem = ProductActionElement.firstAction();
         promoItem.scrollToElement();

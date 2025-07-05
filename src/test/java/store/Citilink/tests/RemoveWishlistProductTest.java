@@ -11,12 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class RemoveWishlistProductTest extends TestWithDataName {
     /** Входит в раздел "избранное" и проверяет не пустой ли он */
-    @Test
-    public void openWishlistPage() {
+    private WishlistPage openWishlistPage() {
         homePage.clickWishListButton();
         WishlistPage wishlistPage = WishlistPage.openWishlistPage();
         loadByActionType(LoadWriteData.ActionType.REMOVE_WISHLIST);
         assertTrue(!wishlistPage.isEmpty());
+        return wishlistPage;
     }
 
     /**
@@ -30,8 +30,7 @@ public class RemoveWishlistProductTest extends TestWithDataName {
      */
     @Test
     public void removeWishlistProductWithCross() {
-        openWishlistPage();
-        WishlistPage wishlistPage = WishlistPage.openWishlistPage();
+        WishlistPage wishlistPage = openWishlistPage();
         String productName = loader.getRandomData();
         wishlistPage.removeProductWithCross(productName);
         assertTrue(wishlistPage.isProductRemoved(),
@@ -48,8 +47,7 @@ public class RemoveWishlistProductTest extends TestWithDataName {
      */
     @Test
     public void removeWishlistProductWithRemoveAll() {
-        openWishlistPage();
-        WishlistPage wishlistPage = WishlistPage.openWishlistPage();
+        WishlistPage wishlistPage = openWishlistPage();
         dataName = loader.getRandomData();
         openWishlistPage();
         wishlistPage.removeProductWithRemoveAll();
