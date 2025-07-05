@@ -12,10 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Название товара берётся из внешнего JSON-файла со списком продуктов.
  */
 public class AddProductToWishListTest extends TestWithDataName {
-
-    /** Страница избранного */
-    protected WishlistPage wishlistPage;
-
     /**
      * Добавление товара в избранное посредством поиска через раздел акций.
      * Ищет товар по тестируемому запросу.
@@ -33,7 +29,7 @@ public class AddProductToWishListTest extends TestWithDataName {
         String productName = promoItem.getTitle();
         loader.doActionLogic(productName);
         homePage.clickWishListButton();
-        wishlistPage = WishlistPage.openWishlistPage();
+        WishlistPage wishlistPage = WishlistPage.openWishlistPage();
         assertTrue(wishlistPage.containsProductWithName(productName),
                 "Ожидали, что товар «" + productName + "» появится в избранном");
     }

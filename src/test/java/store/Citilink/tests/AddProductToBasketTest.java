@@ -13,13 +13,6 @@ import store.Citilink.load_and_write_data.LoadWriteData;
  * Название товара берётся из внешнего JSON-файла со списком продуктов.
  */
 public class AddProductToBasketTest extends TestWithDataName {
-
-    /** Страница корзины */
-    protected BasketPage basketPage;
-
-    /** Страница поиска */
-    protected SearchPage searchPage;
-
     /**
      * Добавление товара в корзину посредством поиска через строку поиска.
      * Ищет товар по тестируемому запросу.
@@ -28,15 +21,16 @@ public class AddProductToBasketTest extends TestWithDataName {
      */
     @Test
     public void addProductToBasket() {
+        homePage.clickCookie();
         loadByActionType(LoadWriteData.ActionType.PUT_BASKET);
         dataName = loader.getRandomData();
 
         homePage.search(dataName);
-        searchPage = SearchPage.openSearchPage();
+        SearchPage searchPage = SearchPage.openSearchPage();
         searchPage.addProductToCartByName(dataName);
 
         homePage.clickBasketButton();
-        basketPage = BasketPage.openBasketPage();
+        BasketPage basketPage = BasketPage.openBasketPage();
         assertTrue(basketPage.containsProductWithName(dataName),
                 "Ожидали, что в корзине есть товар с названием: " + dataName);
     }

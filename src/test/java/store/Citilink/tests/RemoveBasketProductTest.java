@@ -10,15 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Тест-класс для проверки функциональности удаления товаров из корзины
  */
 public class RemoveBasketProductTest extends TestWithDataName {
-
-    /** Страница корзины */
-    protected BasketPage basketPage;
-
     /** Входит в корзину и проверяет не пустая ли она */
     @Test
     protected void openBasketPage() {
         homePage.clickBasketButton();
-        basketPage = BasketPage.openBasketPage();
+        BasketPage basketPage = BasketPage.openBasketPage();
         loadByActionType(LoadWriteData.ActionType.REMOVE_BASKET);
         assertTrue(!basketPage.isEmptyOrder());
     }
@@ -35,6 +31,7 @@ public class RemoveBasketProductTest extends TestWithDataName {
     @Test
     public void removeBasketProductWithBin() {
         openBasketPage();
+        BasketPage basketPage = BasketPage.openBasketPage();
         dataName = loader.getRandomData();
         basketPage.removeProductWithBin(dataName);
         assertTrue(basketPage.isProductRemoved(),
@@ -54,6 +51,7 @@ public class RemoveBasketProductTest extends TestWithDataName {
     @Test
     public void removeBasketProductWithCheckBox() {
         openBasketPage();
+        BasketPage basketPage = BasketPage.openBasketPage();
         String productName = loader.getRandomData();
         basketPage.selectProductWithCheckBox(productName);
         basketPage.clickRemoveSelectedButton();

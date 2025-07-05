@@ -7,10 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /** Тест-класс, проверяющий добавление магазина в избранные */
 public class AddStoreTest extends TestWithDataName{
-
-    /** Страница магазинов */
-    protected StoresPage storesPage;
-
     /**
      * Тест проверяет добавление магазина в избранные.
      * Открывает страницу магазинов.
@@ -24,7 +20,7 @@ public class AddStoreTest extends TestWithDataName{
         dataName = loader.getRandomData();
 
         homePage.openStores();
-        storesPage = StoresPage.openStoresPage();
+        StoresPage storesPage = StoresPage.openStoresPage();
         String storeName = dataName;
         storesPage.addStore(storeName);
         assertTrue(storesPage.isAdded());

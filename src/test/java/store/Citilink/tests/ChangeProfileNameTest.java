@@ -13,16 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * После изменения в профиле должны отображаться тестовые Имя и Фамилия.
  */
 public class ChangeProfileNameTest extends BaseTest {
-    /** Имя и Фалимия для теста (на которые изменяются) */
-    protected String testFirstname = "Алеша";
-    protected String testLastname = "Попович";
-
-    /** Страница профиля */
-    protected ProfilePage profilePage;
-
-    /** Страница настроек */
-    protected SettingsPage settingsPage;
-
     /**
      * Изменение Имени и Фамилии через страницу настроек.
      * Заходит в аккаунт.
@@ -34,10 +24,12 @@ public class ChangeProfileNameTest extends BaseTest {
      */
     @Test
     protected void changeProfileName() {
+        String testFirstname = "Алеша";
+        String testLastname = "Попович";
         homePage.openProfile();
-        profilePage = ProfilePage.openProfilePage();
+        ProfilePage profilePage = ProfilePage.openProfilePage();
         profilePage.openSettings();
-        settingsPage = SettingsPage.openSettingsPage();
+        SettingsPage settingsPage = SettingsPage.openSettingsPage();
         settingsPage.changeName(testFirstname, testLastname);
         settingsPage.submitChanges();
         String currentFirstname = settingsPage.getFirstname();
