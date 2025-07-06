@@ -10,6 +10,17 @@ public class ConfiguratorPage extends BasePage {
     /** Товар в конфигурации */
     private ProductConfiguratorElement processor;
 
+    /** Кнопка открытия конфигурации */
+    private final ButtonElement buttonconfiguratorMenu =  ButtonElement.byClass("js--configurator-menu__create-button " +
+            "configurator-menu__create-button configurator-menu__create-button configurator-menu__create-button");
+
+    /** Кнопка удаления старой конфигурации */
+    private final ButtonElement buttonDeleteConfigurationAndCreateNew = ButtonElement.byClass("js--delete-" +
+            "actual-configuration-popup__confirm-button delete-actual-configuration-popup__confirm-button confirm-popup__" +
+            "confirm-button pretty_button type1");
+
+    /** Кнопка выбора процессора */
+    private final ButtonElement buttonProcessor= ButtonElement.byClass("configuration-add-feature-item");
     /**
      * Ожидаемая часть URL для страницы результатов конфигуратора.
      * Используется для проверки корректности загруженной страницы.
@@ -29,8 +40,7 @@ public class ConfiguratorPage extends BasePage {
      * Создание новой конфигурации
      */
     public void createConfiguration() {
-        ButtonElement.byClass("js--configurator-menu__create-button configurator-menu__create-button configurator-menu__create-button configurator-menu__create-button").click();
-        ButtonElement buttonDeleteConfigurationAndCreateNew = ButtonElement.byClass("js--delete-actual-configuration-popup__confirm-button delete-actual-configuration-popup__confirm-button confirm-popup__confirm-button pretty_button type1");
+        buttonconfiguratorMenu.click();
         if(buttonDeleteConfigurationAndCreateNew.isDisplayed()) {
             buttonDeleteConfigurationAndCreateNew.click();
         }
@@ -40,7 +50,7 @@ public class ConfiguratorPage extends BasePage {
      * Выполняет переход на страницу выбора процессора для ПК
      */
     public void goToProcessorCatalog() {
-        ButtonElement.byClass("configuration-add-feature-item").scrollIntoViewCentered().click();
+        buttonProcessor.scrollIntoViewCentered().click();
     }
 
     /**

@@ -8,6 +8,18 @@ import store.Citilink.elements.ProductCatalogElement;
  * Страница результатов поиска на сайте.
  */
 public class SearchPage extends BasePage {
+    /** Поле ввода минимальной цены в фильтрах*/
+    private final PriceFilterElement PFEmin = PriceFilterElement.byDataMetaName("FilterRangeGroup__input-min");
+
+    /** Кнопка подтверждения фильтра*/
+    private final ButtonElement buttonAcceptFilter = ButtonElement.byClass("e11203e30 app-catalog-1g3e94m-Button" +
+            "--StyledButton-Button--Button ekx3zbi0");
+
+    /** Карточка первого товара*/
+    private final ProductCatalogElement elementSnippet = ProductCatalogElement.byDataMetaName("SnippetProductVerticalLayout");
+
+    /** Максимальная цена товара на странице*/
+    private final PriceFilterElement elementMaxPrice = PriceFilterElement.byDataMetaName("FilterRangeGroup__input-max");
 
     /**
      * Ожидаемая часть URL для страницы результатов поиска.
@@ -61,30 +73,22 @@ public class SearchPage extends BasePage {
      * Использование фильтра цены
      */
     public void usePriceFilter(String minPrice) {
-        PriceFilterElement PFEmin = PriceFilterElement.byDataMetaName("FilterRangeGroup__input-min");
-
         PFEmin.setValue(minPrice);
-
-        ButtonElement.byClass("e11203e30 app-catalog-1g3e94m-Button--StyledButton-Button--Button ekx3zbi0")
-                .scrollIntoViewCentered()
-                .waitUntilClickable()
-                .click();
+        buttonAcceptFilter.scrollIntoViewCentered().waitUntilClickable().click();
     }
 
     /**
      * Получение значения цены первого товара из найденного списка
      */
     public int getPrice() {
-        ProductCatalogElement elem = ProductCatalogElement.byDataMetaName("SnippetProductVerticalLayout");
-        return elem.getPrice();
+        return elementSnippet.getPrice();
     }
 
     /**
      * Возвращает стоимость, которая является максимальной среди найденных товаров.
      */
     public int getMaxPrice() {
-        PriceFilterElement elem = PriceFilterElement.byDataMetaName("FilterRangeGroup__input-max");
-        return elem.getValue();
+        return elementMaxPrice.getValue();
     }
   
      /**

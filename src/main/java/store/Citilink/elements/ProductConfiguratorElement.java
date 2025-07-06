@@ -10,6 +10,11 @@ import org.openqa.selenium.By;
  * Добавляет методы для работы с товарами в конфигураторе.
  */
 public class ProductConfiguratorElement extends ProductCatalogElement {
+    /** Ячейка кода товара*/
+    private final SelenideElement codeElement = baseElement.$(".e1o0o6nd0.eume320.e1a7a4n70");
+    /** Кнопка добавления в конфигуратор */
+    private final ButtonElement configuratorButton= ButtonElement.byInElement(this, "class",
+            "e1yzfrwe0 app-catalog-10rqwk7-Button--StyledButton-Button--Button-StyledTabletActionButton ekx3zbi0");
 
     /**
      * Приватный конструктор.
@@ -25,7 +30,6 @@ public class ProductConfiguratorElement extends ProductCatalogElement {
      * @return числовой код товара
      */
     public int getDataId() {
-        SelenideElement codeElement = baseElement.$(".e1o0o6nd0.eume320.e1a7a4n70");
         String fullText = codeElement.getText();
         return Integer.parseInt(fullText.replaceAll("[^0-9]", ""));
     }
@@ -34,9 +38,7 @@ public class ProductConfiguratorElement extends ProductCatalogElement {
      * Нажатие кнопки "Добавить в конфигурацию"
      */
     public void addToConfigurator() {
-        ButtonElement.byInElement(this, "class", "e1yzfrwe0 app-catalog-10rqwk7-Button--StyledButton-Button--Button-StyledTabletActionButton ekx3zbi0")
-                .scrollIntoViewCentered()
-                .click();
+        configuratorButton.scrollIntoViewCentered().click();
     }
 
     /**
